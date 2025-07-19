@@ -60,7 +60,6 @@
       margin: auto;
     }
     .team-member {
-      background: white;
       border-radius: 12px;
       padding: 20px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
@@ -81,11 +80,10 @@
     A 24-hour hackathon where the <u>winner gets to take a shower.</u>
   </div>
   <div class="criteria">
-    Judging Criteria: <strong>Shock Value</strong>, <strong>Virality Potential</strong>, and <strong>Unhingedness</strong><br>
-    Make people laugh, cry, gag, or scream. Provocative projects win.
+    Judging Criteria: <strong>Shock Value</strong> and <strong>Execution.</strong>
   </div>
   <div class="buttons">
-    <a href="#" class="waitlist">Join Waitlist</a>
+    <a href="#" class="waitlist"><b>Apply</b></a>
     <a href="#" class="discord">Join Discord</a>
   </div>
   <div class="note">
@@ -95,15 +93,15 @@
   <div class="section">
     <h2>Sponsors</h2>
     <div class="sponsors">
-      <img src="/sponsors/cooltech.png" alt="CoolTech" class="sponsor-logo">
-      <img src="/sponsors/soapify.png" alt="Soapify" class="sponsor-logo">
-      <img src="/sponsors/disruptinc.png" alt="DisruptInc" class="sponsor-logo">
-      <img src="/sponsors/hosehub.png" alt="HoseHub" class="sponsor-logo">
-    </div>
+      <img src="https://dubrizz.com/dubrizz.png" alt="CoolTech" class="sponsor-logo">
+      <img src="/sponsors/soapify.png" alt="you" class="sponsor-logo">
+      <img src="/sponsors/disruptinc.png" alt="you" class="sponsor-logo">
+      <img src="/sponsors/hosehub.png" alt="Apply" class="sponsor-logo">
+    
   </div>
 
   <div class="section">
-    <h2>Meet the Team</h2>
+    <h2>The Team</h2>
     <div class="team">
       <div class="team-member">
         <img src="/team/alex.jpg" alt="Alex Chen">
@@ -125,5 +123,79 @@
       </div>
     </div>
   </div>
+  
+  
+  <script>
+    // Create a full-screen canvas appended to the document
+const canvas = document.createElement('canvas');
+canvas.style.position = 'fixed';
+canvas.style.top = '0';
+canvas.style.left = '0';
+canvas.style.width = '100%';
+canvas.style.height = '100%';
+canvas.style.pointerEvents = 'none'; // Allows clicks through
+canvas.style.zIndex = '-1';    // Behind all content
+document.body.appendChild(canvas);
+
+const ctx = canvas.getContext('2d');
+let width, height;
+
+// Resize canvas to fill window
+function resizeCanvas() {
+  width = canvas.width = window.innerWidth;
+  height = canvas.height = window.innerHeight;
+}
+window.addEventListener('resize', resizeCanvas);
+resizeCanvas();
+
+// Raindrop class
+class Drop {
+  constructor() {
+    this.reset();
+  }
+  reset() {
+    this.x = Math.random() * width;
+    this.y = Math.random() * -height;
+    this.len = 10 + Math.random() * 20;
+    this.speed = 2 + Math.random() * 4;
+    this.opacity = 0.2 + Math.random() * 0.3;
+  }
+  update() {
+    this.y += this.speed;
+    if (this.y > height) {
+      this.reset();
+    }
+  }
+  draw(ctx) {
+    ctx.beginPath();
+    ctx.strokeStyle = `rgba(255, 255, 255, ${this.opacity})`;
+    ctx.lineWidth = 1.5;
+    ctx.moveTo(this.x, this.y);
+    ctx.lineTo(this.x, this.y + this.len);
+    ctx.stroke();
+  }
+}
+
+// Create drops
+const drops = [];
+const maxDrops = 150;
+for (let i = 0; i < maxDrops; i++) {
+  drops.push(new Drop());
+}
+
+// Animation loop
+function animate() {
+  ctx.clearRect(0, 0, width, height);
+  for (const drop of drops) {
+    drop.update();
+    drop.draw(ctx);
+  }
+  requestAnimationFrame(animate);
+}
+
+// Start the effect
+animate();
+
+  </script>
 </body>
 </html>
