@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Shower Hacks</title>
   <style>
     body {
@@ -14,7 +14,11 @@
       padding: 40px;
     }
     h1 {
-      font-size: 3em;
+      font-size: clamp(2rem, 8vw, 3.5rem);
+      margin-bottom: 0.5em;
+    }
+    h2 {
+      font-size: 2em;
       margin-bottom: 0.5em;
     }
     .description, .criteria, .note {
@@ -37,6 +41,9 @@
       text-decoration: none;
       color: white;
       background-color: #007bff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
     .buttons a.discord {
       background-color: #e0f0ff;
@@ -72,37 +79,84 @@
       font-size: 0.9em;
       color: #555;
     }
+    ul.prize-list {
+      list-style-type: none;
+      padding: 0;
+      font-size: 1.1em;
+    }
+    ul.prize-list li {
+      margin-bottom: 1em;
+    }
+    
+    h1 {
+  font-size: clamp(2rem, 9vw, 4rem);
+  margin-bottom: 0.5em;
+  white-space: nowrap;
+  overflow-wrap: normal;
+}
+
   </style>
 </head>
 <body>
   <h1>🚿 Shower Hacks</h1>
   <div class="description">
-    A 24-hour hackathon where the <u>winner gets to take a shower.</u>
+    A 24-hour hackathon where the <u>winner gets to take a shower</u>
   </div>
-  <div class="criteria">
-    Judging Criteria: <strong>Shock Value</strong> and <strong>Execution.</strong>
-  </div>
+  
   <div class="buttons">
-    <a href="#" class="waitlist"><b>Apply</b></a>
-    <a href="#" class="discord">Join Discord</a>
+    <a href="#" class="waitlist" onclick="window.alert('Still being set up')"><b>Apply</b></a>
+    <a href="#" class="discord" onclick="window.alert('Still being set up')">
+      <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/discord.svg" width="20" height="20" alt="Discord">
+      Join Discord
+    </a>
   </div>
   <div class="note">
-    <em>Stay tuned for location and date – it'll be in the Bay Area.</em>
+    <em>Stay tuned for location and date (2026) – it'll be in the Bay Area.</em>
+  </div>
+
+  <div class="section">
+    <h2>About</h2>
+    <div style="text-align:left">
+      <p>Some engineers know how to build, others just think they do, but one thing they all have in common is that they smell terrible.</p>
+    <p>In the spirit of unserious ideas, Shower Hacks has only one judging criteria: <strong>Shock Value</strong>.</p>
+    You can build anything, an AI that automatically determines health insurance premiums based on attractiveness as a health indicator. an AI situationship that texts you but then ghosts you randomly. A dating app that matches based on genetic compatibility. A map app that gives the location of people in the area who need a hug. Dating app for infidelity. An AI jury that makes decisions on criminal cases. An AI girlfriend that sends the user CashApp requests. An Uber alternative where you get to select the personal demographics of your driver. A backlink spam bot to hurt a competitor's SEO. AI-powered deep search to perform a background check on your bf. A subscription-based AI homework cheating SAAS that accepts EBT. Endless opportunities...
+    </div>
+  </div>
+ 
+  <div class="section">
+    <h2>Prizes</h2>
+    <ul class="prize-list" style="text-align:left">
+      <li><strong>1st Place:</strong> Gets to take a shower 🫧</li>
+      <li><strong>Most Useless App:</strong> TBD</li>
+      <li><strong>AI-powered Vertical Agentic B2B SAAS GPT-Wrapper:</strong> TBD</li>
+      <li><strong>Most Overengineered:</strong> TBD</li>
+    </ul>
+  </div>
+  
+  
+  <div class="section">
+    <h2>After Party</h2>
+    <div style="text-align:left">
+Invited participants and all winning teams will be invited to the after party. If invited, you must be 18+ to enter and 21+ to consume alcohol.
+    </div>
   </div>
 
   <div class="section">
     <h2>Sponsors</h2>
     <div class="sponsors">
+      In progress...
+      <!--
       <img src="https://dubrizz.com/dubrizz.png" alt="CoolTech" class="sponsor-logo">
-      <img src="/sponsors/soapify.png" alt="you" class="sponsor-logo">
-      <img src="/sponsors/disruptinc.png" alt="you" class="sponsor-logo">
-      <img src="/sponsors/hosehub.png" alt="Apply" class="sponsor-logo">
-    
+      <img src="/sponsors/soapify.png" alt="Soapify" class="sponsor-logo">
+      <img src="/sponsors/disruptinc.png" alt="Disrupt Inc." class="sponsor-logo">
+      <img src="/sponsors/hosehub.png" alt="HoseHub" class="sponsor-logo">-->
+    </div>
   </div>
 
   <div class="section">
     <h2>The Team</h2>
-    <div class="team">
+    In progress... From the creator of <a href="https://sigmoidhacks.devpost.com/">Sigmoid Hacks</a>
+    <!--<div class="team">
       <div class="team-member">
         <img src="/team/alex.jpg" alt="Alex Chen">
         <h3>Alex Chen</h3>
@@ -121,81 +175,69 @@
         <p>Operations Lead</p>
         <p>Hack Club</p>
       </div>
-    </div>
+    </div>-->
   </div>
-  
-  
+
   <script>
-    // Create a full-screen canvas appended to the document
-const canvas = document.createElement('canvas');
-canvas.style.position = 'fixed';
-canvas.style.top = '0';
-canvas.style.left = '0';
-canvas.style.width = '100%';
-canvas.style.height = '100%';
-canvas.style.pointerEvents = 'none'; // Allows clicks through
-canvas.style.zIndex = '-1';    // Behind all content
-document.body.appendChild(canvas);
+    const canvas = document.createElement('canvas');
+    canvas.style.position = 'fixed';
+    canvas.style.top = '0';
+    canvas.style.left = '0';
+    canvas.style.width = '100%';
+    canvas.style.height = '100%';
+    canvas.style.pointerEvents = 'none';
+    canvas.style.zIndex = '-1';
+    document.body.appendChild(canvas);
 
-const ctx = canvas.getContext('2d');
-let width, height;
+    const ctx = canvas.getContext('2d');
+    let width, height;
 
-// Resize canvas to fill window
-function resizeCanvas() {
-  width = canvas.width = window.innerWidth;
-  height = canvas.height = window.innerHeight;
-}
-window.addEventListener('resize', resizeCanvas);
-resizeCanvas();
-
-// Raindrop class
-class Drop {
-  constructor() {
-    this.reset();
-  }
-  reset() {
-    this.x = Math.random() * width;
-    this.y = Math.random() * -height;
-    this.len = 10 + Math.random() * 20;
-    this.speed = 2 + Math.random() * 4;
-    this.opacity = 0.2 + Math.random() * 0.3;
-  }
-  update() {
-    this.y += this.speed;
-    if (this.y > height) {
-      this.reset();
+    function resizeCanvas() {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
     }
-  }
-  draw(ctx) {
-    ctx.beginPath();
-    ctx.strokeStyle = `rgba(255, 255, 255, ${this.opacity})`;
-    ctx.lineWidth = 1.5;
-    ctx.moveTo(this.x, this.y);
-    ctx.lineTo(this.x, this.y + this.len);
-    ctx.stroke();
-  }
-}
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
 
-// Create drops
-const drops = [];
-const maxDrops = 150;
-for (let i = 0; i < maxDrops; i++) {
-  drops.push(new Drop());
-}
+    class Drop {
+      constructor() {
+        this.reset();
+      }
+      reset() {
+        this.x = Math.random() * width;
+        this.y = Math.random() * -height;
+        this.len = 10 + Math.random() * 20;
+        this.speed = 2 + Math.random() * 4;
+        this.opacity = 0.2 + Math.random() * 0.3;
+      }
+      update() {
+        this.y += this.speed;
+        if (this.y > height) this.reset();
+      }
+      draw(ctx) {
+        ctx.beginPath();
+        ctx.strokeStyle = `rgba(255, 255, 255, ${this.opacity})`;
+        ctx.lineWidth = 1.5;
+        ctx.moveTo(this.x, this.y);
+        ctx.lineTo(this.x, this.y + this.len);
+        ctx.stroke();
+      }
+    }
 
-// Animation loop
-function animate() {
-  ctx.clearRect(0, 0, width, height);
-  for (const drop of drops) {
-    drop.update();
-    drop.draw(ctx);
-  }
-  requestAnimationFrame(animate);
-}
+    const drops = [];
+    const maxDrops = 150;
+    for (let i = 0; i < maxDrops; i++) drops.push(new Drop());
 
-// Start the effect
-animate();
+    function animate() {
+      ctx.clearRect(0, 0, width, height);
+      for (const drop of drops) {
+        drop.update();
+        drop.draw(ctx);
+      }
+      requestAnimationFrame(animate);
+    }
 
+    animate();
   </script>
 </body>
 </html>
