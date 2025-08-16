@@ -100,11 +100,17 @@ body::before {
       height: auto;
       margin: auto;
     }
-    .team-member {
-      border-radius: 12px;
-      padding: 20px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    }
+  .team-member {
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+
+  /* frosted glass effect */
+  background: rgba(255, 255, 255, 0.25); /* semi-transparent white */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px); /* for Safari */
+}
+
     .team-member h3 {
       margin: 10px 0 5px;
     }
