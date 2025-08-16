@@ -346,6 +346,119 @@ Invited participants and all winning teams will be invited to the after party (m
     animate();
   </script>
   
+  
+  <script>
+  // Bubble canvas stays fixed, doesn't affect layout
+  const bubbleCanvas = document.createElement('canvas');
+  bubbleCanvas.style.position = 'fixed';
+  bubbleCanvas.style.top = '0';
+  bubbleCanvas.style.left = '0';
+  bubbleCanvas.style.width = '100%';
+  bubbleCanvas.style.height = '100%';
+  bubbleCanvas.style.pointerEvents = 'none';
+  bubbleCanvas.style.zIndex = '-1';
+  document.body.appendChild(bubbleCanvas);
+
+  const bctx = bubbleCanvas.getContext('2d');
+  let bw, bh;
+
+  function resizeBubbleCanvas() {
+    bw = bubbleCanvas.width = window.innerWidth;
+    bh = bubbleCanvas.height = window.innerHeight;
+  }
+  window.addEventListener('resize', resizeBubbleCanvas);
+  resizeBubbleCanvas();
+
+  class BubbleClump {
+    constructor() {
+      this.reset();
+    }
+    reset() {
+      this.x = Math.random() * bw;
+      this.y = bh + Math.random() * bh; // Start from bottom, rise up (y decreases)
+      this.speed = 0.5 + Math.random() * 1.5; // Slower speed for rising
+      this.opacity = 0.3 + Math.random() * 0.4;
+      this.bubbles = [];
+      const numBubbles = 3 + Math.floor(Math.random() * 5); // 3-7 bubbles per clump
+      for (let i = 0; i < numBubbles; i++) {
+        this.bubbles.push({
+          offsetX: (Math.random() - 0.5) * 20,
+          offsetY: (Math.random() - 0.5) * 20,
+          r: 4 + Math.random() * 12,
+          deform: Math.random() * Math.PI * 2, // Phase for deformation
+          deformSpeed: 0.05 + Math.random() * 0.1 // Speed of wobbling
+        });
+      }
+      this.streakLength = 10 + Math.random() * 20; // For streaking effect
+      this.wobble = (Math.random() - 0.5) * 0.3; // Sideways jiggle
+    }
+    update() {
+      this.y -= this.speed; // Rise up (decrease y)
+      this.x += this.wobble;
+      this.bubbles.forEach(b => {
+        b.deform += b.deformSpeed; // Update deformation phase
+      });
+      if (this.y + this.streakLength < 0) {
+        this.reset(); // Respawn at bottom once off screen
+      }
+    }
+    draw(ctx) {
+      ctx.save();
+      ctx.globalAlpha = this.opacity;
+      this.bubbles.forEach(b => {
+        const bx = this.x + b.offsetX;
+        const by = this.y + b.offsetY;
+        const deformX = b.r * (1 + 0.1 * Math.sin(b.deform)); // Deform horizontally
+        const deformY = b.r * (1 + 0.1 * Math.cos(b.deform)); // Deform vertically
+
+        const gradient = ctx.createRadialGradient(
+          bx - deformX * 0.4, by - deformY * 0.4, Math.min(deformX, deformY) * 0.2,
+          bx, by, Math.max(deformX, deformY)
+        );
+        gradient.addColorStop(0, 'rgba(255,255,255,1)');
+        gradient.addColorStop(0.5, 'rgba(255,255,255,0.4)');
+        gradient.addColorStop(1, 'rgba(255,255,255,0)');
+        ctx.fillStyle = gradient;
+
+        ctx.beginPath();
+        ctx.ellipse(bx, by, deformX, deformY, 0, 0, Math.PI * 2); // Deformed ellipse
+        ctx.fill();
+
+        // Add streaking tail
+        const tailGradient = ctx.createLinearGradient(bx, by, bx, by + this.streakLength);
+        tailGradient.addColorStop(0, 'rgba(255,255,255,0.3)');
+        tailGradient.addColorStop(1, 'rgba(255,255,255,0)');
+        ctx.fillStyle = tailGradient;
+        ctx.beginPath();
+        ctx.moveTo(bx - deformX / 2, by);
+        ctx.lineTo(bx + deformX / 2, by);
+        ctx.lineTo(bx + deformX / 2 * 0.8, by + this.streakLength);
+        ctx.lineTo(bx - deformX / 2 * 0.8, by + this.streakLength);
+        ctx.closePath();
+        ctx.fill();
+      });
+      ctx.restore();
+    }
+  }
+
+  const bubbleClumps = [];
+  const maxClumps = 30; // Fewer clumps for performance, each with multiple bubbles
+  for (let i = 0; i < maxClumps; i++) {
+    bubbleClumps.push(new BubbleClump());
+  }
+
+  function animateBubbles() {
+    bctx.clearRect(0, 0, bw, bh);
+    for (const clump of bubbleClumps) {
+      clump.update();
+      clump.draw(bctx);
+    }
+    requestAnimationFrame(animateBubbles);
+  }
+
+  animateBubbles();
+</script>
+
   </main>
 </body>
 </html>
