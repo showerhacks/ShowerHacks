@@ -187,7 +187,13 @@ body::before {
     </a>
   </div>
   <div class="note">
-    <em>October 3th 2026 – San Francisco - 1000 people — <div id="countdown"></div>.</em>
+    <em>October 3th 2026 – San Francisco - 1000 people.</em><br/>
+    <div id="countdown">
+      <div class="time-section"><span id="days">0</span>Days</div>
+      <div class="time-section"><span id="hours">0</span>H</div>
+      <div class="time-section"><span id="minutes">0</span>M</div>
+      <div class="time-section"><span id="seconds">0</span>S</div>
+  </div>
   </div>
 <main>
   
@@ -399,21 +405,29 @@ Invited participants and all winning teams will be invited to the afterparty (mu
 
     <script>
     function updateCountdown() {
-      const targetDate = new Date("October 3, 2026 00:00:00");
-      const today = new Date();
-      const diff = targetDate - today;
+      const targetDate = new Date("October 3, 2026 00:00:00").getTime();
+      const now = new Date().getTime();
+      const diff = targetDate - now;
 
       if (diff <= 0) {
-        document.getElementById("countdown").textContent = "The day has arrived!";
+        document.getElementById("countdown").innerHTML = "<h2>The day has arrived!</h2>";
+        clearInterval(timer);
         return;
       }
 
       const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-      document.getElementById("countdown").textContent = days + " days left";
+      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+      document.getElementById("days").textContent = days;
+      document.getElementById("hours").textContent = hours;
+      document.getElementById("minutes").textContent = minutes;
+      document.getElementById("seconds").textContent = seconds;
     }
 
-    updateCountdown();
-    setInterval(updateCountdown, 1000 * 60 * 60); // update every hour
+    const timer = setInterval(updateCountdown, 1000);
+    updateCountdown(); // run immediately
   </script>
   
   </main>
