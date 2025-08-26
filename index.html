@@ -45,6 +45,21 @@ body::before {
   pointer-events: none;
 }
 
+
+    .header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap; /* allow stacking on mobile */
+}
+
+.header img {
+  height: clamp(60px, 15vw, 120px); /* responsive logo */
+  width: auto;
+}
+
+    
 /* On small screens, make exactly 3 tiles fit across */
 @media (max-width: 600px) {
   body::before {
@@ -154,9 +169,11 @@ body::before {
   </style>
 </head>
 <body>
-  <div style="display: flex; align-items: center;  justify-content: center; gap: 10px;">
-    <img src="logo.png" height="200px"> <h1>Shower Hacks</h1>
-  </div>
+ <div class="header">
+  <img src="logo.png" alt="Showerhacks logo">
+  <h1>Shower Hacks</h1>
+</div>
+
     
   <div class="description">
     A 12-hour hackathon where the <u>winner gets to take a shower</u>
