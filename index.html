@@ -187,10 +187,8 @@ body::before {
     </a>
   </div>
   <div class="note">
-    <em>October 3th 2026 – San Francisco - 1000 people.</em><br/><br/>
-    <div id="countdown" style="color:#7f92aa">
-      <b><span id="days">0</span></b>:<span id="hours">0</span>:<span id="minutes">0</span>:<span id="seconds">0</span> Days left
-  </div>
+    <em>October 3th 2026 🗓️ San Francisco 🌉 1000 people.</em><br/><br/>
+    <div id="countdown" style="color:#7f92aa;font-weight:bold"></div>
   </div>
 <main>
   
@@ -329,7 +327,7 @@ body::before {
         <!--<img src="/team/" alt="">-->
         <h3>Kai</h3>
         <p>XAI / CMU</p>
-  <p><a href="https://profsucrose.dev/>↪</a></p>
+  <p><a href="https://profsucrose.dev"/>↪</a></p>
      </div>
 
 
@@ -402,32 +400,38 @@ body::before {
     animate();
   </script>
 
-    <script>
-    function updateCountdown() {
-      const targetDate = new Date("October 3, 2026 00:00:00").getTime();
-      const now = new Date().getTime();
-      const diff = targetDate - now;
+<script>
+(function() {
+  const el = document.getElementById("countdown");
+  // October 3, 2026 at 10:00 AM PDT (UTC-7)
+  const target = new Date("2026-10-03T10:00:00-07:00").getTime();
+  const msPerDay = 1000 * 60 * 60 * 24;
+  const prec = 5; // decimals
 
-      if (diff <= 0) {
-        document.getElementById("countdown").innerHTML = "<h2>The day has arrived!</h2>";
-        clearInterval(timer);
-        return;
-      }
+  function formatDays(diffMs) {
+    const days = diffMs / msPerDay;
+    return Math.max(0, days).toFixed(prec);
+  }
 
-      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+  function update() {
+    const now = Date.now();
+    const diff = target - now;
 
-      document.getElementById("days").textContent = days;
-      document.getElementById("hours").textContent = hours;
-      document.getElementById("minutes").textContent = minutes;
-      document.getElementById("seconds").textContent = seconds;
+    if (diff <= 0) {
+      el.innerHTML = "<h2>The day has arrived!</h2>";
+      clearInterval(timer);
+      return;
     }
 
-    const timer = setInterval(updateCountdown, 1000);
-    updateCountdown(); // run immediately
-  </script>
+    const daysStr = formatDays(diff);
+    el.innerHTML = `<b>${daysStr}</b> days left`;
+  }
+
+  const timer = setInterval(update, 1000);
+  update();
+})();
+</script>
+
 
 
   <center>
