@@ -16,26 +16,38 @@
   <meta property="og:type" content="website">
   <meta name="theme-color" content="#cce6ff">
 
+  
   <style>
    @import url('https://fonts.googleapis.com/css2?family=Bitcount+Prop+Single:wght@100..900&family=Bitcount:wght@100..900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
     
 body {
   margin: 0;
   font-family: "Bitcount Prop Single", system-ui;
-  /* gradient only; tiles are drawn on a canvas behind everything */
-  background: linear-gradient(to bottom, #cce6ff, lightcoral);
+  background: linear-gradient(to bottom, #cce6ff, lightcoral); /* gradient only */
   color: #333;
   text-align: center;
   padding: 40px;
-  position: relative;
+  position: relative; /* needed for pseudo-element positioning */
   z-index: 0;
 }
 
-/* REMOVE the old ::before tiling entirely.
-   Keeping here commented for reference.
-   body::before { ... } */
+body::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url("tile.png") repeat;
+  background-size: 220px 220px; /* default for desktop */
+  opacity: 0.2;
+  filter: contrast(2) brightness(.9);
+  z-index: -1;
+  pointer-events: none;
+}
 
-.header {
+
+    .header {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -48,119 +60,122 @@ body {
   width: auto;
 }
 
-/* The canvases live behind the content */
-canvas.bg-tiles, canvas.rain {
-  position: fixed;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
+    
+/* On small screens, make exactly 3 tiles fit across */
+@media (max-width: 600px) {
+  body::before {
+    background-size: calc(100vw / 3) auto;
+  }
 }
-canvas.bg-tiles { z-index: -2; }
-canvas.rain { z-index: -1; }
 
-main{
-  max-width: 600px;
-  margin: auto;
-}
-h1 {
-  font-family: "Bitcount", system-ui;
-  font-size: clamp(2rem, 9vw, 4rem);
-  margin-bottom: 0.5em;
-  white-space: nowrap;
-  overflow-wrap: normal;
-}
-h2 {
-  font-size: 2em;
-  margin-bottom: 0.5em;
-}
-.description, .criteria, .note {
-  margin-bottom: 2em;
-  font-size: 1.4em;
-}
-.buttons {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  margin-bottom: 3em;
-  flex-wrap: wrap;
-}
-.buttons a {
-  padding: 12px 20px;
-  font-size: 1em;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  text-decoration: none;
-  color: white;
-  background-color: #007bff;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.buttons a.discord {
-  background-color: #e0f0ff;
-  color: #007bff;
-  border: 2px solid #007bff;
-}
-.section {
-  margin-bottom: 4em;
-}
-.sponsors, .team {
-  display: grid;
-  gap: 20px;
-  justify-content: center;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  max-width: 1000px;
-  margin: auto;
-}
-.sponsor-logo, .team-member img {
-  width: 100px;
-  height: auto;
-  margin: auto;
-}
-.team-member {
+
+    
+    main{
+      max-width: 600px;
+      margin: auto;
+    }
+    h1 {
+      font-family: "Bitcount", system-ui;
+      font-size: clamp(2rem, 8vw, 3.5rem);
+      margin-bottom: 0.5em;
+    }
+    h2 {
+      font-size: 2em;
+      font-family: 
+      margin-bottom: 0.5em;
+    }
+    .description, .criteria, .note {
+      margin-bottom: 2em;
+      font-size: 1.4em;
+    }
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-bottom: 3em;
+      flex-wrap: wrap;
+    }
+    .buttons a {
+      padding: 12px 20px;
+      font-size: 1em;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      text-decoration: none;
+      color: white;
+      background-color: #007bff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .buttons a.discord {
+      background-color: #e0f0ff;
+      color: #007bff;
+      border: 2px solid #007bff;
+    }
+    .section {
+      margin-bottom: 4em;
+    }
+    .sponsors, .team {
+      display: grid;
+      gap: 20px;
+      justify-content: center;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      max-width: 1000px;
+      margin: auto;
+    }
+    .sponsor-logo, .team-member img {
+      width: 100px;
+      height: auto;
+      margin: auto;
+    }
+  .team-member {
   border-radius: 12px;
   padding: 20px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 
   /* frosted glass effect */
-  background: rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.25); /* semi-transparent white */
   backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px); /* for Safari */
 }
-.team-member h3 {
-  margin: 10px 0 5px;
+
+    .team-member h3 {
+      margin: 10px 0 5px;
+    }
+    .team-member p {
+      margin: 2px 0;
+      font-size: 0.9em;
+      color: #555;
+    }
+    .team-member img {
+      border-radius: 5px;
+    }
+    ul.prize-list {
+      list-style-type: none;
+      padding: 0;
+      font-size: 1.1em;
+    }
+    ul.prize-list li {
+      margin-bottom: 1em;
+    }
+    
+    h1 {
+  font-size: clamp(2rem, 9vw, 4rem);
+  margin-bottom: 0.5em;
+  white-space: nowrap;
+  overflow-wrap: normal;
 }
-.team-member p {
-  margin: 2px 0;
-  font-size: 0.9em;
-  color: #555;
-}
-.team-member img {
-  border-radius: 5px;
-}
-ul.prize-list {
-  list-style-type: none;
-  padding: 0;
-  font-size: 1.1em;
-}
-ul.prize-list li {
-  margin-bottom: 1em;
-}
+
   </style>
 </head>
 <body>
-  <!-- Background tiles canvas -->
-  <canvas class="bg-tiles" id="bgTiles"></canvas>
-  <!-- Rain canvas -->
-  <canvas class="rain" id="rainCanvas"></canvas>
+ <div class="header">
+  <img src="logo.png" alt="Showerhacks logo">
+  <h1>Shower Hacks</h1>
+</div>
 
-  <div class="header">
-    <img src="logo.png" alt="Showerhacks logo">
-    <h1>Shower Hacks</h1>
-  </div>
-
+    
   <div class="description" style="text-shadow:0px 0px 15px white">
     A 12-hour hackathon where the <b>winner gets to take a shower</b>
   </div>
@@ -176,288 +191,254 @@ ul.prize-list li {
     <em>October 3rd 2026 🗓️ San Francisco 🌉 1000 people.</em><br/><br/>
     <div id="countdown" style="color:#7f92aa;font-weight:bold"></div>
   </div>
-
-  <main>
-    <div class="section">
-      <h2>About</h2>
-      <div style="text-align:left">
-        <p>Some engineers know how to build, others just think they do, but one thing they all have in common is that they need to take a shower.</p>
-        <p>In the spirit of unserious ideas, Shower Hacks has only one judging criteria: <strong>Shock Value</strong>.</p>
-        You can build anything... <i>anything</i>, like a nonchalant AI chatbot that doesn’t really care that much. An AI that automatically determines health insurance premiums based on attractiveness as a health indicator. A social media platform that only accepts users with an 800+ credit score. An AI situationship that texts you but then ghosts you randomly. A dating app that matches based on genetic compatibility. A map app that gives the location of people in the area who need a hug. Dating app for infidelity. An AI jury that makes decisions on criminal cases. An AI girlfriend that sends the user CashApp requests. An Uber alternative where you can select the height of your driver. A backlink spam bot to hurt a competitor's SEO. AI-powered deep search to perform a background check on your bf or gf. A subscription-based AI homework cheating SAAS that accepts EBT. A C2C platform to trade prescriptions. Endless opportunities...
-      </div>
-    </div>
- 
-    <div class="section">
-      <h2>Prizes</h2>
-      <ul class="prize-list" style="text-align:left">
-        <li><strong>1st Place:</strong> Gets to take a shower 🫧</li>
-      </ul>
-    </div>
+<main>
   
-    <div class="section">
-      <h2>Afterparty 🎉</h2>
-      <div style="text-align:left">
-        Invited participants and all winning teams will be invited to the afterparty (must be 18+ to enter and 21+ to consume alcohol).<br/>
-        There will be multiple afterparties, each at different hackerhouses. Representatives from each hackerhouse will invite selected teams.
-      </div>
+ 
+  <div class="section">
+    <h2>About</h2>
+    <div style="text-align:left">
+      <p>Some engineers know how to build, others just think they do, but one thing they all have in common is that they need to take a shower.</p>
+    <p>In the spirit of unserious ideas, Shower Hacks has only one judging criteria: <strong>Shock Value</strong>.</p>
+    You can build anything... <i>anything</i>, like a nonchalant AI chatbot that doesn’t really care that much. An AI that automatically determines health insurance premiums based on attractiveness as a health indicator. A social media platform that only accepts users with an 800+ credit score. An AI situationship that texts you but then ghosts you randomly. A dating app that matches based on genetic compatibility. A map app that gives the location of people in the area who need a hug. Dating app for infidelity. An AI jury that makes decisions on criminal cases. An AI girlfriend that sends the user CashApp requests. An Uber alternative where you can select the height of your driver. A backlink spam bot to hurt a competitor's SEO. AI-powered deep search to perform a background check on your bf or gf. A subscription-based AI homework cheating SAAS that accepts EBT. A C2C platform to trade prescriptions. Endless opportunities...
     </div>
-
-    <div class="section">
-      <h2>Sponsors</h2>
-      <div class="sponsors">
-        <div>We are looking for a small number of generous sponsors, apply <a href="sponsor.html">here</a>. The first wave of sponsors will be announced in our launch video!!!</div>
-      </div>
+  </div>
+ 
+  <div class="section">
+    <h2>Prizes</h2>
+    <ul class="prize-list" style="text-align:left">
+      <li><strong>1st Place:</strong> Gets to take a shower 🫧</li>
+<!--       <li><strong>Most Useless App:</strong> TBD</li>
+      <li><strong>AI-powered Vertical Agentic B2B SAAS GPT-Wrapper:</strong> TBD</li>
+      <li><strong>Most Overengineered:</strong> TBD</li> -->
+    </ul>
+  </div>
+  
+  
+  <div class="section">
+    <h2>Afterparty 🎉</h2>
+    <div style="text-align:left">
+    Invited participants and all winning teams will be invited to the afterparty (must be 18+ to enter and 21+ to consume alcohol).<br/>
+    There will be multiple afterparties, each at different hackerhouses. Representatives from each hackerhouse will invite selected teams.
     </div>
+  </div>
 
-    <div class="section">
-      <h2>The Team</h2>
-      <div class="team">
-        <div class="team-member">
-          <img src="/team/john.jpg" alt="John Lins">
-          <h3>John Lins</h3>
-          <p>CompE @ UCSB</p>
-          <p><a href="https://johnlins.com">↪</a></p>
-        </div>
-
-        <div class="team-member">
-          <img src="/team/sarah.jpg" alt="">
-          <h3>Sarah Zhao</h3>
-          <p>CSE @ UCLA</p>
-          <p><a href="https://www.sarahzhao.dev">↪</a></p>
-        </div>
-        
-        <div class="team-member">
-          <img src="/team/ken.jpg" alt="">
-          <h3>Ken Mueller</h3>
-          <p>CS @ Stanford</p>
-          <p><a href="https://github.com/kenmueller">↪</a></p>
-        </div>
-        
-        <div class="team-member">
-          <img src="/team/yuni.jpeg" alt="">
-          <h3>Yuni Kim</h3>
-          <p>CS & Bio @ UCSD</p>
-          <p><a href="https://www.tiktok.com/@yunskistudy">@yunskistudy</a></p>
-        </div>
-        
-        <div class="team-member">
-          <img src="/team/mike.jpg" alt="">
-          <h3>Mike</h3>
-          <p><a href="https://www.instagram.com/mikebuildsmore/">@MikeBuildsMore</a></p>
-        </div>
-
-        <div class="team-member">
-          <h3>Celina Kim</h3>
-          <p>Marketing</p>
-        </div>
-
-        <div class="team-member">
-          <img src="/team/aidan.jpg" alt="">
-          <h3>Aidan Ouckama</h3>
-          <p><a href="https://www.instagram.com/ouckahcs?igsh=MzRlODBiNWFlZA==">@ouckahcs</a></p>
-        </div>
-
-        <div class="team-member">
-          <img src="/team/tina.jpg" alt="">
-          <h3>Tina Chi</h3>
-          <p>CS @ UF</p>
-          <p><a href="https://www.instagram.com/tinahelloworld/">@tinahelloworld</a></p>
-        </div>
-
-        <div class="team-member">
-          <img src="/team/viraj.jpg" alt="">
-          <h3>Viraj Ala</h3>
-          <p><a href="https://www.instagram.com/viraj.ala/?hl=en">@viraj.ala</a></p>
-        </div>
-
-        <div class="team-member">
-          <h3>Sophia Duan</h3>
-          <p>Hack Club</p>
-        </div>
-        
-        <div class="team-member">
-          <img src="/team/chris.png" alt="">
-          <h3>Chris Vaisnor</h3>
-          <p>AI M.S. @ John Hopkins University</p>
-        </div>
-
-        <div class="team-member">
-          <h3>Kai</h3>
-          <p>XAI / CMU</p>
-          <p><a href="https://profsucrose.dev">↪</a></p>
-        </div>
-      </div>
+  <div class="section">
+    <h2>Sponsors</h2>
+    <div class="sponsors">
+      <div>We are looking for a small number of generous sponsors, apply <a href="sponsor.html">here</a>. The first wave of sponsors will be announced in our launch video!!!</div>
+      <!--
+      <img src="https://dubrizz.com/dubrizz.png" alt="CoolTech" class="sponsor-logo">
+      <img src="/sponsors/soapify.png" alt="Soapify" class="sponsor-logo">
+      <img src="/sponsors/disruptinc.png" alt="Disrupt Inc." class="sponsor-logo">
+      <img src="/sponsors/hosehub.png" alt="HoseHub" class="sponsor-logo">-->
     </div>
-  </main>
+  </div>
 
-  <!-- RAIN + BACKGROUND TILES SCRIPTS -->
+  <div class="section">
+    <h2>The Team</h2>
+    <div class="team">
+      <div class="team-member">
+        <img src="/team/john.jpg" alt="John Lins">
+        <h3>John Lins</h3>
+        <p>CompE @ UCSB</p>
+        <p><a href="https://johnlins.com">↪</a></p>
+      </div>
+
+      <div class="team-member">
+        <img src="/team/sarah.jpg" alt="">
+        <h3>Sarah Zhao</h3>
+        <p>CSE @ UCLA</p>
+        <p><a href="https://www.sarahzhao.dev">↪</a></p>
+      </div>
+      
+      <div class="team-member">
+        <img src="/team/ken.jpg" alt="">
+        <h3>Ken Mueller</h3>
+        <p>CS @ Stanford</p>
+        <p><a href="https://github.com/kenmueller">↪</a></p>
+      </div>
+      
+       <div class="team-member">
+        <img src="/team/yuni.jpeg" alt="">
+        <h3>Yuni Kim</h3>
+         <p>CS & Bio @ UCSD</p>
+        <p><a href="https://www.tiktok.com/@yunskistudy">@yunskistudy</a></p>
+       </div>
+      
+      <div class="team-member">
+        <img src="/team/mike.jpg" alt="">
+        <h3>Mike</h3>
+        <p><a href="https://www.instagram.com/mikebuildsmore/">@MikeBuildsMore</a></p>
+      </div>
+
+    
+
+          <div class="team-member">
+      <img src="/team/celina.jpg" alt="">
+      <h3>Celina Kim</h3>
+      <p>Marketing</p>
+      </div>
+      
+
+
+  <div class="team-member">
+        <img src="/team/aidan.jpg" alt="">
+        <h3>Aidan Ouckama</h3>
+        <p><a href="https://www.instagram.com/ouckahcs?igsh=MzRlODBiNWFlZA==">@ouckahcs</a></p>
+     </div>
+
+
+    <div class="team-member">
+        <img src="/team/tina.jpg" alt="">
+        <h3>Tina Chi</h3>
+        <p>CS @ UF</p>
+        <p><a href="https://www.instagram.com/tinahelloworld/">@tinahelloworld</a></p>
+     </div>
+
+    
+
+
+      <div class="team-member">
+        <img src="/team/viraj.jpg" alt="">
+        <h3>Viraj Ala</h3>
+        <p><a href="https://www.instagram.com/viraj.ala/?hl=en">@viraj.ala</a></p>
+      </div>
+
+  
+             <div class="team-member">
+        <!--<img src="/team/" alt="">-->
+        <h3>Sophia Duan</h3>
+        <p>Hack Club</p>
+      </div>
+      
+      <div class="team-member">
+        <img src="/team/chris.png" alt="">
+        <h3>Chris Vaisnor</h3>
+        <p>AI M.S. @ John Hopkins University</p>
+      </div>
+
+
+
+
+    
+      
+
+
+<div class="team-member">
+        <!--<img src="/team/" alt="">-->
+        <h3>Kai</h3>
+        <p>XAI / CMU</p>
+  <p><a href="https://profsucrose.dev"/>↪</a></p>
+     </div>
+
+
+      
+
+
+    
+    </div>
+  </div>
+
   <script>
-    // ---- Background tiles ----
-    (function() {
-      const canvas = document.getElementById('bgTiles');
-      const ctx = canvas.getContext('2d');
-      let width, height, tileSize;
+    const canvas = document.createElement('canvas');
+    canvas.style.position = 'fixed';
+    canvas.style.top = '0';
+    canvas.style.left = '0';
+    canvas.style.width = '100%';
+    canvas.style.height = '100%';
+    canvas.style.pointerEvents = 'none';
+    canvas.style.zIndex = '-1';
+    document.body.appendChild(canvas);
 
-      function calcTileSize() {
-        // Exactly 3 tiles across on small screens, else fixed 220px
-        return (window.innerWidth <= 600)
-          ? Math.ceil(window.innerWidth / 3)
-          : 220;
+    const ctx = canvas.getContext('2d');
+    let width, height;
+
+    function resizeCanvas() {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    class Drop {
+      constructor() {
+        this.reset();
       }
-
-      function resize() {
-        width = canvas.width = window.innerWidth;
-        height = canvas.height = window.innerHeight;
-        tileSize = calcTileSize();
-        drawPattern(); // redraw on resize
+      reset() {
+        this.x = Math.random() * width;
+        this.y = Math.random() * -height;
+        this.len = 10 + Math.random() * 20;
+        this.speed = 2 + Math.random() * 4;
+        this.opacity = 0.2 + Math.random() * 0.3;
       }
-      window.addEventListener('resize', resize);
-
-      const img = new Image();
-      img.src = "tile.png";
-      img.onload = () => {
-        resize(); // initial draw after image load
-      };
-
-      function drawOneTile(x, y) {
-        // Random rotation (0,90,180,270) and random mirror (true/false)
-        const rotations = [0, Math.PI/2, Math.PI, 3*Math.PI/2];
-        const rot = rotations[(Math.random()*rotations.length)|0];
-        const mirror = Math.random() < 0.5 ? -1 : 1;
-
-        ctx.save();
-        // Apply global aesthetic similar to the old CSS filter/opacity
-        ctx.globalAlpha = 0.2;
-        // Canvas filter support is solid on modern browsers; ignore where missing
-        try { ctx.filter = 'contrast(200%) brightness(90%)'; } catch(e){}
-
-        // Translate to tile center
-        const cx = x + tileSize/2;
-        const cy = y + tileSize/2;
-        ctx.translate(cx, cy);
-        ctx.rotate(rot);
-        ctx.scale(mirror, 1); // horizontal mirror sometimes
-        // Draw with top-left anchored at (-tileSize/2, -tileSize/2)
-        ctx.drawImage(img, -tileSize/2, -tileSize/2, tileSize, tileSize);
-
-        ctx.restore();
+      update() {
+        this.y += this.speed;
+        if (this.y > height) this.reset();
       }
-
-      function drawPattern() {
-        if (!img.complete) return;
-        ctx.clearRect(0, 0, width, height);
-        const cols = Math.ceil(width / tileSize) + 1;
-        const rows = Math.ceil(height / tileSize) + 1;
-
-        // Optional: deterministic randomness per tile position (stable across resizes)
-        // Using a quick hash on (i,j) so layout doesn't "shuffle" on each redraw.
-        function randFor(i,j) {
-          // xorshift-ish PRNG seeded by grid coords
-          let s = ((i+1)*73856093) ^ ((j+1)*19349663);
-          s ^= s << 13; s ^= s >>> 17; s ^= s << 5;
-          // convert to [0,1)
-          return (s >>> 0) / 4294967296;
-        }
-
-        for (let j = 0; j < rows; j++) {
-          for (let i = 0; i < cols; i++) {
-            // temporarily override Math.random with stable rand for this cell
-            const oldRandom = Math.random;
-            Math.random = () => randFor(i,j);
-            drawOneTile(i * tileSize, j * tileSize);
-            Math.random = oldRandom;
-          }
-        }
+      draw(ctx) {
+        ctx.beginPath();
+        ctx.strokeStyle = `rgba(255, 255, 255, ${this.opacity})`;
+        ctx.lineWidth = 1.5;
+        ctx.moveTo(this.x, this.y);
+        ctx.lineTo(this.x, this.y + this.len);
+        ctx.stroke();
       }
-    })();
-
-    // ---- Rain effect (unchanged, now draws on its own canvas) ----
-    (function() {
-      const canvas = document.getElementById('rainCanvas');
-      const ctx = canvas.getContext('2d');
-      let width, height;
-
-      function resizeCanvas() {
-        width = canvas.width = window.innerWidth;
-        height = canvas.height = window.innerHeight;
-      }
-      window.addEventListener('resize', resizeCanvas);
-      resizeCanvas();
-
-      class Drop {
-        constructor() { this.reset(); }
-        reset() {
-          this.x = Math.random() * width;
-          this.y = Math.random() * -height;
-          this.len = 10 + Math.random() * 20;
-          this.speed = 2 + Math.random() * 4;
-          this.opacity = 0.2 + Math.random() * 0.3;
-        }
-        update() {
-          this.y += this.speed;
-          if (this.y > height) this.reset();
-        }
-        draw(ctx) {
-          ctx.beginPath();
-          ctx.strokeStyle = `rgba(255, 255, 255, ${this.opacity})`;
-          ctx.lineWidth = 1.5;
-          ctx.moveTo(this.x, this.y);
-          ctx.lineTo(this.x, this.y + this.len);
-          ctx.stroke();
-        }
-      }
-
-      const drops = [];
-      const maxDrops = 150;
-      for (let i = 0; i < maxDrops; i++) drops.push(new Drop());
-
-      function animate() {
-        ctx.clearRect(0, 0, width, height);
-        for (const drop of drops) {
-          drop.update();
-          drop.draw(ctx);
-        }
-        requestAnimationFrame(animate);
-      }
-      animate();
-    })();
-  </script>
-
-  <!-- Countdown (unchanged) -->
-  <script>
-  (function() {
-    const el = document.getElementById("countdown");
-    // October 3, 2026 at 10:00 AM PDT (UTC-7)
-    const target = new Date("2026-10-03T10:00:00-07:00").getTime();
-    const msPerDay = 1000 * 60 * 60 * 24;
-    const prec = 5; // decimals
-
-    function formatDays(diffMs) {
-      const days = diffMs / msPerDay;
-      return Math.max(0, days).toFixed(prec);
     }
 
-    function update() {
-      const now = Date.now();
-      const diff = target - now;
+    const drops = [];
+    const maxDrops = 150;
+    for (let i = 0; i < maxDrops; i++) drops.push(new Drop());
 
-      if (diff <= 0) {
-        el.innerHTML = "<h2>The day has arrived!</h2>";
-        clearInterval(timer);
-        return;
+    function animate() {
+      ctx.clearRect(0, 0, width, height);
+      for (const drop of drops) {
+        drop.update();
+        drop.draw(ctx);
       }
-
-      const daysStr = formatDays(diff);
-      el.innerHTML = `<b>${daysStr}</b> days left`;
+      requestAnimationFrame(animate);
     }
 
-    const timer = setInterval(update, 1000);
-    update();
-  })();
+    animate();
   </script>
+
+<script>
+(function() {
+  const el = document.getElementById("countdown");
+  // October 3, 2026 at 10:00 AM PDT (UTC-7)
+  const target = new Date("2026-10-03T10:00:00-07:00").getTime();
+  const msPerDay = 1000 * 60 * 60 * 24;
+  const prec = 5; // decimals
+
+  function formatDays(diffMs) {
+    const days = diffMs / msPerDay;
+    return Math.max(0, days).toFixed(prec);
+  }
+
+  function update() {
+    const now = Date.now();
+    const diff = target - now;
+
+    if (diff <= 0) {
+      el.innerHTML = "<h2>The day has arrived!</h2>";
+      clearInterval(timer);
+      return;
+    }
+
+    const daysStr = formatDays(diff);
+    el.innerHTML = `<b>${daysStr}</b> days left`;
+  }
+
+  const timer = setInterval(update, 1000);
+  update();
+})();
+</script>
+
+
 
   <center>
+
     Follow us on instagram <a href="https://instagram.com/showerhacks">@showerhacks</a>
   </center>
+  </main>
 </body>
 </html>
