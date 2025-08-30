@@ -202,13 +202,14 @@ b, strong {
 }
 
 
-@supports (-webkit-touch-callout: none) and (not (translate: none)) {
-  h1,h2 {
+/* Apply only in Chrome (not Safari, not Firefox) */
+@supports (-webkit-appearance:none) and (not (-webkit-touch-callout:none)) {
+  h1, h2 {
     -webkit-text-stroke: 3px currentColor;
-    color: transparent; /* so only the stroke shows */
+    color: transparent;
   }
- 
 }
+
 
   </style>
  <div class="header">
