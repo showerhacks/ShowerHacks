@@ -202,12 +202,13 @@ b, strong {
 }
 
 
-/* Apply only in Chrome (not Safari, not Firefox) */
-@supports (-webkit-appearance:none) and (not (-webkit-touch-callout:none)) {
+/* Chrome only (not Safari, not Firefox) */
+@supports (-webkit-appearance:none) and (not (-webkit-touch-callout:none)) and (not (selector(:-moz-placeholder))) {
   h1, h2 {
     -webkit-text-stroke: 3px currentColor;
   }
 }
+
 
 
   </style>
