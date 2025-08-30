@@ -362,96 +362,69 @@ body::before {
     </div>
   </div>
 
- <script>
-const canvas = document.createElement('canvas');
-canvas.style.position = 'fixed';
-canvas.style.top = '0';
-canvas.style.left = '0';
-canvas.style.width = '100%';
-canvas.style.height = '100%';
-canvas.style.pointerEvents = 'none';
-canvas.style.zIndex = '-1';
-document.body.appendChild(canvas);
 
-const ctx = canvas.getContext('2d');
-let width, height;
-function resizeCanvas() {
-  width = canvas.width = window.innerWidth;
-  height = canvas.height = window.innerHeight;
-  drawTiles();
-}
-window.addEventListener('resize', resizeCanvas);
-resizeCanvas();
+  <script>
+    const canvas = document.createElement('canvas');
+    canvas.style.position = 'fixed';
+    canvas.style.top = '0';
+    canvas.style.left = '0';
+    canvas.style.width = '100%';
+    canvas.style.height = '100%';
+    canvas.style.pointerEvents = 'none';
+    canvas.style.zIndex = '-1';
+    document.body.appendChild(canvas);
 
-const tileImg = new Image();
-tileImg.src = "tile.png";
-let tilePattern = [];
+    const ctx = canvas.getContext('2d');
+    let width, height;
 
-function drawTiles() {
-  if (!tileImg.complete) return;
-  const tileSize = 220;
-  const cols = Math.ceil(width / tileSize);
-  const rows = Math.ceil(height / tileSize);
-  tilePattern = [];
-  for (let y = 0; y < rows; y++) {
-    for (let x = 0; x < cols; x++) {
-      const rotation = [0, Math.PI/2, Math.PI, 3*Math.PI/2][Math.floor(Math.random()*4)];
-      const mirrorX = Math.random() < 0.5 ? -1 : 1;
-      const mirrorY = Math.random() < 0.5 ? -1 : 1;
-      tilePattern.push({x: x*tileSize, y: y*tileSize, rotation, mirrorX, mirrorY});
+    function resizeCanvas() {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
     }
-  }
-  redrawBackground();
-}
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
 
-function redrawBackground() {
-  ctx.clearRect(0, 0, width, height);
-  const tileSize = 220;
-  for (const t of tilePattern) {
-    ctx.save();
-    ctx.translate(t.x + tileSize/2, t.y + tileSize/2);
-    ctx.rotate(t.rotation);
-    ctx.scale(t.mirrorX, t.mirrorY);
-    ctx.drawImage(tileImg, -tileSize/2, -tileSize/2, tileSize, tileSize);
-    ctx.restore();
-  }
-}
+    class Drop {
+      constructor() {
+        this.reset();
+      }
+      reset() {
+        this.x = Math.random() * width;
+        this.y = Math.random() * -height;
+        this.len = 10 + Math.random() * 20;
+        this.speed = 2 + Math.random() * 4;
+        this.opacity = 0.2 + Math.random() * 0.3;
+      }
+      update() {
+        this.y += this.speed;
+        if (this.y > height) this.reset();
+      }
+      draw(ctx) {
+        ctx.beginPath();
+        ctx.strokeStyle = `rgba(255, 255, 255, ${this.opacity})`;
+        ctx.lineWidth = 1.5;
+        ctx.moveTo(this.x, this.y);
+        ctx.lineTo(this.x, this.y + this.len);
+        ctx.stroke();
+      }
+    }
 
-// Rain effect
-class Drop {
-  constructor() { this.reset(); }
-  reset() {
-    this.x = Math.random() * width;
-    this.y = Math.random() * -height;
-    this.len = 10 + Math.random() * 20;
-    this.speed = 2 + Math.random() * 4;
-    this.opacity = 0.2 + Math.random() * 0.3;
-  }
-  update() {
-    this.y += this.speed;
-    if (this.y > height) this.reset();
-  }
-  draw(ctx) {
-    ctx.beginPath();
-    ctx.strokeStyle = `rgba(255,255,255,${this.opacity})`;
-    ctx.lineWidth = 1.5;
-    ctx.moveTo(this.x, this.y);
-    ctx.lineTo(this.x, this.y + this.len);
-    ctx.stroke();
-  }
-}
-const drops = Array.from({length:150}, () => new Drop());
+    const drops = [];
+    const maxDrops = 150;
+    for (let i = 0; i < maxDrops; i++) drops.push(new Drop());
 
-function animate() {
-  redrawBackground(); // redraw tiles
-  for (const drop of drops) { drop.update(); drop.draw(ctx); }
-  requestAnimationFrame(animate);
-}
+    function animate() {
+      ctx.clearRect(0, 0, width, height);
+      for (const drop of drops) {
+        drop.update();
+        drop.draw(ctx);
+      }
+      requestAnimationFrame(animate);
+    }
 
-tileImg.onload = () => { drawTiles(); animate(); };
-</script>
-
-
+    animate();
+  </script>
+  
 <script>
 (function() {
   const el = document.getElementById("countdown");
