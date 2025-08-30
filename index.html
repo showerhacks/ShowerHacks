@@ -201,6 +201,15 @@ b, strong {
   overflow-wrap: normal;
 }
 
+
+@supports (-webkit-touch-callout: none) and (not (translate: none)) {
+  h1,h2 {
+    -webkit-text-stroke: 3px currentColor;
+    color: transparent; /* so only the stroke shows */
+  }
+ 
+}
+
   </style>
  <div class="header">
   <img src="logo.png" alt="Showerhacks logo">
