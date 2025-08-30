@@ -3,11 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-
   <link rel="icon" type="image/png" href="whitelogo.png">
-  
-  <title>Shower Hacks</title>
-  <meta name="description" content="Showerhacks — a 12-hour hackathon where the winner gets to take a shower">
+  <title>Showerhacks — winner gets to take a shower</title>
+  <meta name="description" content="Showerhacks — a 1000-person 12-hour hackathon in San Francisco where the winner gets to take a shower">
   <meta name="keywords" content="SF Hackathon, shower hacks, showerhacks">
   <meta property="og:title" content="Showerhacks — a 12-hour hackathon where the winner gets to take a shower">
   <meta property="og:description" content="Showerhacks is a 1000-person 12-hour hackathon in SF where the winner gets to take a shower">
@@ -16,8 +14,39 @@
   <meta property="og:type" content="website">
   <meta name="theme-color" content="#cce6ff">
 
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Event",
+    "name": "Showerhacks",
+    "startDate": "2026-10-03T10:00-07:00",
+    "endDate": "2026-10-03T22:00-07:00",
+    "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+    "eventStatus": "https://schema.org/EventScheduled",
+    "location": {
+      "@type": "Place",
+      "name": "San Francisco",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "San Francisco",
+        "addressRegion": "CA",
+        "addressCountry": "US"
+      }
+    },
+    "image": "https://showerhacks.org/whitelogo.png",
+    "description": "Showerhacks is a 12-hour hackathon in San Francisco with 1000+ participants. Build shocking projects, compete, and win a shower.",
+    "organizer": {
+      "@type": "Organization",
+      "name": "Showerhacks",
+      "url": "https://showerhacks.org"
+    }
+  }
+  </script>
+</head>
+
   
-  <style>
+<body>
+    <style>
    @import url('https://fonts.googleapis.com/css2?family=Bitcount+Prop+Single:wght@100..900&family=Bitcount:wght@100..900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
     
 body {
@@ -168,8 +197,6 @@ body::before {
 }
 
   </style>
-</head>
-<body>
  <div class="header">
   <img src="logo.png" alt="Showerhacks logo">
   <h1>Shower Hacks</h1>
