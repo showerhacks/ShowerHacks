@@ -1,0 +1,5 @@
+# robots.txt for showerhacks.org
+
+# Allow all crawlers full access
+User-agent: *
+Allow: /
