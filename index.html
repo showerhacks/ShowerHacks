@@ -102,13 +102,7 @@ b, strong {
   -webkit-text-stroke: 0.5px currentColor;
 }
 
-    
-/* On small screens, make exactly 3 tiles fit across */
-@media (max-width: 600px) {
-  body::before {
-    background-size: calc(100vw / 3) auto;
-  }
-}
+
 
 
     
@@ -120,6 +114,7 @@ b, strong {
       font-family: "Bitcount", system-ui;
       font-size: clamp(2rem, 8vw, 3.5rem);
       margin-bottom: 0.5em;
+      text-shadow: 0px 0px 15px white;
     }
     h2 {
       font-size: 2em;
@@ -228,6 +223,7 @@ b, strong {
   flex-wrap: wrap;
   justify-content: center;
   gap: 10px;
+   padding:10px;
   
 }
 
@@ -242,8 +238,44 @@ b, strong {
   text-shadow: 0px 0px 10px white;
   white-space: nowrap;
 }
+      
+      .section.hero {
+  position: relative;
+  border-radius: 7px;
+  overflow: hidden; /* keeps the background inside rounded corners */
+  box-shadow: 0px 0px 15px white;
+}
+
+.section.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url('sf.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.4; /* adjust opacity here */
+  z-index: 0;
+}
+
+.section.hero .note {
+  margin:0;
+  position: relative;
+  z-index: 1; /* text stays on top of the background */
+}
 
 
+    
+/* On small screens, make exactly 3 tiles fit across */
+@media (max-width: 600px) {
+  body::before {
+    background-size: calc(100vw / 3) auto;
+  }
+  
+  .info-box{
+    font-size: .5em;
+  }
+}
 
 /* Chrome only (not Safari, not Firefox) */
 @supports (-webkit-appearance:none) and (not (-webkit-touch-callout:none)) and (not (selector(:-moz-placeholder))) {
@@ -275,20 +307,20 @@ b, strong {
     </a>
   </div>
   <main>
-    <div class="section" style="background-color:black; border-radius: 7px;padding-top: 30px;padding-bottom:1px;  background-image: url('sf.jpg'); 
-  background-size: cover;          
-  background-position: center;
-  background-repeat: no-repeat; box-shadow: 0px 0px 15px black;">
-<div class="note">
-  <div class="info-boxes">
-    <div class="info-box">October 3rd 2026</div>
-    <div class="info-box">10AM – 10PM</div>
-    <div class="info-box">San Francisco</div>
-    <div class="info-box">1000 People</div>
-    <div class="info-box" id="countdown"></div>
+   
+<div class="section hero">
+  <div class="note">
+    <div class="info-boxes">
+      <div class="info-box">October 3rd 2026</div>
+      <div class="info-box">10AM – 10PM</div>
+      <div class="info-box">San Francisco</div>
+      <div class="info-box">1000 People</div>
+      <div class="info-box" id="countdown"></div>
+    </div>
   </div>
 </div>
-  </div>
+
+
 
     
   </div>
