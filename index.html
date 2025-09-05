@@ -49,6 +49,10 @@
 <body>
     <style>
    @import url('https://fonts.googleapis.com/css2?family=Bitcount+Prop+Single:wght@100..900&family=Bitcount:wght@100..900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+      
+      @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+      
+
     
 body {
   margin: 0;
@@ -76,6 +80,9 @@ body::before {
   pointer-events: none;
 }
 
+  .cleanfont {
+   font-family: "Montserrat", sans-serif;
+  }
 
     .header {
   display: flex;
@@ -164,16 +171,30 @@ b, strong {
       height: auto;
       margin: auto;
     }
-  .team-member {
+.team-member {
+  position: relative; /* needed for absolute positioning of the label */
   border-radius: 12px;
   padding: 20px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-
-  /* frosted glass effect */
-  background: rgba(255, 255, 255, 0.25); /* semi-transparent white */
+  background: rgba(255, 255, 255, 0.25);
   backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px); /* for Safari */
+  -webkit-backdrop-filter: blur(10px);
 }
+
+.judge-label {
+  position: absolute;
+  left: 5px; /* keep near the left edge, you can adjust this */
+  top: 50%;
+  transform: translateY(-50%) rotate(180deg);
+  writing-mode: vertical-rl;
+  font-size: 0.8rem;
+  font-weight: thin;
+  letter-spacing: 1px;
+  text-shadow: 0px 0px 15px white; 
+  
+}
+
+
 
     .team-member h3 {
       margin: 10px 0 5px;
@@ -201,6 +222,27 @@ b, strong {
   white-space: nowrap;
   overflow-wrap: normal;
 }
+      
+      .info-boxes {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  
+}
+
+.info-box {
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 12px;
+  padding: 8px 16px;
+  font-size: .9em;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  text-shadow: 0px 0px 10px white;
+  white-space: nowrap;
+}
+
 
 
 /* Chrome only (not Safari, not Firefox) */
@@ -213,6 +255,8 @@ b, strong {
 
 
   </style>
+  
+  
  <div class="header">
   <img src="logo.png" alt="Showerhacks logo">
   <h1>Shower Hacks</h1>
@@ -230,11 +274,25 @@ b, strong {
       Join Discord
     </a>
   </div>
-  <div class="note">
-    <em>October 3rd 2026, 10AM-10PM, San Francisco, 1000 people, <div id="countdown"></div></em><br/><br/>
+  <main>
+    <div class="section" style="background-color:black; border-radius: 7px;padding-top: 30px;padding-bottom:1px;  background-image: url('https://images.pexels.com/photos/3584437/pexels-photo-3584437.jpeg'); 
+  background-size: cover;          
+  background-position: center;
+  background-repeat: no-repeat; box-shadow: 0px 0px 15px black;">
+<div class="note">
+  <div class="info-boxes">
+    <div class="info-box">October 3rd 2026</div>
+    <div class="info-box">10AM – 10PM</div>
+    <div class="info-box">San Francisco</div>
+    <div class="info-box">1000 People</div>
+    <div class="info-box" id="countdown"></div>
+  </div>
+</div>
+  </div>
+
     
   </div>
-<main>
+
   
  
   <div class="section">
@@ -271,6 +329,7 @@ b, strong {
     <h2>The Team</h2>
     <div class="team">
       <div class="team-member">
+        <span class="judge-label" style="color:#007bff">Org</span>
         <img src="/team/john.jpg" alt="John Lins">
         <h3>John Lins</h3>
         <p>CompE @ UCSB</p>
@@ -278,6 +337,7 @@ b, strong {
       </div>
 
       <div class="team-member">
+        <span class="judge-label" style="color:#007bff">Org</span>
         <img src="/team/sarah.jpg" alt="Sarah Zhao">
         <h3>Sarah Zhao</h3>
         <p>CSE @ UCLA</p>
@@ -285,6 +345,7 @@ b, strong {
       </div>
 
           <div class="team-member">
+            <span class="judge-label" style="color:lightcoral">Judge</span>
         <img src="/team/mike.jpg" alt="Mike Klikushin">
         <h3>Mike Klikushin</h3>
         <p><a href="https://www.instagram.com/mikebuildsmore/">@MikeBuildsMore</a></p>
@@ -293,6 +354,7 @@ b, strong {
   
       
        <div class="team-member">
+         <span class="judge-label" style="color:lightcoral">Judge</span>
         <img src="/team/yuni.jpeg" alt="Yuni Kim">
         <h3>Yuni Kim</h3>
          <p>CS & Bio @ UCSD</p>
@@ -301,6 +363,7 @@ b, strong {
       
   
     <div class="team-member">
+      <span class="judge-label" style="color:#007bff">Org</span>
         <img src="/team/ken.jpg" alt="Ken Mueller">
         <h3>Ken Mueller</h3>
         <p>CS @ Stanford</p>
@@ -309,6 +372,7 @@ b, strong {
     
 
           <div class="team-member">
+            <span class="judge-label" style="color:#007bff">Org</span>
       <img src="/team/celina.jpg" alt="Celina Kim">
       <h3>Celina Kim</h3>
       <p>Marketing</p>
@@ -317,6 +381,7 @@ b, strong {
 
 
   <div class="team-member">
+    <span class="judge-label" style="color:lightcoral">Judge</span>
         <img src="/team/aidan.jpg" alt="Aidan Ouckama">
         <h3>Aidan Ouckama</h3>
         <p><a href="https://www.instagram.com/ouckahcs?igsh=MzRlODBiNWFlZA==">@ouckahcs</a></p>
@@ -324,6 +389,7 @@ b, strong {
 
 
     <div class="team-member">
+      <span class="judge-label" style="color:lightcoral">Judge</span>
         <img src="/team/tina.jpg" alt="Tina Chi">
         <h3>Tina Chi</h3>
         <p>CS @ UF</p>
@@ -334,18 +400,21 @@ b, strong {
 
 
       <div class="team-member">
+        <span class="judge-label" style="color:lightcoral">Judge</span>
         <img src="/team/viraj.jpg" alt="Viraj Ala">
         <h3>Viraj Ala</h3>
         <p><a href="https://www.instagram.com/viraj.ala/?hl=en">@viraj.ala</a></p>
       </div>
 
         <div class="team-member">
+          <span class="judge-label" style="color:lightcoral">Judge</span>
         <img src="/team/christy.jpg" alt="Christy Lam">
         <h3>Christy Lam</h3>
         <p><a href="https://www.instagram.com/christyoverflow/">@christyoverflow</a></p>
       </div>
 
          <div class="team-member">
+           <span class="judge-label" style="color:lightcoral">Judge</span>
         <img src="/team/allen.jpg" alt="Allen Tran">
         <h3>Allen Tran</h3>
         <p></p>
@@ -353,6 +422,7 @@ b, strong {
       </div>
 
           <div class="team-member">
+            <span class="judge-label" style="color:lightcoral">Judge</span>
         <img src="/team/ace.jpg" alt="Ace Yip">
         <h3>Ace Yip</h3>
         <p></p>
@@ -362,6 +432,7 @@ b, strong {
   
 
       <div class="team-member">
+        <span class="judge-label" style="color:lightcoral">Judge</span>
         <img src="/team/martin.jpg" alt="Martin Lee">
         <h3>Martin Lee</h3>
         <p>Cinema @ USC</p>
@@ -370,6 +441,7 @@ b, strong {
 
       
           <div class="team-member">
+            <span class="judge-label" style="color:lightcoral">Judge</span>
         <img src="/team/sara.jpg" alt="Sara Leung">
         <h3>Sara Leung</h3>
         <p></p>
@@ -380,6 +452,7 @@ b, strong {
 
 
       <div class="team-member">
+        <span class="judge-label" style="color:#007bff">Org</span>
         <img src="/team/chris.png" alt="Chris Vaisnor">
         <h3>Chris Vaisnor</h3>
         <p>AI M.S. @ John Hopkins University</p>
@@ -387,6 +460,7 @@ b, strong {
 
 
       <div class="team-member">
+        <span class="judge-label" style="color:lightcoral">Judge</span>
         <img src="/team/harneet.jpeg" alt="Harneet Dhillon">
         <h3>Harneet Dhillon</h3>
         <p>UCSB B.S/Georgia Tech M.S.</p>
@@ -394,6 +468,7 @@ b, strong {
       </div>
 
 <div class="team-member">
+  <span class="judge-label" style="color:#007bff">Org</span>
         <!--<img src="/team/" alt="">-->
         <h3>Kai</h3>
         <p>XAI / CMU</p>
@@ -404,6 +479,7 @@ b, strong {
       
 
       <div class="team-member">
+        <span class="judge-label" style="color:#007bff">Org</span>
         <!--<img src="/team/" alt="">-->
         <h3>Sophia Duan</h3>
         <p>Hack Club</p>
