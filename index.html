@@ -376,7 +376,7 @@ b, strong {
     <div class="afterparty-container">
       <canvas id="afterparty-canvas"></canvas>
       <div class="afterparty-content" style="text-align:left">
-        <b>11PM-2AM:</b> Invited participants and all winning teams will be invited to the afterparty (must be 18+ to enter and 21+ to consume alcohol).<br/>
+        <b>11PM-2AM:</b> Invited participants and all winning teams will be invited to the afterparty (must be 18+ to enter and 21+ to consume alcohol 🥂).<br/>
         There will be multiple afterparties, each at different hackerhouses. Representatives from each hackerhouse will invite selected teams.
       </div>
     </div>
@@ -682,7 +682,7 @@ b, strong {
 
 
 
-    <script>
+   <script>
     document.addEventListener('DOMContentLoaded', function() {
         const canvas = document.getElementById('afterparty-canvas');
         const ctx = canvas.getContext('2d');
@@ -698,58 +698,104 @@ b, strong {
         window.addEventListener('resize', resizeCanvas);
         resizeCanvas();
         
-        // Particle classes
-        class Spark {
+        // Sparkler class
+        class Sparkler {
             constructor() {
                 this.reset();
+                this.active = false;
+                this.activationTime = 0;
+                this.duration = 3000 + Math.random() * 4000; // 3-7 seconds
             }
             
             reset() {
-                this.x = width / 2;
-                this.y = height / 2;
-                this.size = Math.random() * 3 + 1;
-                this.speedX = Math.random() * 10 - 5;
-                this.speedY = Math.random() * -10 - 5;
-                this.color = `hsl(${Math.random() * 60 + 10}, 100%, ${Math.random() * 30 + 70}%)`;
-                this.life = 1;
-                this.decay = Math.random() * 0.02 + 0.005;
-                this.trail = [];
-                this.maxTrail = 5;
+                this.x = Math.random() * width;
+                this.y = height + 20; // Start below the container
+                this.size = Math.random() * 2 + 1;
+                this.speedY = Math.random() * -2 - 1; // Move upward
+                this.sparks = [];
+                this.maxSparks = 30;
+                this.color = `hsl(${Math.random() * 60 + 10}, 100%, 70%)`;
+                this.active = false;
+            }
+            
+            activate() {
+                this.active = true;
+                this.activationTime = Date.now();
             }
             
             update() {
-                this.trail.push({x: this.x, y: this.y});
-                if (this.trail.length > this.maxTrail) this.trail.shift();
+                if (!this.active) {
+                    this.y += this.speedY;
+                    
+                    // If sparkler has risen enough, activate it
+                    if (this.y < height * 0.7) {
+                        this.activate();
+                    }
+                    return;
+                }
                 
-                this.x += this.speedX;
-                this.y += this.speedY;
-                this.speedY += 0.1; // gravity
-                this.life -= this.decay;
-                
-                if (this.life <= 0 || this.y > height) {
+                // Check if sparkler should deactivate
+                if (Date.now() - this.activationTime > this.duration) {
                     this.reset();
+                    return;
+                }
+                
+                // Create new sparks
+                if (this.sparks.length < this.maxSparks && Math.random() < 0.3) {
+                    this.sparks.push({
+                        x: this.x,
+                        y: this.y,
+                        size: Math.random() * 2 + 1,
+                        speedX: (Math.random() - 0.5) * 5,
+                        speedY: (Math.random() - 0.5) * 5,
+                        life: 1,
+                        decay: Math.random() * 0.03 + 0.01,
+                        color: this.color
+                    });
+                }
+                
+                // Update existing sparks
+                for (let i = this.sparks.length - 1; i >= 0; i--) {
+                    const spark = this.sparks[i];
+                    spark.x += spark.speedX;
+                    spark.y += spark.speedY;
+                    spark.speedY += 0.05; // Gravity
+                    spark.life -= spark.decay;
+                    
+                    // Remove dead sparks
+                    if (spark.life <= 0 || spark.y > height) {
+                        this.sparks.splice(i, 1);
+                    }
                 }
             }
             
             draw() {
-                // Draw trail
-                for (let i = 0; i < this.trail.length; i++) {
-                    const point = this.trail[i];
-                    const alpha = (i / this.trail.length) * this.life;
+                if (!this.active) {
+                    // Draw the unactivated sparkler
                     ctx.beginPath();
-                    ctx.arc(point.x, point.y, this.size * (i / this.trail.length), 0, Math.PI * 2);
-                    ctx.fillStyle = this.color.replace('%)', `%, ${alpha})`);
+                    ctx.arc(this.x, this.y, 3, 0, Math.PI * 2);
+                    ctx.fillStyle = '#888';
                     ctx.fill();
+                    return;
                 }
                 
-                // Draw spark
+                // Draw the sparkler center
                 ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fillStyle = this.color.replace('%)', `%, ${this.life})`);
+                ctx.arc(this.x, this.y, 4, 0, Math.PI * 2);
+                ctx.fillStyle = 'yellow';
                 ctx.fill();
+                
+                // Draw all sparks
+                for (const spark of this.sparks) {
+                    ctx.beginPath();
+                    ctx.arc(spark.x, spark.y, spark.size, 0, Math.PI * 2);
+                    ctx.fillStyle = spark.color.replace('%)', `%, ${spark.life})`);
+                    ctx.fill();
+                }
             }
         }
         
+        // Confetti class (simplified)
         class Confetti {
             constructor() {
                 this.reset();
@@ -758,14 +804,13 @@ b, strong {
             reset() {
                 this.x = Math.random() * width;
                 this.y = -10;
-                this.size = Math.random() * 8 + 5;
-                this.speedX = Math.random() * 4 - 2;
-                this.speedY = Math.random() * 3 + 2;
+                this.size = Math.random() * 6 + 4;
+                this.speedX = Math.random() * 2 - 1;
+                this.speedY = Math.random() * 2 + 1;
                 this.color = `hsl(${Math.random() * 360}, 100%, 50%)`;
                 this.shape = Math.floor(Math.random() * 3);
                 this.rotation = Math.random() * Math.PI * 2;
                 this.rotationSpeed = Math.random() * 0.1 - 0.05;
-                this.life = 1;
             }
             
             update() {
@@ -774,8 +819,7 @@ b, strong {
                 this.rotation += this.rotationSpeed;
                 
                 if (this.y > height) {
-                    this.life -= 0.02;
-                    if (this.life <= 0) this.reset();
+                    this.reset();
                 }
             }
             
@@ -783,7 +827,6 @@ b, strong {
                 ctx.save();
                 ctx.translate(this.x, this.y);
                 ctx.rotate(this.rotation);
-                ctx.globalAlpha = this.life;
                 
                 ctx.fillStyle = this.color;
                 
@@ -809,45 +852,45 @@ b, strong {
             }
         }
         
-        // Create particles
-        const sparks = [];
-        const confetti = [];
+        // Create multiple sparklers
+        const sparklers = [];
+        for (let i = 0; i < 5; i++) {
+            sparklers.push(new Sparkler());
+        }
         
-        for (let i = 0; i < 20; i++) sparks.push(new Spark());
-        for (let i = 0; i < 30; i++) confetti.push(new Confetti());
+        // Create less confetti
+        const confetti = [];
+        for (let i = 0; i < 10; i++) {
+            confetti.push(new Confetti());
+        }
         
         // Animation
         function animate() {
             ctx.clearRect(0, 0, width, height);
             
-            // Update and draw particles
-            for (const spark of sparks) {
-                spark.update();
-                spark.draw();
+            // Update and draw sparklers
+            for (const sparkler of sparklers) {
+                sparkler.update();
+                sparkler.draw();
             }
             
+            // Update and draw confetti
             for (const piece of confetti) {
                 piece.update();
                 piece.draw();
             }
             
-            // Occasionally add new confetti
-            if (Math.random() < 0.05) confetti.push(new Confetti());
+            // Occasionally add new confetti (less frequently)
+            if (Math.random() < 0.02) {
+                confetti.push(new Confetti());
+            }
             
             requestAnimationFrame(animate);
         }
         
         animate();
-        
-        // Random bursts of activity
-        setInterval(() => {
-            for (let i = 0; i < 5; i++) {
-                sparks.push(new Spark());
-            }
-        }, 2000);
     });
 </script>
-
 
 
   <center>
