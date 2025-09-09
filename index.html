@@ -265,7 +265,30 @@ b, strong {
   z-index: 1; /* text stays on top of the background */
 }
 
+.afterparty-container {
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+}
 
+#afterparty-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.afterparty-content {
+  position: relative;
+  z-index: 2;
+}
     
 /* On small screens, make exactly 3 tiles fit across */
 @media (max-width: 600px) {
@@ -350,11 +373,15 @@ b, strong {
   
   <div class="section">
     <h2>Afterparty 🎉</h2>
-    <div style="text-align:left">
-    <b>11PM-2AM:</b> Invited participants and all winning teams will be invited to the afterparty (must be 18+ to enter and 21+ to consume alcohol).<br/>
-    There will be multiple afterparties, each at different hackerhouses. Representatives from each hackerhouse will invite selected teams.
+    <div class="afterparty-container">
+      <canvas id="afterparty-canvas"></canvas>
+      <div class="afterparty-content" style="text-align:left">
+        <b>11PM-2AM:</b> Invited participants and all winning teams will be invited to the afterparty (must be 18+ to enter and 21+ to consume alcohol).<br/>
+        There will be multiple afterparties, each at different hackerhouses. Representatives from each hackerhouse will invite selected teams.
+      </div>
     </div>
   </div>
+
 
 
 
@@ -453,6 +480,15 @@ b, strong {
       </div>
 
 
+       <div class="team-member">
+          <span class="judge-label" style="color:lightcoral">Judge</span>
+        <img src="/team/char.jpg" alt="Charissa Kim">
+        <h3>Charissa Kim</h3>
+        <p><a href="https://www.instagram.com/charlikestoeat/">@charlikestoeat</a></p>
+      </div>
+
+
+      
 
 
   <div class="team-member">
@@ -642,6 +678,174 @@ b, strong {
   const timer = setInterval(update, 1000);
   update();
 })();
+</script>
+
+
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const canvas = document.getElementById('afterparty-canvas');
+        const ctx = canvas.getContext('2d');
+        let width, height;
+        
+        // Set canvas dimensions
+        function resizeCanvas() {
+            const container = canvas.parentElement;
+            width = canvas.width = container.offsetWidth;
+            height = canvas.height = container.offsetHeight;
+        }
+        
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+        
+        // Particle classes
+        class Spark {
+            constructor() {
+                this.reset();
+            }
+            
+            reset() {
+                this.x = width / 2;
+                this.y = height / 2;
+                this.size = Math.random() * 3 + 1;
+                this.speedX = Math.random() * 10 - 5;
+                this.speedY = Math.random() * -10 - 5;
+                this.color = `hsl(${Math.random() * 60 + 10}, 100%, ${Math.random() * 30 + 70}%)`;
+                this.life = 1;
+                this.decay = Math.random() * 0.02 + 0.005;
+                this.trail = [];
+                this.maxTrail = 5;
+            }
+            
+            update() {
+                this.trail.push({x: this.x, y: this.y});
+                if (this.trail.length > this.maxTrail) this.trail.shift();
+                
+                this.x += this.speedX;
+                this.y += this.speedY;
+                this.speedY += 0.1; // gravity
+                this.life -= this.decay;
+                
+                if (this.life <= 0 || this.y > height) {
+                    this.reset();
+                }
+            }
+            
+            draw() {
+                // Draw trail
+                for (let i = 0; i < this.trail.length; i++) {
+                    const point = this.trail[i];
+                    const alpha = (i / this.trail.length) * this.life;
+                    ctx.beginPath();
+                    ctx.arc(point.x, point.y, this.size * (i / this.trail.length), 0, Math.PI * 2);
+                    ctx.fillStyle = this.color.replace('%)', `%, ${alpha})`);
+                    ctx.fill();
+                }
+                
+                // Draw spark
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = this.color.replace('%)', `%, ${this.life})`);
+                ctx.fill();
+            }
+        }
+        
+        class Confetti {
+            constructor() {
+                this.reset();
+            }
+            
+            reset() {
+                this.x = Math.random() * width;
+                this.y = -10;
+                this.size = Math.random() * 8 + 5;
+                this.speedX = Math.random() * 4 - 2;
+                this.speedY = Math.random() * 3 + 2;
+                this.color = `hsl(${Math.random() * 360}, 100%, 50%)`;
+                this.shape = Math.floor(Math.random() * 3);
+                this.rotation = Math.random() * Math.PI * 2;
+                this.rotationSpeed = Math.random() * 0.1 - 0.05;
+                this.life = 1;
+            }
+            
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                this.rotation += this.rotationSpeed;
+                
+                if (this.y > height) {
+                    this.life -= 0.02;
+                    if (this.life <= 0) this.reset();
+                }
+            }
+            
+            draw() {
+                ctx.save();
+                ctx.translate(this.x, this.y);
+                ctx.rotate(this.rotation);
+                ctx.globalAlpha = this.life;
+                
+                ctx.fillStyle = this.color;
+                
+                if (this.shape === 0) {
+                    // Rectangle
+                    ctx.fillRect(-this.size/2, -this.size/2, this.size, this.size);
+                } else if (this.shape === 1) {
+                    // Circle
+                    ctx.beginPath();
+                    ctx.arc(0, 0, this.size/2, 0, Math.PI * 2);
+                    ctx.fill();
+                } else {
+                    // Triangle
+                    ctx.beginPath();
+                    ctx.moveTo(0, -this.size/2);
+                    ctx.lineTo(this.size/2, this.size/2);
+                    ctx.lineTo(-this.size/2, this.size/2);
+                    ctx.closePath();
+                    ctx.fill();
+                }
+                
+                ctx.restore();
+            }
+        }
+        
+        // Create particles
+        const sparks = [];
+        const confetti = [];
+        
+        for (let i = 0; i < 20; i++) sparks.push(new Spark());
+        for (let i = 0; i < 30; i++) confetti.push(new Confetti());
+        
+        // Animation
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+            
+            // Update and draw particles
+            for (const spark of sparks) {
+                spark.update();
+                spark.draw();
+            }
+            
+            for (const piece of confetti) {
+                piece.update();
+                piece.draw();
+            }
+            
+            // Occasionally add new confetti
+            if (Math.random() < 0.05) confetti.push(new Confetti());
+            
+            requestAnimationFrame(animate);
+        }
+        
+        animate();
+        
+        // Random bursts of activity
+        setInterval(() => {
+            for (let i = 0; i < 5; i++) {
+                sparks.push(new Spark());
+            }
+        }, 2000);
+    });
 </script>
 
 
