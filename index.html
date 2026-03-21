@@ -319,6 +319,38 @@ b, strong {
   }
 }
 
+.cohost-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+}
+.co-host-partner-logos {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: clamp(0.75rem, 3vw, 2rem);
+  width: 100%;
+  max-width: min(100%, 36rem);
+  margin: 0 auto;
+  padding: 0 4px;
+  box-sizing: border-box;
+}
+.co-host-partner-logos a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 1 auto;
+  line-height: 0;
+}
+.co-host-partner-logos img {
+  height: clamp(28px, 6vw, 48px);
+  width: auto;
+  max-width: min(180px, 42vw);
+  object-fit: contain;
+}
 
 
   </style>
@@ -356,15 +388,20 @@ b, strong {
 </div>
 
     
-<div style="display: flex; align-items: center; gap: 8px;  justify-content: center; align-items: center;">
-  <h4>Co-hosted with</h4>
-  <a href="https://www.linkedin.com/company/aicollective/"><img src="https://www.aicollective.com/images/brand/Wordmark.svg"
-       style="width:120px; height:auto;" /></a>
+<div class="cohost-wrap">
+  <div style="display: flex; align-items: center; gap: 8px; justify-content: center;">
+    <h4>Co-hosted with</h4>
+    <a href="https://www.linkedin.com/company/aicollective/"><img src="https://www.aicollective.com/images/brand/Wordmark.svg"
+         style="width:120px; height:auto;" alt="AI Collective" /></a>
+  </div>
+  <div class="co-host-partner-logos">
+    <a href="https://www.firecrawl.dev/"><img src="spon/firecrawl_s.png" alt="Firecrawl"></a>
+    <a href="https://usemoss.dev/"><img src="spon/moss_s.png" alt="Moss"></a>
+  </div>
 </div>
 
 
     
-  </div>
 
   
 
@@ -596,7 +633,7 @@ b, strong {
       <div><a href="https://www.firecrawl.dev/"><img src="spon/firecrawl.png" alt="Firecrawl" class="sponsor-logo" style="width:80%"></a> <br/>Turn websites into
 LLM-ready data</div>
 <br/>
- <div><a href="https://usemoss.dev/"><img src="https://www.usemoss.dev/_next/image?url=%2FIcon.png&w=64&q=75" alt="Moss" class="sponsor-logo" style="width:30%"></a> <br/>Moss: Real-Time Semantic Search</div>
+ <div><a href="https://usemoss.dev/"><img src="spon/moss.png" alt="Moss" class="sponsor-logo" style="width:80%"></a> <br/>Moss: Real-Time Semantic Search</div>
       <br/>
       
       <div>Personal Sponsor: <a href="https://shub.club/">Shubham</a> </div>
