@@ -119,7 +119,7 @@ b, strong {
     }
     h2 {
       font-size: 2em;
-      font-family: 
+      font-family: "Bitcount", system-ui;
       margin-bottom: 0.5em;
     }
     .description, .criteria, .note {
@@ -352,6 +352,35 @@ b, strong {
   object-fit: contain;
 }
 
+.faq {
+  text-align: left;
+}
+.faq details {
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 12px;
+  padding: 14px 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  margin: 12px auto;
+  max-width: 900px;
+}
+.faq summary {
+  cursor: pointer;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+  font-size: 1.05rem;
+  text-shadow: 0px 0px 10px white;
+}
+.faq details p {
+  margin: 10px 0 0;
+  font-family: "Montserrat", sans-serif;
+  line-height: 1.5;
+}
+.faq details[open] summary {
+  margin-bottom: 6px;
+}
+
 
   </style>
   
@@ -418,6 +447,7 @@ b, strong {
         <img src="/team/john.jpg" alt="John Lins">
         <h3>John Lins</h3>
         <p>CompE @ UCSB</p>
+        <p>Prev-LLNL AI Research</p>
         <p><a href="https://johnlins.com">johnlins.com</a></p>
       </div>
 
@@ -426,19 +456,35 @@ b, strong {
         <img src="/team/sarah.jpg" alt="Sarah Zhao">
         <h3>Sarah Zhao</h3>
         <p>CSE @ UCLA</p>
+        <p>Prev-Quilly SWE</p>
         <p><a href="https://www.sarahzhao.dev">sarahzhao.dev</a></p>
       </div>
 
 
-        <div class="team-member">
+        <!-- <div class="team-member">
            <span class="judge-label" style="color:lightcoral">Judge</span>
         <img src="/team/allen.jpg" alt="Allen Tran">
         <h3>Allen Tran</h3>
         <p></p>
         <p><a href="https://www.instagram.com/allenvert/">@allenvert</a></p>
-      </div>
+      </div> -->
 
         
+      <div class="team-member">
+        <span class="judge-label" style="color:lightcoral">Judge</span>
+        <img src="/team/viraj.jpg" alt="Viraj Ala">
+        <h3>Viraj Ala</h3>
+        <p>Viral Founder Interviews, Prev-White House & Deloitte</p>
+        <p><a href="https://www.instagram.com/viraj.ala/?hl=en">@viraj.ala</a></p>
+      </div>
+
+        <div class="team-member">
+          <span class="judge-label" style="color:lightcoral">Judge</span>
+        <img src="/team/christy.jpg" alt="Christy Lam">
+        <h3>Christy Lam</h3>
+        <p>SWE @ NVIDIA</p>
+        <p><a href="https://www.instagram.com/christyoverflow/">@christyoverflow</a></p>
+      </div>
   
       
        <div class="team-member">
@@ -446,6 +492,7 @@ b, strong {
         <img src="/team/yuni.jpeg" alt="Yuni Kim">
         <h3>Yuni Kim</h3>
          <p>CS & Bio @ UCSD</p>
+        <p>CMO @ DittoAI</p>
         <p><a href="https://www.tiktok.com/@yunskistudy">@yunskistudy</a></p>
        </div>
       
@@ -457,6 +504,7 @@ b, strong {
       <img src="/team/celina.jpg" alt="Celina Kim">
       <h3>Celina Kim</h3>
       <p>Marketing</p>
+      <p>CSUS</p>
       <p><a href="https://www.linkedin.com/in/celina-kim-942a11260/">Profile</a></p>
       </div>
       
@@ -465,17 +513,12 @@ b, strong {
             <span class="judge-label" style="color:lightcoral">Judge</span>
         <img src="/team/mike.jpg" alt="Mike Klikushin">
         <h3>Mike Klikushin</h3>
+        <p>Co-Founder @ Inspector (YC)</p>
         <p><a href="https://www.instagram.com/mikebuildsmore/">@MikeBuildsMore</a></p>
       </div>
       
 
-   <div class="team-member">
-      <span class="judge-label" style="color:#007bff">Org</span>
-        <img src="/team/ken.jpg" alt="Ken Mueller">
-        <h3>Ken Mueller</h3>
-        <p>CS @ Stanford</p>
-        <p><a href="https://sup.ai">Sup.ai</a></p>
-      </div>
+
 
 
 
@@ -485,42 +528,40 @@ b, strong {
         <img src="/team/tina.jpg" alt="Tina Chi">
         <h3>Tina Chi</h3>
         <p>CS @ UF</p>
+        <p>SWE @ Apple</p>
         <p><a href="https://www.instagram.com/tinahelloworld/">@tinahelloworld</a></p>
      </div>
 
     
 
 
-      <div class="team-member">
-        <span class="judge-label" style="color:lightcoral">Judge</span>
-        <img src="/team/viraj.jpg" alt="Viraj Ala">
-        <h3>Viraj Ala</h3>
-        <p><a href="https://www.instagram.com/viraj.ala/?hl=en">@viraj.ala</a></p>
-      </div>
-
-        <div class="team-member">
-          <span class="judge-label" style="color:lightcoral">Judge</span>
-        <img src="/team/christy.jpg" alt="Christy Lam">
-        <h3>Christy Lam</h3>
-        <p><a href="https://www.instagram.com/christyoverflow/">@christyoverflow</a></p>
-      </div>
 
 
        <div class="team-member">
           <span class="judge-label" style="color:lightcoral">Judge</span>
         <img src="/team/char.jpg" alt="Charissa Kim">
         <h3>Charissa Kim</h3>
+        <p>Technical Program Manager @ Semgrep</p>
         <p><a href="https://www.instagram.com/charlikestoeat/">@charlikestoeat</a></p>
       </div>
 
+      <div class="team-member">
+        <span class="judge-label" style="color:lightcoral">Judge</span>
+              <img src="/team/aolin.jpg" alt="">
+              <h3>Aolin Xu</h3>
+              <p>TikTok SWE</p>
+              <p>ML SWE @ TikTok</p>
+        <p><a href="https://www.instagram.com/aolin_xu/"/>@aolin_xu</a></p>
+           </div>
 
-      
+
 
 
   <div class="team-member">
     <span class="judge-label" style="color:lightcoral">Judge</span>
         <img src="/team/aidan.jpg" alt="Aidan Ouckama">
         <h3>Aidan Ouckama</h3>
+        <p>Prev-Microsoft</p>
         <p><a href="https://www.instagram.com/ouckahcs?igsh=MzRlODBiNWFlZA==">@ouckahcs</a></p>
      </div>
 
@@ -530,10 +571,18 @@ b, strong {
         <img src="/team/harneet.jpeg" alt="Harneet Dhillon">
         <h3>Harneet Dhillon</h3>
         <p>UCSB B.S/Georgia Tech M.S.</p>
+        <p>Co-Founder of Elsewher3</p>
         <p><a href="https://www.tiktok.com/@dhillon.diary">@dhillon.diary</a></p>
       </div>
       
-
+      <div class="team-member">
+        <span class="judge-label" style="color:#007bff">Org</span>
+          <img src="/team/ken.jpg" alt="Ken Mueller">
+          <h3>Ken Mueller</h3>
+          <p>CS @ Stanford</p>
+          <p>Founder @Sup.ai</p>
+        </div>
+      
 
   
 
@@ -542,6 +591,7 @@ b, strong {
         <img src="/team/martin.jpg" alt="Martin Lee">
         <h3>Martin Lee</h3>
         <p>Cinema @ USC</p>
+        <p>Founder @ Neocast</p>
         <p><a href="https://www.instagram.com/mwtle/">@mwtle</a></p>
       </div>
 
@@ -553,6 +603,7 @@ b, strong {
         <img src="/team/ace.jpg" alt="Ace Yip">
         <h3>Ace Yip</h3>
         <p></p>
+        <p>WOMEN IN TECH ® Global</p>
         <p><a href="https://www.instagram.com/hehuabuilds/">@hehuabuilds</a></p>
       </div>
 
@@ -562,6 +613,7 @@ b, strong {
         <img src="/team/chris.png" alt="Chris Vaisnor">
         <h3>Chris Vaisnor</h3>
         <p>AI M.S. @ John Hopkins University</p>
+        <p>Co-Founder @ Adalace</p>
       </div>
 
       <div class="team-member">
@@ -569,17 +621,12 @@ b, strong {
         <img src="/team/sara.jpg" alt="Sara Leung">
         <h3>Sara Leung</h3>
         <p></p>
+        <p>Executive @ UQIES</p>
         <p><a href="https://www.instagram.com/saraxxlg/">@saraxxlg</a></p>
       </div>
 
 
-      <div class="team-member">
-  <span class="judge-label" style="color:lightcoral">Judge</span>
-        <img src="/team/aolin.jpg" alt="">
-        <h3>Aolin Xu</h3>
-        <p>TikTok SWE</p>
-  <p><a href="https://www.instagram.com/aolin_xu/"/>@aolin_xu</a></p>
-     </div>
+
 
             <div class="team-member">
   <span class="judge-label" style="color:lightcoral">Judge</span>
@@ -592,6 +639,7 @@ b, strong {
   <span class="judge-label" style="color:lightcoral">Pre-Judge</span>
         <img src="/team/arine.jpg" alt="">
         <h3>Arine Kim</h3>
+        <p>Product & Growth @ Beacons</p>
    <p><a href="https://www.instagram.com/arinekim/"/>@arinekim</a></p>
    <p><a href="https://www.instagram.com/arinebuilds/"/>@arinebuilds</a></p>
      </div>
@@ -884,6 +932,36 @@ LLM-ready data</div>
     });
 </script>
 
+
+  <div class="section faq">
+    <h2>FAQ</h2>
+
+    <details>
+      <summary>Who can participate?</summary>
+      <p>Anyone can apply! We accept applications in August. We’re looking for builders, founders, creators, engineers, and community builders.</p>
+    </details>
+
+    <details>
+      <summary>Does it cost anything to attend?</summary>
+      <p>No, attendance is free thanks to our amazing sponsors.</p>
+    </details>
+
+    <details>
+      <summary>What can I win?</summary>
+      <p>The grand prize is a shower, yes, you heard that right. Imagine having that on your LinkedIn.</p>
+      <p>There will also be sponsor-specific prizes. If you used a sponsor’s technology, you qualify for their track. More info on this coming soon.</p>
+    </details>
+
+    <details>
+      <summary>Are there travel reimbursements?</summary>
+      <p>No.</p>
+    </details>
+
+    <details>
+      <summary>Is there a Showerhacks group chat?</summary>
+      <p>Yes — join our Discord: <a href="https://discord.gg/4xEtJc9xqZ">discord.gg/4xEtJc9xqZ</a></p>
+    </details>
+  </div>
 
   <center>
 
