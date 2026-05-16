@@ -396,7 +396,7 @@ b, strong {
   </div>
   
   <div class="buttons">
-    <a href="https://form.jotform.com/252246352481051" class="waitlist"><b>Apply</b></a>
+    <a href="https://form.jotform.com/252246352481051" class="waitlist" style="font-weight: 600">Apply</a>
     <a href="https://discord.gg/4xEtJc9xqZ" class="discord">
       <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/discord.svg" width="20" height="20" alt="Discord">
       Join Discord
@@ -417,7 +417,7 @@ b, strong {
 </div>
 
     
-<div class="cohost-wrap">
+<div class="cohost-wrap" style="margin-top: -50px;">
   <h4>Co-hosted with</h4>
   <div class="co-host-partner-logos">
     <a href="https://www.linkedin.com/company/aicollective/"><img src="https://www.aicollective.com/images/brand/Wordmark.svg" alt="AI Collective"></a>
@@ -432,7 +432,7 @@ b, strong {
 </div>
 
 
-    
+    <br/>
 
     <div class="section">
     <div class="about-container">
@@ -745,7 +745,7 @@ LLM-ready data</div>
     <div class="afterparty-container">
       <canvas id="afterparty-canvas"></canvas>
       <div class="afterparty-content" style="text-align:left">
-        <b>11PM-2AM:</b> The top 40% of participants and all winning teams will be invited to the afterparty 🥂 to watch the shower take place. Imagine that as a Linkedin post<br/>
+        <b>11PM-2AM:</b> The top 40% of participants and all winning teams will be invited to the afterparty 🥂 to announce the winner<br/>
       </div>
     </div>
   </div>
@@ -953,6 +953,34 @@ LLM-ready data</div>
         
         animate();
     });
+</script>
+
+<script>
+  const applyButton = document.querySelector(".buttons a.waitlist");
+
+  if (applyButton) {
+    applyButton.animate(
+      [
+        {
+          transform: "scale(1)",
+          boxShadow: "0 0 0 rgba(0, 123, 255, 0)"
+        },
+        {
+          transform: "scale(1.08)",
+          boxShadow: "0 0 24px rgba(0, 123, 255, 0.7)"
+        },
+        {
+          transform: "scale(1)",
+          boxShadow: "0 0 0 rgba(0, 123, 255, 0)"
+        }
+      ],
+      {
+        duration: 1400,
+        iterations: Infinity,
+        easing: "ease-in-out"
+      }
+    );
+  }
 </script>
 
 
