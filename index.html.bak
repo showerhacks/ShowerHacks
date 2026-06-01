@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="icon" type="image/png" href="whitelogo.png">
+  <title>Showerhacks — winner gets to take a shower</title>
+  <meta name="description" content="Showerhacks — a 350-person 12-hour hackathon in San Francisco where the winner gets to take a shower">
+  <meta name="keywords" content="SF Hackathon, shower hacks, showerhacks">
+  <meta property="og:title" content="Showerhacks — a 12-hour hackathon where the winner gets to take a shower">
+  <meta property="og:description" content="Showerhacks is a 350-person 12-hour hackathon in SF where the winner gets to take a shower">
+  <meta property="og:image" content="https://showerhacks.org/whitelogo.png">
+  <meta property="og:url" content="https://showerhacks.org/">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#cce6ff">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Event",
+    "name": "Showerhacks",
+    "startDate": "2026-10-03T10:00-07:00",
+    "endDate": "2026-10-03T22:00-07:00",
+    "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+    "eventStatus": "https://schema.org/EventScheduled",
+    "location": {
+      "@type": "Place",
+      "name": "San Francisco",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "San Francisco",
+        "addressRegion": "CA",
+        "addressCountry": "US"
+      }
+    },
+    "image": "https://showerhacks.org/whitelogo.png",
+    "description": "Showerhacks is a 12-hour hackathon in San Francisco with 300-500 participants. Build shocking projects, compete, and win a shower.",
+    "organizer": {
+      "@type": "Organization",
+      "name": "Showerhacks",
+      "url": "https://showerhacks.org"
+    }
+  }
+  </script>
+</head>
+
+  
+<body>
+    <style>
+   @import url('https://fonts.googleapis.com/css2?family=Bitcount+Prop+Single:wght@100..900&family=Bitcount:wght@100..900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+      
+      @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+      
+
+    
+body {
+  margin: 0;
+  font-family: "Bitcount Prop Single", system-ui;
+  background: linear-gradient(to bottom, #cce6ff, lightcoral); /* gradient only */
+  color: #333;
+  text-align: center;
+  padding: 40px;
+  position: relative; /* needed for pseudo-element positioning */
+  z-index: 0;
+}
+
+body::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url("tile.jpg") repeat;
+  background-size: 220px 220px; /* default for desktop */
+  opacity: 0.2;
+  filter: contrast(2) brightness(.9);
+  z-index: -1;
+  pointer-events: none;
+}
+
+  .cleanfont {
+   font-family: "Montserrat", sans-serif;
+  }
+
+    .header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap; /* allow stacking on mobile */
+}
+
+.header img {
+  height: clamp(140px, 25vw, 160px);
+  width: auto;
+  filter: drop-shadow(0px 0px 15px white);
+}
+
+b, strong {
+  font-weight: 700;
+  -webkit-text-stroke: 0.5px currentColor;
+}
+
+
+
+
+    
+    main{
+      max-width: 600px;
+      margin: auto;
+    }
+    h1 {
+      font-family: "Bitcount", system-ui;
+      font-size: clamp(2rem, 8vw, 3.5rem);
+      margin-bottom: 0.5em;
+      text-shadow: 0px 0px 15px white;
+    }
+    h2 {
+      font-size: 2em;
+      font-family: "Bitcount", system-ui;
+      margin-bottom: 0.5em;
+    }
+    .description, .criteria, .note {
+      margin-bottom: 2em;
+      font-size: 1.4em;
+    }
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-bottom: 3em;
+      flex-wrap: wrap;
+    }
+    .buttons a {
+      padding: 12px 20px;
+      font-size: 1em;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      text-decoration: none;
+      color: white;
+      background-color: #007bff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .buttons a.discord {
+      background-color: #e0f0ff;
+      color: #007bff;
+      border: 2px solid #007bff;
+    }
+    .section {
+      margin-bottom: 4em;
+    }
+    .sponsors, .team {
+      display: grid;
+      gap: 20px;
+      justify-content: center;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      max-width: 1000px;
+      margin: auto;
+    }
+    .sponsor-logo, .team-member img {
+      width: 100px;
+      height: auto;
+      margin: auto;
+    }
+.team-member {
+  position: relative; /* needed for absolute positioning of the label */
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.judge-label {
+  position: absolute;
+  left: 5px; /* keep near the left edge, you can adjust this */
+  top: 50%;
+  transform: translateY(-50%) rotate(180deg);
+  writing-mode: vertical-rl;
+  font-size: 0.8rem;
+  font-weight: thin;
+  letter-spacing: 1px;
+  text-shadow: 0px 0px 15px white; 
+  
+}
+
+
+
+    .team-member h3 {
+      margin: 10px 0 5px;
+    }
+    .team-member p {
+      margin: 2px 0;
+      font-size: 0.9em;
+      color: #555;
+    }
+    .team-member img {
+      border-radius: 5px;
+    }
+    ul.prize-list {
+      list-style-type: none;
+      padding: 0;
+      font-size: 1.1em;
+    }
+    ul.prize-list li {
+      margin-bottom: 1em;
+    }
+    
+    h1 {
+  font-size: clamp(2rem, 9vw, 4rem);
+  margin-bottom: 0.5em;
+  white-space: nowrap;
+  overflow-wrap: normal;
+}
+      
+      .info-boxes {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+   padding:10px;
+  
+}
+
+.info-box {
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 12px;
+  padding: 8px 16px;
+  font-size: .9em;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  text-shadow: 0px 0px 10px white;
+  white-space: nowrap;
+}
+      
+      .section.hero {
+  position: relative;
+  border-radius: 7px;
+  overflow: hidden; /* keeps the background inside rounded corners */
+  box-shadow: 0px 0px 15px white;
+}
+
+.section.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url('sf.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.4; /* adjust opacity here */
+  z-index: 0;
+}
+
+.section.hero .note {
+  margin:0;
+  position: relative;
+  z-index: 1; /* text stays on top of the background */
+}
+
+.afterparty-container {
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+}
+
+
+.about-container {
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+}
+
+#afterparty-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.afterparty-content {
+  position: relative;
+  z-index: 2;
+}
+    
+/* On small screens, make exactly 3 tiles fit across */
+@media (max-width: 600px) {
+  body::before {
+    background-size: calc(100vw / 3) auto;
+  }
+  
+  .info-box{
+    font-size: .5em;
+  }
+}
+
+/* Chrome only (not Safari, not Firefox) */
+@supports (-webkit-appearance:none) and (not (-webkit-touch-callout:none)) and (not (selector(:-moz-placeholder))) {
+  h1, h2 {
+    -webkit-text-stroke: 3px currentColor;
+  }
+}
+
+.cohost-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+}
+.co-host-partner-logos {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: clamp(0.75rem, 3vw, 2rem);
+  width: 100%;
+  max-width: min(100%, 36rem);
+  margin: 0 auto;
+  padding: 0 4px;
+  box-sizing: border-box;
+}
+.co-host-partner-logos a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 1 auto;
+  line-height: 0;
+}
+.co-host-partner-logos img {
+  height: clamp(28px, 6vw, 48px);
+  width: auto;
+  max-width: min(180px, 42vw);
+  object-fit: contain;
+}
+
+.faq {
+  text-align: left;
+}
+.faq details {
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 12px;
+  padding: 14px 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  margin: 12px auto;
+  max-width: 900px;
+}
+.faq summary {
+  cursor: pointer;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+  font-size: 1.05rem;
+  text-shadow: 0px 0px 10px white;
+}
+.faq details p {
+  margin: 10px 0 0;
+  font-family: "Montserrat", sans-serif;
+  line-height: 1.5;
+}
+.faq details[open] summary {
+  margin-bottom: 6px;
+}
+
+
+  </style>
+  
+  
+ <div class="header">
+  <img src="logo.png" alt="Showerhacks logo">
+  <h1>Showerhacks</h1>
+</div>
+
+    
+  <div class="description" style="text-shadow:0px 0px 15px white">
+    A 12-hour hackathon where the <b>winner gets to take a shower</b>
+  </div>
+  
+  <div class="buttons">
+    <a
+      href="https://luma.com/event/evt-KoG613La396FbEw"
+      class="waitlist luma-checkout--button"
+      data-luma-action="checkout"
+      data-luma-event-id="evt-KoG613La396FbEw"
+      style="font-weight: 600"
+    >Apply</a>
+    <a href="https://discord.gg/4xEtJc9xqZ" class="discord">
+      <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/discord.svg" width="20" height="20" alt="Discord">
+      Join Discord
+    </a>
+  </div>
+  <main>
+   
+<div class="section hero">
+  <div class="note">
+    <div class="info-boxes">
+      <div class="info-box">October 3rd 2026</div>
+      <div class="info-box">10AM – 10PM</div>
+      <div class="info-box">San Francisco</div>
+      <div class="info-box">300-400 People</div>
+      <div class="info-box" id="countdown"></div>
+    </div>
+  </div>
+</div>
+
+    
+<div class="cohost-wrap" style="margin-top: -50px;">
+  <h4>Co-hosted with</h4>
+  <div class="co-host-partner-logos">
+    <a href="https://www.linkedin.com/company/aicollective/"><img src="https://www.aicollective.com/images/brand/Wordmark.svg" alt="AI Collective"></a>
+    <a href="https://www.aivalley.io/"><img src="spon/aivalley.webp" alt="AI Valley"></a>
+    <a href="https://oscollective.org/"><img src="spon/osc.png" alt="Open Source Collective"></a>
+    <a href="https://www.linkedin.com/company/shipaccelerator"><img src="spon/ship.jpeg" alt="SH1P"></a>
+  </div>
+  <div class="co-host-partner-logos">
+    <a href="https://www.firecrawl.dev/"><img src="spon/firecrawl_s.png" alt="Firecrawl"></a>
+    <a href="https://usemoss.dev/"><img src="spon/moss_s.png" alt="Moss"></a>
+  </div>
+</div>
+
+
+    <br/>
+
+    <div class="section">
+    <div class="about-container">
+    <div style="text-align:left">
+      <p>After hours of coding, caffeine, and zero sleep, hackers want one thing above all else: <b>a shower</b>.</p>
+   <!-- You can build anything... <i>anything</i>, like an AI agent for eviction notices. A nonchalant AI chatbot that doesn’t really care if it helps you that much. An AI that automatically determines health insurance premiums based on attractiveness as a health indicator. An AI jury that makes decisions on criminal cases. An AI situationship that sends the user CashApp requests. A dating app that matches based on genetic compatibility. A consumer platform to trade prescriptions. Endless opportunities...-->
+    </div>
+    </div>
+  </div>
+
+
+
+
+  <div class="section">
+    <h2>The Team</h2>
+    <div class="team">
+      <div class="team-member">
+        <span class="judge-label" style="color:#007bff">Org</span>
+        <img src="/team/john.jpg" alt="John Lins">
+        <h3>John Lins</h3>
+        <p>Prev-LLNL AI Research</p>
+        <p>UCSB</p>
+        <p><a href="https://johnlins.com">Profile</a></p>
+      </div>
+
+      <div class="team-member">
+        <span class="judge-label" style="color:#007bff">Org</span>
+        <img src="/team/sarah.jpg" alt="Sarah Zhao">
+        <h3>Sarah Zhao</h3>
+
+        <p>Research at UCLA Connection Lab</p>
+        <p><a href="https://www.sarahzhao.dev">Profile</a></p>
+      </div>
+
+
+        <!-- <div class="team-member">
+           <span class="judge-label" style="color:lightcoral">Judge</span>
+        <img src="/team/allen.jpg" alt="Allen Tran">
+        <h3>Allen Tran</h3>
+        <p></p>
+        <p><a href="https://www.instagram.com/allenvert/">@allenvert</a></p>
+      </div> -->
+
+        
+      <div class="team-member">
+        <span class="judge-label" style="color:lightcoral">Judge</span>
+        <img src="/team/viraj.jpg" alt="Viraj Ala">
+        <h3>Viraj Ala</h3>
+        <p>Viral Founder Interviews, Prev-White House & Deloitte</p>
+        <p><a href="https://www.instagram.com/viraj.ala/?hl=en">@viraj.ala</a></p>
+        <p>Berkeley</p>
+        <p><a href="https://beacons.ai/viraj.ala/mediakit?utm_source=ig&utm_medium=social&utm_content=link_in_bio&fbclid=PAZXh0bgNhZW0CMTEAc3J0YwZhcHBfaWQMMjU2MjgxMDQwNTU4AAGnx7mR3OLltffRmjXBLLiPqo24ZOmMH7KVRCiHgALDvLRlysbEuQdJZdvVAdE_aem_olMg1DID_AtKtCzLnM8zTA">Profile</a></p>
+      </div>
+
+        <div class="team-member">
+          <span class="judge-label" style="color:lightcoral">Judge</span>
+        <img src="/team/christy.jpg" alt="Christy Lam">
+        <h3>Christy Lam</h3>
+        <p>SWE @ Dell, Prev-NVIDIA</p>
+        <p><a href="https://www.instagram.com/christyoverflow/">@christyoverflow</a></p>
+      </div>
+  
+      
+       <div class="team-member">
+         <span class="judge-label" style="color:lightcoral">Judge</span>
+        <img src="/team/yuni.jpeg" alt="Yuni Kim">
+        <h3>Yuni Kim</h3>
+        <p>CMO @ DittoAI</p>
+        <p><a href="https://www.tiktok.com/@yunskistudy">@yunskistudy</a></p>
+        <p>UCSD</p>
+        <p><a href="https://linkedin.com/in/seoyunkim06">Profile</a></p>
+       </div>
+      
+
+
+
+      
+
+        <div class="team-member">
+            <span class="judge-label" style="color:lightcoral">Judge</span>
+        <img src="/team/mike.jpg" alt="Mike Klikushin">
+        <h3>Mike Klikushin</h3>
+        <p>Co-Founder @ Inspector (YC)</p>
+        <p><a href="https://www.instagram.com/mikebuildsmore/">@MikeBuildsMore</a></p>
+
+        <p><a href="https://tryinspector.com">Profile</a></p>
+      </div>
+
+      <div class="team-member">
+        <span class="judge-label" style="color:lightcoral">Org</span>
+        <img src="/team/amy.jpg" alt="Amy Chen">
+        <h3>Amy Chen</h3>
+        <p>Western University</p>
+        <p><a href="https://www.linkedin.com/in/amychencodes/">Profile</a></p>
+      </div>
+      
+
+
+
+      <div class="team-member">
+        <span class="judge-label" style="color:#007bff">Org</span>
+  <img src="/team/celina.jpg" alt="Celina Kim">
+  <h3>Celina Kim</h3>
+  <p>Marketing</p>
+  <p>CSUS</p>
+  <p><a href="https://www.linkedin.com/in/celina-kim-942a11260/">Profile</a></p>
+  </div>
+
+
+
+    <div class="team-member">
+      <span class="judge-label" style="color:lightcoral">Judge</span>
+        <img src="/team/tina.jpg" alt="Tina Chi">
+        <h3>Tina Chi</h3>
+        <p>SWE @ Apple</p>
+        <p>UF</p>
+        <p><a href="https://www.instagram.com/tinahelloworld/">@tinahelloworld</a></p>
+        
+     </div>
+
+    
+
+
+
+
+       <div class="team-member">
+          <span class="judge-label" style="color:lightcoral">Judge</span>
+        <img src="/team/char.jpg" alt="Charissa Kim">
+        <h3>Charissa Kim</h3>
+        <p>Technical Program Manager @ Semgrep</p>
+        <p><a href="https://www.instagram.com/charlikestoeat/">@charlikestoeat</a></p>
+        <p><a href="https://www.linkedin.com/in/charissakim?utm_source=share_via&utm_content=profile&utm_medium=member_ios">Profile</a></p>
+      </div>
+
+      <div class="team-member">
+        <span class="judge-label" style="color:lightcoral">Judge</span>
+              <img src="/team/aolin.jpg" alt="">
+              <h3>Aolin Xu</h3>
+              <p>ML SWE @ TikTok</p>
+        <p><a href="https://www.instagram.com/aolin_xu/">@aolin_xu</a></p>
+        <a href="https://www.linkedin.com/in/aolin-xu-b01798194/">Profile</a>
+           </div>
+
+
+
+
+  <div class="team-member">
+    <span class="judge-label" style="color:lightcoral">Judge</span>
+        <img src="/team/aidan.jpg" alt="Aidan Ouckama">
+        <h3>Aidan Ouckama</h3>
+        <p>Prev-Microsoft</p>
+        <p><a href="https://www.instagram.com/ouckahcs?igsh=MzRlODBiNWFlZA==">@ouckahcs</a></p>
+        <p><a href="https://linkedin.com/in/ouck">Profile</a></p>
+     </div>
+
+
+          <div class="team-member">
+        <span class="judge-label" style="color:lightcoral">Judge</span>
+        <img src="/team/harneet.jpeg" alt="Harneet Dhillon">
+        <h3>Harneet Dhillon</h3>
+
+        <p>Co-Founder of Elsewher3</p>
+        <p><a href="https://www.tiktok.com/@dhillon.diary">@dhillon.diary</a></p>
+        <p>UCSB B.S/Georgia Tech M.S.</p>
+        <p><a href="https://www.linkedin.com/in/harneet-dhillon">Profile</a></p>
+      </div>
+      
+      <div class="team-member">
+        <span class="judge-label" style="color:#007bff">Org</span>
+          <img src="/team/ken.jpg" alt="Ken Mueller">
+          <h3>Ken Mueller</h3>
+          <p>CS @ Stanford University</p>
+          <p>Founder @Sup.ai</p>
+          <a href="https://github.com/kenmueller">Profile</a></p>
+        </div>
+      
+
+  
+
+      <div class="team-member">
+        <span class="judge-label" style="color:lightcoral">Judge</span>
+        <img src="/team/martin.jpg" alt="Martin Lee">
+        <h3>Martin Lee</h3>
+        <p>Founder @ Neocast</p>
+        <p>USC</p>
+        <p><a href="https://www.instagram.com/mwtle/">@mwtle</a></p>
+        <a href="https://www.linkedin.com/in/mrtle/">Profile</a>
+      </div>
+
+      
+    
+  
+          <div class="team-member">
+            <span class="judge-label" style="color:lightcoral">Judge</span>
+        <img src="/team/ace.jpg" alt="Ace Yip">
+        <h3>Ace Yip</h3>
+        <p></p>
+        <p>WOMEN IN TECH ® Global</p>
+        <p><a href="https://www.instagram.com/hehuabuilds/">@hehuabuilds</a></p>
+        <p><a href="https://www.linkedin.com/in/ace-yip-71b71b20a/">Profile</a></p>
+      </div>
+
+
+      <div class="team-member">
+        <span class="judge-label" style="color:#007bff">Org</span>
+        <img src="/team/chris.png" alt="Chris Vaisnor">
+        <h3>Chris Vaisnor</h3>
+        <p>AI M.S. @ John Hopkins University</p>
+        <p>Co-Founder @ Adalace</p>
+        <p><a href="https://www.linkedin.com/in/chris-vaisnor">Profile</a></p>
+      </div>
+
+      <div class="team-member">
+            <span class="judge-label" style="color:lightcoral">Judge</span>
+        <img src="/team/sara.jpg" alt="Sara Leung">
+        <h3>Sara Leung</h3>
+        <p></p>
+        <p>Executive @ UQIES</p>
+        <p><a href="https://www.instagram.com/saraxxlg/">@saraxxlg</a></p>
+        <p><a href="https://www.linkedin.com/in/sara-l-50b61b255?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app">Profile</a></p>
+      </div>
+
+
+
+
+            <div class="team-member">
+  <span class="judge-label" style="color:lightcoral">Judge</span>
+        <img src="/team/raami.jpg" alt="">
+        <h3>Raami Abichou</h3>
+  <p><a href="https://www.instagram.com/raamics/">@raamics</a></p>
+     </div>
+
+            <div class="team-member">
+  <span class="judge-label" style="color:lightcoral">Judge</span>
+        <img src="/team/arine.jpg" alt="">
+        <h3>Arine Kim</h3>
+        <p>Prev Product & Growth @ Beacons</p>
+   <p><a href="https://www.instagram.com/arinekim/">@arinekim</a></p>
+   <p><a href="https://www.instagram.com/arinebuilds/">@arinebuilds</a></p>
+   <p>UCLA</p>
+        <p><a href="https://www.linkedin.com/in/arinekim/">Profile</a></p>
+     </div>
+  
+
+<div class="team-member">
+  <span class="judge-label" style="color:#007bff">Org</span>
+        <!--<img src="/team/" alt="">-->
+        <h3>Kai</h3>
+        <p>XAI / CMU</p>
+  <p><a href="https://profsucrose.dev"/>Profile</a></p>
+     </div>
+<!--
+      <div class="team-member">
+        <span class="judge-label" style="color:#007bff">Pre-Org</span>
+        <img src="/team/shlok.png" alt="Shlok Madhekar">
+        <h3>Shlok Madhekar</h3>
+         <p><a href="https://www.linkedin.com/in/shlok-madhekar-b281872a1/"/>↪</a></p>
+      </div>
+-->
+      
+
+      
+  
+
+    
+    </div>
+  </div>
+
+
+    <div class="section">
+    <h2>Sponsors</h2>
+    <div class="sponsors">
+      <div>We are looking for generous sponsors to closely collaboration with, apply <a href="sponsor.html">here</a>.</div>
+
+      
+      <!--<img src="/sponsors/soapify.png" alt="Soapify" class="sponsor-logo">
+      <img src="/sponsors/disruptinc.png" alt="Disrupt Inc." class="sponsor-logo">
+      <img src="/sponsors/hosehub.png" alt="HoseHub" class="sponsor-logo">-->
+    </div>
+      <h3>Generously funded by</h3><br/>
+      <div><a href="https://www.firecrawl.dev/"><img src="spon/firecrawl.png" alt="Firecrawl" class="sponsor-logo" style="width:80%"></a> <br/>Turn websites into
+LLM-ready data</div>
+<br/>
+ <div><a href="https://usemoss.dev/"><img src="spon/moss.png" alt="Moss" class="sponsor-logo" style="width:80%"></a> <br/>Moss: Real-Time Semantic Search</div>
+      <br/>
+      
+      <div>Personal Sponsor: <a href="https://shub.club/">Shubham</a> </div>
+  </div>
+
+
+
+
+     
+
+ 
+<!--   <div class="section">
+    <h2>Prizes</h2>
+    <ul class="prize-list" style="text-align:left">
+      <li><strong>1st Place:</strong> Gets to take a shower 🫧</li>
+  <li><strong>Most Useless App:</strong> TBD</li>
+      <li><strong>AI-powered Vertical Agentic B2B SAAS GPT-Wrapper:</strong> TBD</li>
+      <li><strong>Most Overengineered:</strong> TBD</li>
+    </ul>
+  </div> -->
+  
+  
+  <div class="section">
+    <h2>Afterparty 🎉</h2>
+    <div class="afterparty-container">
+      <canvas id="afterparty-canvas"></canvas>
+      <div class="afterparty-content" style="text-align:left">
+        <b>11PM-2AM:</b> The top 40% of participants and all winning teams will be invited to the afterparty 🥂 to announce the winner<br/>
+      </div>
+    </div>
+  </div>
+
+
+
+  <script>
+    const canvas = document.createElement('canvas');
+    canvas.style.position = 'fixed';
+    canvas.style.top = '0';
+    canvas.style.left = '0';
+    canvas.style.width = '100%';
+    canvas.style.height = '100%';
+    canvas.style.pointerEvents = 'none';
+    canvas.style.zIndex = '-1';
+    document.body.appendChild(canvas);
+
+    const ctx = canvas.getContext('2d');
+    let width, height;
+
+    function resizeCanvas() {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    class Drop {
+      constructor() {
+        this.reset();
+      }
+      reset() {
+        this.x = Math.random() * width;
+        this.y = Math.random() * -height;
+        this.len = 10 + Math.random() * 20;
+        this.speed = 2 + Math.random() * 4;
+        this.opacity = 0.2 + Math.random() * 0.3;
+      }
+      update() {
+        this.y += this.speed;
+        if (this.y > height) this.reset();
+      }
+      draw(ctx) {
+        ctx.beginPath();
+        ctx.strokeStyle = `rgba(255, 255, 255, ${this.opacity})`;
+        ctx.lineWidth = 1.5;
+        ctx.moveTo(this.x, this.y);
+        ctx.lineTo(this.x, this.y + this.len);
+        ctx.stroke();
+      }
+    }
+
+    const drops = [];
+    const maxDrops = 150;
+    for (let i = 0; i < maxDrops; i++) drops.push(new Drop());
+
+    function animate() {
+      ctx.clearRect(0, 0, width, height);
+      for (const drop of drops) {
+        drop.update();
+        drop.draw(ctx);
+      }
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+  </script>
+  
+<script>
+(function() {
+  const el = document.getElementById("countdown");
+  // October 3, 2026 at 10:00 AM PDT (UTC-7)
+  const target = new Date("2026-10-03T10:00:00-07:00").getTime();
+  const msPerDay = 1000 * 60 * 60 * 24;
+  const prec = 5; // decimals
+
+  function formatDays(diffMs) {
+    const days = diffMs / msPerDay;
+    return Math.max(0, days).toFixed(prec);
+  }
+
+  function update() {
+    const now = Date.now();
+    const diff = target - now;
+
+    if (diff <= 0) {
+      el.innerHTML = "<h2>The day has arrived!</h2>";
+      clearInterval(timer);
+      return;
+    }
+
+    const daysStr = formatDays(diff);
+    el.innerHTML = `${daysStr} days left`;
+  }
+
+  const timer = setInterval(update, 1000);
+  update();
+})();
+</script>
+
+
+
+   <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const canvas = document.getElementById('afterparty-canvas');
+        const ctx = canvas.getContext('2d');
+        let width, height;
+        
+        // Set canvas dimensions
+        function resizeCanvas() {
+            const container = canvas.parentElement;
+            width = canvas.width = container.offsetWidth;
+            height = canvas.height = container.offsetHeight;
+        }
+        
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+        
+   
+        
+        // Confetti class (simplified)
+        class Confetti {
+            constructor() {
+                this.reset();
+            }
+            
+            reset() {
+                this.x = Math.random() * width;
+                this.y = -10;
+                this.size = Math.random() * 6 + 4;
+                this.speedX = Math.random() * 2 - 1;
+                this.speedY = Math.random() * 2 + 1;
+                this.color = `hsl(${Math.random() * 360}, 100%, 50%)`;
+                this.shape = Math.floor(Math.random() * 3);
+                this.rotation = Math.random() * Math.PI * 2;
+                this.rotationSpeed = Math.random() * 0.1 - 0.05;
+            }
+            
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                this.rotation += this.rotationSpeed;
+                
+                if (this.y > height) {
+                    this.reset();
+                }
+            }
+            
+            draw() {
+                ctx.save();
+                ctx.translate(this.x, this.y);
+                ctx.rotate(this.rotation);
+                
+                ctx.fillStyle = this.color;
+                
+                if (this.shape === 0) {
+                    // Rectangle
+                    ctx.fillRect(-this.size/2, -this.size/2, this.size, this.size);
+                } else if (this.shape === 1) {
+                    // Circle
+                    ctx.beginPath();
+                    ctx.arc(0, 0, this.size/2, 0, Math.PI * 2);
+                    ctx.fill();
+                } else {
+                    // Triangle
+                    ctx.beginPath();
+                    ctx.moveTo(0, -this.size/2);
+                    ctx.lineTo(this.size/2, this.size/2);
+                    ctx.lineTo(-this.size/2, this.size/2);
+                    ctx.closePath();
+                    ctx.fill();
+                }
+                
+                ctx.restore();
+            }
+        }
+        
+       
+        
+        // Create less confetti
+        const confetti = [];
+        for (let i = 0; i < 10; i++) {
+            confetti.push(new Confetti());
+        }
+        
+        // Animation
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+            
+         
+            
+            // Update and draw confetti
+            for (const piece of confetti) {
+                piece.update();
+                piece.draw();
+            }
+            
+            // // Occasionally add new confetti (less frequently)
+            // if (Math.random() < 0.02) {
+            //     confetti.push(new Confetti());
+            // }
+            
+            requestAnimationFrame(animate);
+        }
+        
+        animate();
+    });
+</script>
+
+<script id="luma-checkout" src="https://embed.lu.ma/checkout-button.js"></script>
+
+<script>
+  const applyButton = document.querySelector(".buttons a.waitlist");
+
+  if (applyButton) {
+    applyButton.animate(
+      [
+        {
+          transform: "scale(1)",
+          boxShadow: "0 0 0 rgba(0, 123, 255, 0)"
+        },
+        {
+          transform: "scale(1.08)",
+          boxShadow: "0 0 24px rgba(0, 123, 255, 0.7)"
+        },
+        {
+          transform: "scale(1)",
+          boxShadow: "0 0 0 rgba(0, 123, 255, 0)"
+        }
+      ],
+      {
+        duration: 1400,
+        iterations: Infinity,
+        easing: "ease-in-out"
+      }
+    );
+  }
+</script>
+
+
+  <div class="section faq">
+    <h2>FAQ</h2>
+
+    <details>
+      <summary>Who can participate?</summary>
+      <p>Anyone can apply! We accept applications in August. We’re looking for builders, founders, creators, engineers, and community builders.</p>
+    </details>
+
+    <details>
+      <summary>Does it cost anything to attend?</summary>
+      <p>No, attendance is free thanks to our amazing sponsors.</p>
+    </details>
+
+    <details>
+      <summary>What can I win?</summary>
+      <p>The grand prize is a shower, yes, you heard that right. Imagine having that on your LinkedIn.</p>
+      <p>There will also be sponsor-specific prizes. If you used a sponsor’s technology, you qualify for their track. More info on this coming soon.</p>
+    </details>
+
+    <details>
+      <summary>Are there travel reimbursements?</summary>
+      <p>No.</p>
+    </details>
+
+    <details>
+      <summary>Is there a Showerhacks group chat?</summary>
+      <p>Yes — join our Discord: <a href="https://discord.gg/4xEtJc9xqZ">discord.gg/4xEtJc9xqZ</a></p>
+    </details>
+  </div>
+
+  <center>
+
+    Follow us on instagram <a href="https://instagram.com/showerhacks">@showerhacks</a> and on <a href="https://www.linkedin.com/company/showerhacks">Linkedin</a>.
+
+    <br/>
+    <a href="https://showerhacks.org/tos.txt">tos</a> <a href="https://showerhacks.org/privacy.txt">privacy</a> <a href="https://showerhacks.org/coc.html">code of conduct</a>
+  </center>
+  </main>
+</body>
+</html>
