@@ -339,7 +339,12 @@
       margin: 0 auto;
     }
     .team-grid.copres {
-      grid-template-columns: repeat(auto-fit, minmax(220px, 260px));
+      grid-template-columns: repeat(auto-fit, minmax(220px, 160px));
+      justify-content: center;
+      gap: 22px;
+    }
+    .team-grid.orgs {
+      grid-template-columns: repeat(auto-fit, minmax(220px, 160px));
       justify-content: center;
       gap: 22px;
     }
@@ -667,10 +672,19 @@
           <p><a href="https://www.linkedin.com/in/amychencodes/">Profile</a></p>
         </div>
 
+        <div class="team-member copres">
+          <span class="role-badge copres">Afterparty Host</span>
+          <img src="/team/kristen.jpg" alt="Amy Chen">
+          <h3>Kristen Lew</h3>
+          <p>Stanford University</p>
+          <p>Entrepreneurs First</p>
+          <p><a href="https://www.instagram.com/kristenblds/?hl=en">@kristenblds</a></p>
+        </div>
+
       </div>
 
       <h3 class="section-sub"></h3>
-      <div class="team-grid">
+      <div class="team-grid orgs">
 
         <div class="team-member">
           <span class="role-badge org">Organizer</span>
