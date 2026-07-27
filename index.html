@@ -20,8 +20,8 @@
     "@context": "https://schema.org",
     "@type": "Event",
     "name": "Showerhacks",
-    "startDate": "2026-10-03T10:00-07:00",
-    "endDate": "2026-10-03T22:00-07:00",
+    "startDate": "2026-09-26T10:00-07:00",
+    "endDate": "2026-09-26T22:00-07:00",
     "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
     "eventStatus": "https://schema.org/EventScheduled",
     "location": {
@@ -480,6 +480,49 @@
       color: var(--ink-soft);
     }
 
+    /* ---------- Itinerary ---------- */
+    .itinerary {
+      text-align: left;
+      padding: clamp(8px, 2vw, 12px) 0;
+      list-style: none;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .itinerary-item {
+      display: grid;
+      grid-template-columns: minmax(7.5rem, 9.5rem) 1fr;
+      gap: 16px;
+      align-items: baseline;
+      padding: 14px 20px;
+      background: var(--surface);
+      backdrop-filter: blur(var(--blur));
+      -webkit-backdrop-filter: blur(var(--blur));
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-sm);
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+    .itinerary-item:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow);
+    }
+    .itinerary-time {
+      font-family: var(--font-ui);
+      font-weight: 700;
+      font-size: 0.92rem;
+      color: var(--brand);
+      letter-spacing: 0.2px;
+      white-space: nowrap;
+    }
+    .itinerary-event {
+      font-family: var(--font-ui);
+      font-size: 1.02rem;
+      color: var(--ink);
+      line-height: 1.4;
+    }
+
     /* ---------- Afterparty ---------- */
     .afterparty-container {
       position: relative;
@@ -577,6 +620,13 @@
       .team-member img { width: 80px; height: 80px; }
       .team-member.copres img { width: 96px; height: 96px; }
       .funded-grid { grid-template-columns: 1fr; }
+      .itinerary-item {
+        grid-template-columns: 1fr;
+        gap: 4px;
+        padding: 12px 16px;
+      }
+      .itinerary-time { font-size: 0.82rem; }
+      .itinerary-event { font-size: 0.95rem; }
     }
   </style>
 </head>
@@ -636,8 +686,50 @@
     <section class="section container-narrow">
       <!-- <h2>About</h2> -->
       <div class="card about">
-        <p>After hours of coding, caffeine, and zero sleep, hackers want one thing above all else: <b>a shower</b>.</p>
+        <p>After hours of coding, caffeine, and zero sleep, hackers want one thing above all else: <b>a shower</b>.
+        <br/>
+        We want to foster absurdly creative ideas that push builders to think wildly outside of the box. Funny, unhinged, and absurd ideas are encouraged! Every brilliant solution sounds absurd until it works.
+      </p>
       </div>
+    </section>
+
+    <!-- ============ ITINERARY ============ -->
+    <section class="section container-narrow">
+      <h2>Itinerary</h2>
+      <ol class="itinerary">
+        <li class="itinerary-item">
+          <span class="itinerary-time">9:00 – 10:00 AM</span>
+          <span class="itinerary-event">Check-in &amp; team-forming</span>
+        </li>
+        <li class="itinerary-item">
+          <span class="itinerary-time">10:00 – 10:30 AM</span>
+          <span class="itinerary-event">Opening ceremony</span>
+        </li>
+        <li class="itinerary-item">
+          <span class="itinerary-time">10:30 AM – 8:00 PM</span>
+          <span class="itinerary-event">Hacking</span>
+        </li>
+        <li class="itinerary-item">
+          <span class="itinerary-time">8:00 – 9:00 PM</span>
+          <span class="itinerary-event">Judging</span>
+        </li>
+        <li class="itinerary-item">
+          <span class="itinerary-time">9:00 PM</span>
+          <span class="itinerary-event">Top 3 projects present</span>
+        </li>
+        <li class="itinerary-item">
+          <span class="itinerary-time">9:45 PM</span>
+          <span class="itinerary-event">Vote</span>
+        </li>
+        <li class="itinerary-item">
+          <span class="itinerary-time">10:00 PM</span>
+          <span class="itinerary-event">Shower</span>
+        </li>
+        <li class="itinerary-item">
+          <span class="itinerary-time">10:40 PM – 12:00 AM</span>
+          <span class="itinerary-event">Afterparty</span>
+        </li>
+      </ol>
     </section>
 
     <!-- ============ TEAM ============ -->
@@ -900,7 +992,7 @@
       <div class="afterparty-container">
         <canvas id="afterparty-canvas"></canvas>
         <div class="afterparty-content">
-          <b>11PM–2AM:</b> The top 40% of participants and all winning teams will be invited to the afterparty 🥂 to announce the winner.
+          <b>10:40PM–12AM:</b> The top 40% of participants and all winning teams will be invited to the afterparty 🥂 to announce the winner.
         </div>
       </div>
     </section>
