@@ -321,6 +321,51 @@
     }
     .co-host-partner-logos img:hover { transform: translateY(-2px); }
 
+    /* ---------- Logo wall ---------- */
+    .logo-wall {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: clamp(14px, 3vw, 22px);
+      margin: var(--space-5) auto 0;
+      max-width: 720px;
+    }
+    .logo-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: clamp(14px, 3.5vw, 28px);
+      width: 100%;
+    }
+    .logo-row a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 0;
+      text-decoration: none;
+    }
+    .logo-row img {
+      width: auto;
+      object-fit: contain;
+      filter: drop-shadow(0 2px 8px rgba(255,255,255,0.75));
+      transition: transform .2s ease;
+    }
+    .logo-row a:hover img { transform: translateY(-2px); }
+    .logo-row--tier1 img {
+      height: clamp(42px, 8vw, 64px);
+      max-width: min(200px, 44vw);
+    }
+    .logo-row--tier2 img {
+      height: clamp(30px, 6vw, 46px);
+      max-width: min(120px, 28vw);
+    }
+    .logo-row--tier3 img {
+      height: clamp(26px, 5vw, 38px);
+      max-width: min(100px, 24vw);
+      border-radius: 8px;
+    }
+
     /* ---------- About ---------- */
     .about {
       padding: clamp(22px, 4vw, 32px);
@@ -690,6 +735,28 @@
         <br/><br/>
         We want to foster outrageously creative ideas that push builders to think wildly outside of the box. Funny and absurd ideas are encouraged! Every brilliant solution sounded absurd until it worked.
       </p>
+      </div>
+    </section>
+
+    <!-- ============ PARTNERS ============ -->
+    <section class="section container-narrow" aria-label="Partners">
+      <div class="logo-wall">
+        <div class="logo-row logo-row--tier1">
+          <a href="https://zo.computer/" target="_blank" rel="noopener noreferrer"><img src="spon/zo.svg" alt="Zo"></a>
+          <a href="https://www.joinef.com/" target="_blank" rel="noopener noreferrer"><img src="spon/ef.png" alt="Entrepreneurs First"></a>
+        </div>
+        <div class="logo-row logo-row--tier2">
+          <a href="https://www.firecrawl.dev/" target="_blank" rel="noopener noreferrer"><img src="spon/firecrawl_s.png" alt="Firecrawl"></a>
+          <a href="https://usemoss.dev/" target="_blank" rel="noopener noreferrer"><img src="spon/moss_s.png" alt="Moss"></a>
+          <a href="https://chatforce.com/" target="_blank" rel="noopener noreferrer"><img src="spon/chatforces1.png" alt="Chatforce"></a>
+          <a href="https://oscollective.org/" target="_blank" rel="noopener noreferrer"><img src="spon/osc.png" alt="Open Source Collective"></a>
+        </div>
+        <div class="logo-row logo-row--tier3">
+          <a href="https://www.aicollective.com/" target="_blank" rel="noopener noreferrer"><img src="spon/aicollective_logo.jpeg" alt="AI Collective"></a>
+          <a href="https://www.aivalley.io/" target="_blank" rel="noopener noreferrer"><img src="spon/aivalley.webp" alt="AI Valley"></a>
+          <a href="hello@crewbasecollective.com"><img src="spon/crew.png" alt="Crew"></a>
+          <img src="spon/build.avif" alt="Build">
+        </div>
       </div>
     </section>
 
