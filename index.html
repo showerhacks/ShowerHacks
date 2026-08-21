@@ -1135,13 +1135,17 @@
 
     const ctx = canvas.getContext('2d');
     let width, height;
+    const drops = [];
+    ctx.lineWidth = 1.5;
 
     function resizeCanvas() {
       width = canvas.width = window.innerWidth;
       height = canvas.height = window.innerHeight;
+      drops.length = 0;
+      const maxDrops = Math.min(70, Math.max(25, Math.floor(width * height / 15000)));
+      for (let i = 0; i < maxDrops; i++) drops.push(new Drop());
     }
     window.addEventListener('resize', resizeCanvas);
-    resizeCanvas();
 
     class Drop {
       constructor() { this.reset(); }
@@ -1149,33 +1153,34 @@
         this.x = Math.random() * width;
         this.y = Math.random() * -height;
         this.len = 10 + Math.random() * 20;
-        this.speed = 2 + Math.random() * 4;
-        this.opacity = 0.2 + Math.random() * 0.3;
+        this.speed = 120 + Math.random() * 240;
+        this.opacity = 0.6 + Math.random() * 0.3;
       }
-      update() {
-        this.y += this.speed;
+      update(dt) {
+        this.y += this.speed * dt;
         if (this.y > height) this.reset();
       }
-      draw(ctx) {
+      draw() {
         ctx.beginPath();
         ctx.strokeStyle = `rgba(255, 255, 255, ${this.opacity})`;
-        ctx.lineWidth = 1.5;
         ctx.moveTo(this.x, this.y);
         ctx.lineTo(this.x, this.y + this.len);
         ctx.stroke();
       }
     }
 
-    const drops = [];
-    const maxDrops = 150;
-    for (let i = 0; i < maxDrops; i++) drops.push(new Drop());
+    resizeCanvas();
 
-    function animate() {
-      ctx.clearRect(0, 0, width, height);
-      for (const drop of drops) { drop.update(); drop.draw(ctx); }
+    let last = 0;
+    function animate(ts) {
       requestAnimationFrame(animate);
+      if (ts - last < 1000 / 30) return;
+      const dt = (ts - last) / 1000;
+      last = ts;
+      ctx.clearRect(0, 0, width, height);
+      for (const drop of drops) { drop.update(dt); drop.draw(); }
     }
-    animate();
+    requestAnimationFrame(animate);
   </script>
 
   <!-- ============ Countdown ============ -->
