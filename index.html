@@ -1121,8 +1121,10 @@
 
   </main>
 
-  <!-- ============ Rain background ============ -->
-  <script>
+  <!-- ============ Binary rain background (1s and 0s) ============ -->
+  <script type="module">
+    import { prepareWithSegments, measureNaturalWidth } from 'https://cdn.jsdelivr.net/npm/@chenglou/pretext@0.0.8/dist/layout.js';
+
     const canvas = document.createElement('canvas');
     canvas.style.position = 'fixed';
     canvas.style.top = '0';
@@ -1134,38 +1136,44 @@
     document.body.appendChild(canvas);
 
     const ctx = canvas.getContext('2d');
+    const FONT_STACK = 'ui-monospace, SFMono-Regular, Menlo, Consolas, monospace';
+    const BASE_SIZE = 16;
+
+    // Measure the two glyphs with Pretext (canvas-backed, no DOM reflow)
+    const zeroWidth = measureNaturalWidth(prepareWithSegments('0', `${BASE_SIZE}px ${FONT_STACK}`));
+    const oneWidth = measureNaturalWidth(prepareWithSegments('1', `${BASE_SIZE}px ${FONT_STACK}`));
+
     let width, height;
-    const drops = [];
-    ctx.lineWidth = 1.5;
+    const bits = [];
 
     function resizeCanvas() {
       width = canvas.width = window.innerWidth;
       height = canvas.height = window.innerHeight;
-      drops.length = 0;
-      const maxDrops = Math.min(70, Math.max(25, Math.floor(width * height / 15000)));
-      for (let i = 0; i < maxDrops; i++) drops.push(new Drop());
+      bits.length = 0;
+      const maxBits = Math.min(42, Math.max(18, Math.floor(width * height / 24000)));
+      for (let i = 0; i < maxBits; i++) bits.push(new Bit());
     }
     window.addEventListener('resize', resizeCanvas);
 
-    class Drop {
+    class Bit {
       constructor() { this.reset(); }
       reset() {
         this.x = Math.random() * width;
         this.y = Math.random() * -height;
-        this.len = 10 + Math.random() * 20;
-        this.speed = 120 + Math.random() * 240;
-        this.opacity = 0.6 + Math.random() * 0.3;
+        this.size = 13 + Math.random() * 8;
+        this.speed = 60 + Math.random() * 140;
+        this.opacity = 0.3 + Math.random() * 0.3;
+        this.digit = Math.random() < 0.5 ? '0' : '1';
+        this.w = (this.digit === '0' ? zeroWidth : oneWidth) * (this.size / BASE_SIZE);
       }
       update(dt) {
         this.y += this.speed * dt;
-        if (this.y > height) this.reset();
+        if (this.y > height + 30) this.reset();
       }
       draw() {
-        ctx.beginPath();
-        ctx.strokeStyle = `rgba(255, 255, 255, ${this.opacity})`;
-        ctx.moveTo(this.x, this.y);
-        ctx.lineTo(this.x, this.y + this.len);
-        ctx.stroke();
+        ctx.font = `${this.size}px ${FONT_STACK}`;
+        ctx.fillStyle = `rgba(42, 42, 51, ${this.opacity})`;
+        ctx.fillText(this.digit, this.x - this.w / 2, this.y);
       }
     }
 
@@ -1178,7 +1186,7 @@
       const dt = (ts - last) / 1000;
       last = ts;
       ctx.clearRect(0, 0, width, height);
-      for (const drop of drops) { drop.update(dt); drop.draw(); }
+      for (const bit of bits) { bit.update(dt); bit.draw(); }
     }
     requestAnimationFrame(animate);
   </script>
