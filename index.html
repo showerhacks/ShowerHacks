@@ -184,7 +184,7 @@
       justify-content: center;
       gap: clamp(8px, 2vw, 18px);
       flex-wrap: wrap;
-      margin-top: var(--space-2);
+      margin-top: clamp(90px, 16vh, 180px);
     }
     .header img {
       height: clamp(120px, 22vw, 160px);
@@ -1121,54 +1121,85 @@
 
   </main>
 
-  <!-- ============ Binary rain background (1s and 0s) ============ -->
+  <!-- ============ Binary rain (1s and 0s bouncing off the page) ============ -->
   <script type="module">
     import { prepareWithSegments, measureNaturalWidth } from 'https://cdn.jsdelivr.net/npm/@chenglou/pretext@0.0.8/dist/layout.js';
 
     const canvas = document.createElement('canvas');
-    canvas.style.position = 'fixed';
-    canvas.style.top = '0';
-    canvas.style.left = '0';
-    canvas.style.width = '100%';
-    canvas.style.height = '100%';
-    canvas.style.pointerEvents = 'none';
-    canvas.style.zIndex = '-1';
+    Object.assign(canvas.style, {
+      position: 'fixed', top: '0', left: '0', width: '100%', height: '100%',
+      pointerEvents: 'none', zIndex: '-1',
+    });
     document.body.appendChild(canvas);
-
     const ctx = canvas.getContext('2d');
+
     const FONT_STACK = 'ui-monospace, SFMono-Regular, Menlo, Consolas, monospace';
     const BASE_SIZE = 16;
 
-    // Measure the two glyphs with Pretext (canvas-backed, no DOM reflow)
+    // Pretext measures each glyph once (canvas-backed, no DOM reflow).
     const zeroWidth = measureNaturalWidth(prepareWithSegments('0', `${BASE_SIZE}px ${FONT_STACK}`));
     const oneWidth = measureNaturalWidth(prepareWithSegments('1', `${BASE_SIZE}px ${FONT_STACK}`));
 
+    const GRAVITY = 900;
+    const MAX_FALL = 360;
+    const RESTITUTION = 0.55;
+    const SPAWN_MS = 70;
+
+    const SOLID_SELECTOR = '.card, .team-member, .sponsor-card, .itinerary-item, .faq details, .afterparty-container, .hero, .header h1, .header img';
+
     let width, height;
-    const bits = [];
+    let scrollY = 0;
+    const solids = [];   // page-space {left, right, top}
+
+    function measureSolids() {
+      const sy = window.scrollY;
+      solids.length = 0;
+      document.querySelectorAll(SOLID_SELECTOR).forEach((el) => {
+        const r = el.getBoundingClientRect();
+        solids.push({ left: r.left, right: r.right, top: r.top + sy });
+      });
+    }
 
     function resizeCanvas() {
       width = canvas.width = window.innerWidth;
       height = canvas.height = window.innerHeight;
-      bits.length = 0;
-      const maxBits = Math.min(42, Math.max(18, Math.floor(width * height / 24000)));
-      for (let i = 0; i < maxBits; i++) bits.push(new Bit());
+      measureSolids();
     }
     window.addEventListener('resize', resizeCanvas);
+    window.addEventListener('load', measureSolids);
+    document.addEventListener('toggle', measureSolids);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(measureSolids);
 
     class Bit {
-      constructor() { this.reset(); }
-      reset() {
+      constructor() { this.state = 'idle'; }
+      spawn() {
+        this.state = 'fall';
         this.x = Math.random() * width;
-        this.y = Math.random() * -height;
+        this.y = -24;
+        this.vx = (Math.random() - 0.5) * 30;
+        this.vy = 80 + Math.random() * 120;
         this.size = 13 + Math.random() * 8;
-        this.speed = 60 + Math.random() * 140;
-        this.opacity = 0.3 + Math.random() * 0.3;
+        this.opacity = 0.35 + Math.random() * 0.3;
         this.digit = Math.random() < 0.5 ? '0' : '1';
         this.w = (this.digit === '0' ? zeroWidth : oneWidth) * (this.size / BASE_SIZE);
       }
-      update(dt) {
-        this.y += this.speed * dt;
-        if (this.y > height + 30) this.reset();
+      step(dt) {
+        this.vy = Math.min(this.vy + GRAVITY * dt, MAX_FALL);
+        const prevY = this.y;
+        this.x += this.vx * dt;
+        this.y += this.vy * dt;
+
+        for (const s of solids) {
+          const top = s.top - scrollY;
+          if (this.vy > 0 && this.x >= s.left && this.x <= s.right && prevY < top && this.y >= top) {
+            this.y = top;
+            this.vy = -this.vy * RESTITUTION;
+            this.vx += (Math.random() - 0.5) * 24;
+            break;
+          }
+        }
+
+        if (this.y > height + 40) this.state = 'idle';
       }
       draw() {
         ctx.font = `${this.size}px ${FONT_STACK}`;
@@ -1176,6 +1207,19 @@
         ctx.fillText(this.digit, this.x - this.w / 2, this.y);
       }
     }
+
+    const idle = [];
+    const active = [];
+    for (let i = 0; i < 80; i++) idle.push(new Bit());
+
+    function spawnOne() {
+      if (idle.length === 0) return;
+      const b = idle.pop();
+      b.spawn();
+      active.push(b);
+    }
+
+    let emitter = 0;
 
     resizeCanvas();
 
@@ -1185,8 +1229,19 @@
       if (ts - last < 1000 / 30) return;
       const dt = (ts - last) / 1000;
       last = ts;
+
+      scrollY = window.scrollY;
+
+      emitter -= dt * 1000;
+      if (emitter <= 0) { emitter = SPAWN_MS; spawnOne(); }
+
       ctx.clearRect(0, 0, width, height);
-      for (const bit of bits) { bit.update(dt); bit.draw(); }
+      for (let i = active.length - 1; i >= 0; i--) {
+        const b = active[i];
+        b.step(dt);
+        if (b.state === 'idle') { active.splice(i, 1); idle.push(b); }
+        else b.draw();
+      }
     }
     requestAnimationFrame(animate);
   </script>
