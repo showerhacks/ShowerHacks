@@ -57,8 +57,8 @@
       --ink:          #2a2a33;
       --ink-soft:     #5a5a66;
 
-      --surface:      rgba(255, 255, 255, 0.32);
-      --surface-strong: rgba(255, 255, 255, 0.55);
+      --surface:      rgba(255, 255, 255, 0.82);
+      --surface-strong: rgba(255, 255, 255, 0.9);
       --border:       rgba(255, 255, 255, 0.55);
       --blur:         14px;
 
@@ -82,6 +82,18 @@
       --font-display: "Bitcount", system-ui;
       --font-body:    "Bitcount Prop Single", system-ui;
       --font-ui:      "Montserrat", system-ui, sans-serif;
+    }
+
+    /* ---------- Backdrop blur (WebKit/Blink only; Firefox stays opaque) ---------- */
+    @supports (-webkit-backdrop-filter: blur(1px)) {
+      :root {
+        --surface:        rgba(255, 255, 255, 0.32);
+        --surface-strong: rgba(255, 255, 255, 0.55);
+      }
+      .card, .info-box, .team-member, .sponsor-card, .itinerary-item, .afterparty-container, .faq details {
+        backdrop-filter: blur(var(--blur));
+        -webkit-backdrop-filter: blur(var(--blur));
+      }
     }
 
     /* ---------- Base ---------- */
@@ -109,7 +121,6 @@
       background: url("tile.jpg") repeat;
       background-size: 220px 220px;
       opacity: 0.18;
-      filter: contrast(2) brightness(.9);
       z-index: -2;
       pointer-events: none;
     }
@@ -160,8 +171,6 @@
     /* ---------- Glass card primitive ---------- */
     .card {
       background: var(--surface);
-      backdrop-filter: blur(var(--blur));
-      -webkit-backdrop-filter: blur(var(--blur));
       border: 1px solid var(--border);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
@@ -270,8 +279,6 @@
     }
     .info-box {
       background: var(--surface-strong);
-      backdrop-filter: blur(var(--blur));
-      -webkit-backdrop-filter: blur(var(--blur));
       border: 1px solid var(--border);
       border-radius: 999px;
       padding: 9px 18px;
@@ -399,8 +406,6 @@
       border-radius: var(--radius);
       padding: 22px 18px 18px;
       background: var(--surface);
-      backdrop-filter: blur(var(--blur));
-      -webkit-backdrop-filter: blur(var(--blur));
       border: 1px solid var(--border);
       box-shadow: var(--shadow);
       transition: transform .2s ease, box-shadow .2s ease;
@@ -501,8 +506,6 @@
       padding: 26px 22px;
       border-radius: var(--radius);
       background: var(--surface-strong);
-      backdrop-filter: blur(var(--blur));
-      -webkit-backdrop-filter: blur(var(--blur));
       border: 1px solid var(--border);
       box-shadow: var(--shadow);
       display: flex;
@@ -542,8 +545,6 @@
       align-items: baseline;
       padding: 14px 20px;
       background: var(--surface);
-      backdrop-filter: blur(var(--blur));
-      -webkit-backdrop-filter: blur(var(--blur));
       border: 1px solid var(--border);
       border-radius: var(--radius);
       box-shadow: var(--shadow-sm);
@@ -575,8 +576,6 @@
       border-radius: var(--radius-lg);
       padding: clamp(22px, 4vw, 32px);
       background: var(--surface-strong);
-      backdrop-filter: blur(var(--blur));
-      -webkit-backdrop-filter: blur(var(--blur));
       border: 1px solid var(--border);
       box-shadow: var(--shadow);
     }
@@ -600,8 +599,6 @@
     .faq { text-align: left; }
     .faq details {
       background: var(--surface);
-      backdrop-filter: blur(var(--blur));
-      -webkit-backdrop-filter: blur(var(--blur));
       border: 1px solid var(--border);
       border-radius: var(--radius);
       padding: 16px 20px;
