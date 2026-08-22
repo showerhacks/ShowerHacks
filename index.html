@@ -46,7 +46,8 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bitcount+Prop+Single:wght@100..900&family=Bitcount:wght@100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bitcount+Prop+Single:wght@400;700&family=Bitcount:wght@400;700&family=Montserrat:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bitcount+Prop+Single:wght@400;700&family=Bitcount:wght@400;700&family=Montserrat:wght@400;500;600;700&display=swap"></noscript>
 
   <style>
     /* ---------- Design tokens ---------- */
@@ -57,8 +58,8 @@
       --ink:          #2a2a33;
       --ink-soft:     #5a5a66;
 
-      --surface:      rgba(255, 255, 255, 0.32);
-      --surface-strong: rgba(255, 255, 255, 0.55);
+      --surface:      rgba(255, 255, 255, 0.82);
+      --surface-strong: rgba(255, 255, 255, 0.9);
       --border:       rgba(255, 255, 255, 0.55);
       --blur:         14px;
 
@@ -82,6 +83,18 @@
       --font-display: "Bitcount", system-ui;
       --font-body:    "Bitcount Prop Single", system-ui;
       --font-ui:      "Montserrat", system-ui, sans-serif;
+    }
+
+    /* ---------- Backdrop blur (WebKit/Blink only; Firefox stays opaque) ---------- */
+    @supports (-webkit-backdrop-filter: blur(1px)) {
+      :root {
+        --surface:        rgba(255, 255, 255, 0.32);
+        --surface-strong: rgba(255, 255, 255, 0.55);
+      }
+      .card, .info-box, .team-member, .sponsor-card, .itinerary-item, .afterparty-container, .faq details {
+        backdrop-filter: blur(var(--blur));
+        -webkit-backdrop-filter: blur(var(--blur));
+      }
     }
 
     /* ---------- Base ---------- */
@@ -109,7 +122,6 @@
       background: url("tile.jpg") repeat;
       background-size: 220px 220px;
       opacity: 0.18;
-      filter: contrast(2) brightness(.9);
       z-index: -2;
       pointer-events: none;
     }
@@ -160,8 +172,6 @@
     /* ---------- Glass card primitive ---------- */
     .card {
       background: var(--surface);
-      backdrop-filter: blur(var(--blur));
-      -webkit-backdrop-filter: blur(var(--blur));
       border: 1px solid var(--border);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
@@ -174,7 +184,7 @@
       justify-content: center;
       gap: clamp(8px, 2vw, 18px);
       flex-wrap: wrap;
-      margin-top: var(--space-2);
+      margin-top: clamp(90px, 16vh, 180px);
     }
     .header img {
       height: clamp(120px, 22vw, 160px);
@@ -246,7 +256,7 @@
       content: "";
       position: absolute;
       inset: 0;
-      background-image: url('sf.jpg');
+      background-image: url('sf.webp');
       background-size: cover;
       background-position: center;
       opacity: 0.42;
@@ -270,8 +280,6 @@
     }
     .info-box {
       background: var(--surface-strong);
-      backdrop-filter: blur(var(--blur));
-      -webkit-backdrop-filter: blur(var(--blur));
       border: 1px solid var(--border);
       border-radius: 999px;
       padding: 9px 18px;
@@ -399,8 +407,6 @@
       border-radius: var(--radius);
       padding: 22px 18px 18px;
       background: var(--surface);
-      backdrop-filter: blur(var(--blur));
-      -webkit-backdrop-filter: blur(var(--blur));
       border: 1px solid var(--border);
       box-shadow: var(--shadow);
       transition: transform .2s ease, box-shadow .2s ease;
@@ -501,8 +507,6 @@
       padding: 26px 22px;
       border-radius: var(--radius);
       background: var(--surface-strong);
-      backdrop-filter: blur(var(--blur));
-      -webkit-backdrop-filter: blur(var(--blur));
       border: 1px solid var(--border);
       box-shadow: var(--shadow);
       display: flex;
@@ -542,8 +546,6 @@
       align-items: baseline;
       padding: 14px 20px;
       background: var(--surface);
-      backdrop-filter: blur(var(--blur));
-      -webkit-backdrop-filter: blur(var(--blur));
       border: 1px solid var(--border);
       border-radius: var(--radius);
       box-shadow: var(--shadow-sm);
@@ -575,8 +577,6 @@
       border-radius: var(--radius-lg);
       padding: clamp(22px, 4vw, 32px);
       background: var(--surface-strong);
-      backdrop-filter: blur(var(--blur));
-      -webkit-backdrop-filter: blur(var(--blur));
       border: 1px solid var(--border);
       box-shadow: var(--shadow);
     }
@@ -600,8 +600,6 @@
     .faq { text-align: left; }
     .faq details {
       background: var(--surface);
-      backdrop-filter: blur(var(--blur));
-      -webkit-backdrop-filter: blur(var(--blur));
       border: 1px solid var(--border);
       border-radius: var(--radius);
       padding: 16px 20px;
@@ -679,7 +677,7 @@
 <body>
 
   <div class="header">
-    <img src="logo.png" alt="Showerhacks logo">
+    <img src="logo.webp" alt="Showerhacks logo" width="320" height="320" decoding="async">
     <h1>Showerhacks</h1>
   </div>
 
@@ -695,7 +693,7 @@
       data-luma-event-id="evt-KoG613La396FbEw"
     >Apply</a>
     <a href="https://discord.gg/4xEtJc9xqZ" class="discord">
-      <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/discord.svg" width="20" height="20" alt="">
+      <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/discord.svg" width="20" height="20" alt="" decoding="async">
       Join Discord
     </a>
   </div>
@@ -742,20 +740,20 @@
     <section class="section container-narrow" aria-label="Partners">
       <div class="logo-wall">
         <div class="logo-row logo-row--tier1">
-          <a href="https://zo.computer/" target="_blank" rel="noopener noreferrer"><img src="spon/zo.svg" alt="Zo"></a>
-          <a href="https://www.joinef.com/" target="_blank" rel="noopener noreferrer"><img src="spon/ef.png" alt="Entrepreneurs First"></a>
+          <a href="https://zo.computer/" target="_blank" rel="noopener noreferrer"><img src="spon/zo.svg" alt="Zo" width="499" height="213" loading="lazy" decoding="async"></a>
+          <a href="https://www.joinef.com/" target="_blank" rel="noopener noreferrer"><img src="spon/ef.png" alt="Entrepreneurs First" width="664" height="324" loading="lazy" decoding="async"></a>
         </div>
         <div class="logo-row logo-row--tier2">
-          <a href="https://www.firecrawl.dev/" target="_blank" rel="noopener noreferrer"><img src="spon/firecrawl_s.png" alt="Firecrawl"></a>
-          <a href="https://usemoss.dev/" target="_blank" rel="noopener noreferrer"><img src="spon/moss_s.png" alt="Moss"></a>
-          <a href="https://chatforce.com/" target="_blank" rel="noopener noreferrer"><img src="spon/chatforces1.png" alt="Chatforce"></a>
-          <a href="https://oscollective.org/" target="_blank" rel="noopener noreferrer"><img src="spon/osc.png" alt="Open Source Collective"></a>
+          <a href="https://www.firecrawl.dev/" target="_blank" rel="noopener noreferrer"><img src="spon/firecrawl_s.png" alt="Firecrawl" width="394" height="477" loading="lazy" decoding="async"></a>
+          <a href="https://usemoss.dev/" target="_blank" rel="noopener noreferrer"><img src="spon/moss_s.png" alt="Moss" width="280" height="280" loading="lazy" decoding="async"></a>
+          <a href="https://chatforce.com/" target="_blank" rel="noopener noreferrer"><img src="spon/chatforces1.png" alt="Chatforce" width="480" height="560" loading="lazy" decoding="async"></a>
+          <a href="https://oscollective.org/" target="_blank" rel="noopener noreferrer"><img src="spon/osc.png" alt="Open Source Collective" width="256" height="256" loading="lazy" decoding="async"></a>
         </div>
         <div class="logo-row logo-row--tier3">
-          <a href="https://www.aicollective.com/" target="_blank" rel="noopener noreferrer"><img src="spon/aicollective_logo.jpeg" alt="AI Collective"></a>
-          <a href="https://www.aivalley.io/" target="_blank" rel="noopener noreferrer"><img src="spon/aivalley.webp" alt="AI Valley"></a>
-          <a href="hello@crewbasecollective.com"><img src="spon/crew.png" alt="Crew"></a>
-          <img src="spon/build.avif" alt="Build">
+          <a href="https://www.aicollective.com/" target="_blank" rel="noopener noreferrer"><img src="spon/aicollective_logo.jpeg" alt="AI Collective" width="200" height="200" loading="lazy" decoding="async"></a>
+          <a href="https://www.aivalley.io/" target="_blank" rel="noopener noreferrer"><img src="spon/aivalley.webp" alt="AI Valley" width="200" height="200" loading="lazy" decoding="async"></a>
+          <a href="hello@crewbasecollective.com"><img src="spon/crew.webp" alt="Crew" width="300" height="265" loading="lazy" decoding="async"></a>
+          <img src="spon/build.avif" alt="Build" width="488" height="469" loading="lazy" decoding="async">
         </div>
       </div>
     </section>
@@ -808,7 +806,7 @@
 
         <div class="team-member copres">
           <span class="role-badge copres">Co-President</span>
-          <img src="/team/john.jpg" alt="John Lins">
+          <img src="/team/john.webp" alt="John Lins" width="256" height="256" loading="lazy" decoding="async">
           <h3>John Lins</h3>
           <p>Prev-LLNL AI Research</p>
           <p>UCSB</p>
@@ -817,7 +815,7 @@
 
         <div class="team-member copres">
           <span class="role-badge copres">Co-President</span>
-          <img src="/team/sarah.jpg" alt="Sarah Zhao">
+          <img src="/team/sarah.webp" alt="Sarah Zhao" width="256" height="256" loading="lazy" decoding="async">
           <h3>Sarah Zhao</h3>
           <p>Research at UCLA Connection Lab</p>
           <p><a href="https://www.sarahzhao.dev">Profile</a></p>
@@ -825,7 +823,7 @@
 
         <div class="team-member copres">
           <span class="role-badge copres">Co-President</span>
-          <img src="/team/amy.jpg" alt="Amy Chen">
+          <img src="/team/amy.webp" alt="Amy Chen" width="256" height="256" loading="lazy" decoding="async">
           <h3>Amy Chen</h3>
           <p>Western University</p>
           <p><a href="https://www.linkedin.com/in/amychencodes/">Profile</a></p>
@@ -833,7 +831,7 @@
 
         <div class="team-member copres">
           <span class="role-badge copres">Afterparty Host</span>
-          <img src="/team/kristen.jpg" alt="Amy Chen">
+          <img src="/team/kristen.webp" alt="Amy Chen" width="256" height="256" loading="lazy" decoding="async">
           <h3>Kristen Lew</h3>
           <p>Stanford University</p>
           <p>Entrepreneurs First</p>
@@ -847,7 +845,7 @@
 
         <div class="team-member">
           <span class="role-badge org">Organizer</span>
-          <img src="/team/celina.jpg" alt="Celina Kim">
+          <img src="/team/celina.webp" alt="Celina Kim" width="200" height="200" loading="lazy" decoding="async">
           <h3>Celina Kim</h3>
           <p>Marketing</p>
           <p>CSUS</p>
@@ -856,7 +854,7 @@
 
         <div class="team-member">
           <span class="role-badge org">Organizer</span>
-          <img src="/team/ken.jpg" alt="Ken Mueller">
+          <img src="/team/ken.webp" alt="Ken Mueller" width="256" height="256" loading="lazy" decoding="async">
           <h3>Ken Mueller</h3>
           <p>CS @ Stanford University</p>
           <p>Founder @Sup.ai</p>
@@ -865,7 +863,7 @@
 
         <div class="team-member">
           <span class="role-badge org">Organizer</span>
-          <img src="/team/chris.png" alt="Chris Vaisnor">
+          <img src="/team/chris.webp" alt="Chris Vaisnor" width="256" height="256" loading="lazy" decoding="async">
           <h3>Chris Vaisnor</h3>
           <p>AI M.S. @ John Hopkins University</p>
           <p>Co-Founder @ Adalace</p>
@@ -874,7 +872,7 @@
 
         <div class="team-member">
           <span class="role-badge org">Organizer</span>
-          <img src="/team/kevin.jpg" alt="Kevin Lin">
+          <img src="/team/kevin.webp" alt="Kevin Lin" width="256" height="256" loading="lazy" decoding="async">
           <h3>Kevin Lin</h3>
           <p>SWE @ Tesla</p>
           <p>UBC</p>
@@ -895,7 +893,7 @@
 
         <div class="team-member">
           <span class="role-badge judge">Judge</span>
-          <img src="/team/viraj.jpg" alt="Viraj Ala">
+          <img src="/team/viraj.webp" alt="Viraj Ala" width="256" height="256" loading="lazy" decoding="async">
           <h3>Viraj Ala</h3>
           <p>Viral Founder Interviews, Prev-White House &amp; Deloitte</p>
           <p><a href="https://www.instagram.com/viraj.ala/?hl=en">@viraj.ala</a></p>
@@ -905,7 +903,7 @@
 
         <div class="team-member">
           <span class="role-badge judge">Judge</span>
-          <img src="/team/christy.jpg" alt="Christy Lam">
+          <img src="/team/christy.webp" alt="Christy Lam" width="256" height="256" loading="lazy" decoding="async">
           <h3>Christy Lam</h3>
           <p>FAANG SWE</p>
           <p><a href="https://www.instagram.com/christyoverflow/">@christyoverflow</a></p>
@@ -913,7 +911,7 @@
 
         <div class="team-member">
           <span class="role-badge judge">Judge</span>
-          <img src="/team/yuni.jpeg" alt="Yuni Kim">
+          <img src="/team/yuni.webp" alt="Yuni Kim" width="256" height="256" loading="lazy" decoding="async">
           <h3>Yuni Kim</h3>
           <p>CMO @ DittoAI</p>
           <p><a href="https://www.tiktok.com/@yunskistudy">@yunskistudy</a></p>
@@ -923,7 +921,7 @@
 
         <div class="team-member">
           <span class="role-badge judge">Judge</span>
-          <img src="/team/mike.jpg" alt="Mike Klikushin">
+          <img src="/team/mike.webp" alt="Mike Klikushin" width="150" height="150" loading="lazy" decoding="async">
           <h3>Mike Klikushin</h3>
           <p>Co-Founder @ Inspector (YC)</p>
           <p><a href="https://www.instagram.com/mikebuildsmore/">@MikeBuildsMore</a></p>
@@ -932,7 +930,7 @@
 
         <div class="team-member">
           <span class="role-badge judge">Judge</span>
-          <img src="/team/tina.jpg" alt="Tina Chi">
+          <img src="/team/tina.webp" alt="Tina Chi" width="256" height="256" loading="lazy" decoding="async">
           <h3>Tina Chi</h3>
           <p>FAANG SWE</p>
           <p>UF</p>
@@ -941,7 +939,7 @@
 
         <div class="team-member">
           <span class="role-badge judge">Judge</span>
-          <img src="/team/char.jpg" alt="Charissa Kim">
+          <img src="/team/char.webp" alt="Charissa Kim" width="256" height="256" loading="lazy" decoding="async">
           <h3>Charissa Kim</h3>
           <p>Technical Program Manager @ Semgrep</p>
           <p><a href="https://www.instagram.com/charlikestoeat/">@charlikestoeat</a></p>
@@ -950,7 +948,7 @@
 
         <!-- <div class="team-member">
           <span class="role-badge judge">Judge</span>
-          <img src="/team/aolin.jpg" alt="Aolin Xu">
+          <img src="/team/aolin.webp" alt="Aolin Xu">
           <h3>Aolin Xu</h3>
           <p>ML SWE @ TikTok</p>
           <p><a href="https://www.instagram.com/aolin_xu/">@aolin_xu</a></p>
@@ -959,7 +957,7 @@
 
         <div class="team-member">
           <span class="role-badge judge">Judge</span>
-          <img src="/team/aidan.jpg" alt="Aidan Ouckama">
+          <img src="/team/aidan.webp" alt="Aidan Ouckama" width="225" height="225" loading="lazy" decoding="async">
           <h3>Aidan Ouckama</h3>
           <p>Prev-Microsoft</p>
           <p><a href="https://www.instagram.com/ouckahcs?igsh=MzRlODBiNWFlZA==">@ouckahcs</a></p>
@@ -968,7 +966,7 @@
 
         <div class="team-member">
           <span class="role-badge judge">Judge</span>
-          <img src="/team/harneet.jpeg" alt="Harneet Dhillon">
+          <img src="/team/harneet.webp" alt="Harneet Dhillon" width="256" height="256" loading="lazy" decoding="async">
           <h3>Harneet Dhillon</h3>
           <p>Co-Founder of Elsewher3</p>
           <p><a href="https://www.tiktok.com/@dhillon.diary">@dhillon.diary</a></p>
@@ -978,7 +976,7 @@
 
         <div class="team-member">
           <span class="role-badge judge">Judge</span>
-          <img src="/team/martin.jpg" alt="Martin Lee">
+          <img src="/team/martin.webp" alt="Martin Lee" width="256" height="256" loading="lazy" decoding="async">
           <h3>Martin Lee</h3>
           <p>Founder @ Neocast</p>
           <p>USC</p>
@@ -988,7 +986,7 @@
 
         <div class="team-member">
           <span class="role-badge judge">Judge</span>
-          <img src="/team/ace.jpg" alt="Ace Yip">
+          <img src="/team/ace.webp" alt="Ace Yip" width="256" height="256" loading="lazy" decoding="async">
           <h3>Ace Yip</h3>
           <p>WOMEN IN TECH ® Global</p>
           <p><a href="https://www.instagram.com/hehuabuilds/">@hehuabuilds</a></p>
@@ -997,7 +995,7 @@
 
         <div class="team-member">
           <span class="role-badge judge">Judge</span>
-          <img src="/team/sara.jpg" alt="Sara Leung">
+          <img src="/team/sara.webp" alt="Sara Leung" width="256" height="256" loading="lazy" decoding="async">
           <h3>Sara Leung</h3>
           <p>Executive @ UQIES</p>
           <p><a href="https://www.instagram.com/saraxxlg/">@saraxxlg</a></p>
@@ -1006,21 +1004,21 @@
 
         <!-- <div class="team-member">
           <span class="role-badge judge">Judge</span>
-          <img src="/team/raami.jpg" alt="Raami Abichou">
+          <img src="/team/raami.webp" alt="Raami Abichou">
           <h3>Raami Abichou</h3>
           <p><a href="https://www.instagram.com/raamics/">@raamics</a></p>
         </div> -->
 
         <div class="team-member">
           <span class="role-badge judge">Judge</span>
-          <img src="/team/miron.jpeg" alt="Miron Tkachuk">
+          <img src="/team/miron.webp" alt="Miron Tkachuk" width="200" height="200" loading="lazy" decoding="async">
           <h3>Miron Tkachuk</h3>
           <p>Founding Engineer @ Minoa</p>
           <p><a href="https://www.linkedin.com/in/mirontkachuk/">Profile</a></p>
         </div>
         <div class="team-member">
           <span class="role-badge judge">Judge</span>
-          <img src="/team/arine.jpg" alt="Arine Kim">
+          <img src="/team/arine.webp" alt="Arine Kim" width="256" height="256" loading="lazy" decoding="async">
           <h3>Arine Kim</h3>
           <p>Prev Product &amp; Growth @ Beacons</p>
           <p><a href="https://www.instagram.com/arinekim/">@arinekim</a></p>
@@ -1042,20 +1040,20 @@
       <!-- <h3 class="section-sub">Generously funded by</h3> -->
       <div class="funded-grid">
         <a class="sponsor-card sponsor-card--full" href="https://zo.computer/">
-          <img src="spon/zo.svg" alt="Zo">
+          <img src="spon/zo.svg" alt="Zo" width="499" height="213" loading="lazy" decoding="async">
           <div class="desc">Zo is an AI computer in the cloud that gives you superpowers to build anything, host anything, and own it all.</div>
         </a>
 
         <a class="sponsor-card" href="https://www.firecrawl.dev/">
-          <img src="spon/firecrawl.png" alt="Firecrawl">
+          <img src="spon/firecrawl.webp" alt="Firecrawl" width="560" height="131" loading="lazy" decoding="async">
           <div class="desc">Turn websites into LLM-ready data</div>
         </a>
         <a class="sponsor-card" href="https://usemoss.dev/">
-          <img src="spon/moss.png" alt="Moss">
+          <img src="spon/moss.png" alt="Moss" width="1024" height="300" loading="lazy" decoding="async">
           <div class="desc">Moss: Real-Time Semantic Search</div>
         </a>
          <a class="sponsor-card" href="https://chatforce.com/">
-          <img src="spon/chatforces.png" alt="Chatforce">
+          <img src="spon/chatforces.webp" alt="Chatforce" width="560" height="108" loading="lazy" decoding="async">
           <div class="desc">Build & Share Viral Games with AI</div>
         </a>
         <!--<a class="sponsor-card" href="https://oscollective.org/">
@@ -1123,61 +1121,129 @@
 
   </main>
 
-  <!-- ============ Rain background ============ -->
-  <script>
-    const canvas = document.createElement('canvas');
-    canvas.style.position = 'fixed';
-    canvas.style.top = '0';
-    canvas.style.left = '0';
-    canvas.style.width = '100%';
-    canvas.style.height = '100%';
-    canvas.style.pointerEvents = 'none';
-    canvas.style.zIndex = '-1';
-    document.body.appendChild(canvas);
+  <!-- ============ Binary rain (1s and 0s bouncing off the page) ============ -->
+  <script type="module">
+    import { prepareWithSegments, measureNaturalWidth } from 'https://cdn.jsdelivr.net/npm/@chenglou/pretext@0.0.8/dist/layout.js';
 
+    const canvas = document.createElement('canvas');
+    Object.assign(canvas.style, {
+      position: 'fixed', top: '0', left: '0', width: '100%', height: '100%',
+      pointerEvents: 'none', zIndex: '-1',
+    });
+    document.body.appendChild(canvas);
     const ctx = canvas.getContext('2d');
+
+    const FONT_STACK = 'ui-monospace, SFMono-Regular, Menlo, Consolas, monospace';
+    const BASE_SIZE = 16;
+
+    // Pretext measures each glyph once (canvas-backed, no DOM reflow).
+    const zeroWidth = measureNaturalWidth(prepareWithSegments('0', `${BASE_SIZE}px ${FONT_STACK}`));
+    const oneWidth = measureNaturalWidth(prepareWithSegments('1', `${BASE_SIZE}px ${FONT_STACK}`));
+
+    const GRAVITY = 900;
+    const MAX_FALL = 360;
+    const RESTITUTION = 0.55;
+    const SPAWN_MS = 70;
+
+    const SOLID_SELECTOR = '.card, .team-member, .sponsor-card, .itinerary-item, .faq details, .afterparty-container, .hero, .header h1, .header img';
+
     let width, height;
+    let scrollY = 0;
+    const solids = [];   // page-space {left, right, top}
+
+    function measureSolids() {
+      const sy = window.scrollY;
+      solids.length = 0;
+      document.querySelectorAll(SOLID_SELECTOR).forEach((el) => {
+        const r = el.getBoundingClientRect();
+        solids.push({ left: r.left, right: r.right, top: r.top + sy });
+      });
+    }
 
     function resizeCanvas() {
       width = canvas.width = window.innerWidth;
       height = canvas.height = window.innerHeight;
+      measureSolids();
     }
     window.addEventListener('resize', resizeCanvas);
+    window.addEventListener('load', measureSolids);
+    document.addEventListener('toggle', measureSolids);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(measureSolids);
+
+    class Bit {
+      constructor() { this.state = 'idle'; }
+      spawn() {
+        this.state = 'fall';
+        this.x = Math.random() * width;
+        this.y = -24;
+        this.vx = (Math.random() - 0.5) * 30;
+        this.vy = 80 + Math.random() * 120;
+        this.size = 13 + Math.random() * 8;
+        this.opacity = 0.10 + Math.random() * 0.22;
+        this.digit = Math.random() < 0.5 ? '0' : '1';
+        this.w = (this.digit === '0' ? zeroWidth : oneWidth) * (this.size / BASE_SIZE);
+      }
+      step(dt) {
+        this.vy = Math.min(this.vy + GRAVITY * dt, MAX_FALL);
+        const prevY = this.y;
+        this.x += this.vx * dt;
+        this.y += this.vy * dt;
+
+        for (const s of solids) {
+          const top = s.top - scrollY;
+          if (this.vy > 0 && this.x >= s.left && this.x <= s.right && prevY < top && this.y >= top) {
+            this.y = top;
+            this.vy = -this.vy * RESTITUTION;
+            this.vx += (Math.random() - 0.5) * 24;
+            break;
+          }
+        }
+
+        if (this.y > height + 40) this.state = 'idle';
+      }
+      draw() {
+        ctx.font = `${this.size}px ${FONT_STACK}`;
+        ctx.fillStyle = `rgba(42, 42, 51, ${this.opacity})`;
+        ctx.fillText(this.digit, this.x - this.w / 2, this.y);
+      }
+    }
+
+    const idle = [];
+    const active = [];
+    for (let i = 0; i < 80; i++) idle.push(new Bit());
+
+    function spawnOne() {
+      if (idle.length === 0) return;
+      const b = idle.pop();
+      b.spawn();
+      active.push(b);
+    }
+
+    let emitter = 0;
+
     resizeCanvas();
 
-    class Drop {
-      constructor() { this.reset(); }
-      reset() {
-        this.x = Math.random() * width;
-        this.y = Math.random() * -height;
-        this.len = 10 + Math.random() * 20;
-        this.speed = 2 + Math.random() * 4;
-        this.opacity = 0.2 + Math.random() * 0.3;
-      }
-      update() {
-        this.y += this.speed;
-        if (this.y > height) this.reset();
-      }
-      draw(ctx) {
-        ctx.beginPath();
-        ctx.strokeStyle = `rgba(255, 255, 255, ${this.opacity})`;
-        ctx.lineWidth = 1.5;
-        ctx.moveTo(this.x, this.y);
-        ctx.lineTo(this.x, this.y + this.len);
-        ctx.stroke();
-      }
-    }
-
-    const drops = [];
-    const maxDrops = 150;
-    for (let i = 0; i < maxDrops; i++) drops.push(new Drop());
-
-    function animate() {
-      ctx.clearRect(0, 0, width, height);
-      for (const drop of drops) { drop.update(); drop.draw(ctx); }
+    let last = 0;
+    function animate(ts) {
       requestAnimationFrame(animate);
+      if (ts - last < 1000 / 30) return;
+      const dt = (ts - last) / 1000;
+      last = ts;
+
+      scrollY = window.scrollY;
+
+      emitter -= dt * 1000;
+      if (emitter <= 0) { emitter = SPAWN_MS; spawnOne(); }
+
+      ctx.clearRect(0, 0, width, height);
+      for (let i = active.length - 1; i >= 0; i--) {
+        const b = active[i];
+        b.step(dt);
+        if (b.state === 'idle') { active.splice(i, 1); idle.push(b); }
+        else b.draw();
+      }
     }
-    animate();
+    requestAnimationFrame(animate);
   </script>
 
   <!-- ============ Countdown ============ -->
