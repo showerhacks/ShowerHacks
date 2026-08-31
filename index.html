@@ -184,7 +184,8 @@
       justify-content: center;
       gap: clamp(8px, 2vw, 18px);
       flex-wrap: wrap;
-      margin-top: clamp(90px, 16vh, 180px);
+      margin-top: clamp(72px, 14vh, 140px);
+      padding-top: 44px;
     }
     .header img {
       height: clamp(120px, 22vw, 160px);
@@ -328,6 +329,49 @@
       transition: transform .2s ease, filter .2s ease;
     }
     .co-host-partner-logos img:hover { transform: translateY(-2px); }
+
+    /* Top partner strip */
+    .top-partners {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 20;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: clamp(0.75rem, 2.5vw, 1.5rem);
+      padding: 10px 16px;
+      background: rgba(255, 255, 255, 0.45);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+      box-shadow: 0 2px 12px rgba(20, 40, 80, 0.06);
+    }
+    @supports (-webkit-backdrop-filter: blur(1px)) {
+      .top-partners {
+        background: rgba(255, 255, 255, 0.28);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+      }
+    }
+    .top-partners a {
+      display: inline-flex;
+      align-items: center;
+      line-height: 0;
+      text-decoration: none;
+    }
+    .top-partners img {
+      height: clamp(20px, 3.8vw, 28px);
+      width: auto;
+      max-width: min(120px, 28vw);
+      object-fit: contain;
+      filter: drop-shadow(0 1px 4px rgba(255, 255, 255, 0.8));
+      transition: transform .2s ease;
+    }
+    .top-partners a:hover img { transform: translateY(-1px); }
+    .top-partners img.bond-logo {
+      height: clamp(26px, 4.8vw, 36px);
+      border-radius: 6px;
+    }
 
     /* ---------- Logo wall ---------- */
     .logo-wall {
@@ -676,6 +720,15 @@
 
 <body>
 
+  <div class="top-partners" aria-label="Presented by">
+    <a href="https://cerebralvalley.ai" target="_blank" rel="noopener noreferrer">
+      <img src="spon/cv.png" alt="Cerebral Valley" width="512" height="512" decoding="async">
+    </a>
+    <a href="https://bondcommunity.ai" target="_blank" rel="noopener noreferrer">
+      <img src="spon/bond-ai-logo-vertical.png" alt="Bond AI" class="bond-logo" width="200" height="280" decoding="async">
+    </a>
+  </div>
+
   <div class="header">
     <img src="logo.webp" alt="Showerhacks logo" width="320" height="320" decoding="async">
     <h1>Showerhacks</h1>
@@ -755,6 +808,8 @@
           <a href="https://crewbasecollective.com/"><img src="spon/crew.webp" alt="Crew" width="300" height="265" loading="lazy" decoding="async"></a>
           <img src="spon/build.avif" alt="Build" width="488" height="469" loading="lazy" decoding="async">
           <a href="https://www.designbuddies.community/"><img src="spon/db.png" alt="Design Buddies" width="200" height="200" loading="lazy" decoding="async"/></a>
+          <a href="https://cerebralvalley.ai" target="_blank" rel="noopener noreferrer"><img src="spon/cv.png" alt="Cerebral Valley" width="512" height="512" loading="lazy" decoding="async"></a>
+          <a href="https://bondcommunity.ai" target="_blank" rel="noopener noreferrer"><img src="spon/bond-ai-logo-vertical.png" alt="Bond AI" width="200" height="280" loading="lazy" decoding="async"></a>
         </div>
       </div>
     </section>
