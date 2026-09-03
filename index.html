@@ -437,14 +437,36 @@
       margin: 0 auto;
     }
     .team-grid.copres {
-      grid-template-columns: repeat(auto-fit, minmax(220px, 160px));
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      max-width: 920px;
       justify-content: center;
       gap: 22px;
     }
     .team-grid.orgs {
-      grid-template-columns: repeat(auto-fit, minmax(220px, 160px));
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      max-width: 920px;
       justify-content: center;
-      gap: 22px;
+      gap: 12px;
+    }
+    .team-grid.orgs .team-member {
+      padding: 18px 8px 12px;
+    }
+    .team-grid.orgs .team-member img {
+      width: 68px;
+      height: 68px;
+      margin-bottom: 6px;
+    }
+    .team-grid.orgs .team-member h3 {
+      font-size: 0.95rem;
+      margin: 4px 0 2px;
+    }
+    .team-grid.orgs .team-member p {
+      font-size: 0.72rem;
+    }
+    .team-grid.orgs .role-badge {
+      font-size: 0.55rem;
+      letter-spacing: 1px;
+      padding: 3px 8px;
     }
 
     .team-member {
@@ -707,6 +729,18 @@
       h1 { font-size: clamp(2rem, 11vw, 3rem); }
       .team-member img { width: 80px; height: 80px; }
       .team-member.copres img { width: 96px; height: 96px; }
+      .team-grid.copres {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+      }
+      .team-grid.orgs {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+      }
+      .team-grid.orgs .team-member img {
+        width: 72px;
+        height: 72px;
+      }
       .funded-grid { grid-template-columns: 1fr; }
       .itinerary-item {
         grid-template-columns: 1fr;
