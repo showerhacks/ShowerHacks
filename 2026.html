@@ -1,0 +1,1500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="icon" type="image/png" href="whitelogo.png">
+  <title>Showerhacks 2026 — Recap</title>
+  <meta name="description" content="Showerhacks 2026 recap — itinerary, FAQ, sponsors, organizers, and afterparty from our 12-hour hackathon in San Francisco.">
+  <meta name="keywords" content="SF Hackathon, shower hacks, showerhacks">
+  <meta property="og:title" content="Showerhacks 2026 — Recap">
+  <meta property="og:description" content="The recap of Showerhacks 2026 — our 12-hour hackathon in SF where the winner gets to take a shower.">
+  <meta property="og:image" content="https://showerhacks.org/whitelogo.png">
+  <meta property="og:url" content="https://showerhacks.org/2026.html">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#cce6ff">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Event",
+    "name": "Showerhacks",
+    "startDate": "2026-09-26T10:00-07:00",
+    "endDate": "2026-09-26T22:00-07:00",
+    "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+    "eventStatus": "https://schema.org/EventScheduled",
+    "location": {
+      "@type": "Place",
+      "name": "San Francisco",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "San Francisco",
+        "addressRegion": "CA",
+        "addressCountry": "US"
+      }
+    },
+    "image": "https://showerhacks.org/whitelogo.png",
+    "description": "Showerhacks is a 12-hour hackathon in San Francisco with 500 participants. Build shocking projects, compete, and win a shower.",
+    "organizer": {
+      "@type": "Organization",
+      "name": "Showerhacks",
+      "url": "https://showerhacks.org"
+    }
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bitcount+Prop+Single:wght@400;700&family=Bitcount:wght@400;700&family=Montserrat:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bitcount+Prop+Single:wght@400;700&family=Bitcount:wght@400;700&family=Montserrat:wght@400;500;600;700&display=swap"></noscript>
+
+  <style>
+    /* ---------- Design tokens ---------- */
+    :root {
+      --brand:        #007bff;
+      --brand-soft:   #e6f1ff;
+      --accent:       lightcoral;
+      --ink:          #2a2a33;
+      --ink-soft:     #5a5a66;
+
+      --surface:      rgba(255, 255, 255, 0.82);
+      --surface-strong: rgba(255, 255, 255, 0.9);
+      --border:       rgba(255, 255, 255, 0.55);
+      --blur:         14px;
+
+      --radius-sm:    10px;
+      --radius:       16px;
+      --radius-lg:    22px;
+
+      --shadow-sm:    0 2px 8px rgba(20, 40, 80, 0.08);
+      --shadow:       0 10px 30px rgba(20, 40, 80, 0.10);
+      --shadow-lg:    0 20px 60px rgba(20, 40, 80, 0.18);
+
+      --glow:         0 0 18px rgba(255,255,255,0.9);
+
+      --space-1: 6px;
+      --space-2: 12px;
+      --space-3: 18px;
+      --space-4: 28px;
+      --space-5: 44px;
+      --space-6: 72px;
+
+      --font-display: "Bitcount", system-ui;
+      --font-body:    "Bitcount Prop Single", system-ui;
+      --font-ui:      "Montserrat", system-ui, sans-serif;
+    }
+
+    /* ---------- Backdrop blur (WebKit/Blink only; Firefox stays opaque) ---------- */
+    @supports (-webkit-backdrop-filter: blur(1px)) {
+      :root {
+        --surface:        rgba(255, 255, 255, 0.32);
+        --surface-strong: rgba(255, 255, 255, 0.55);
+      }
+      .card, .info-box, .team-member, .sponsor-card, .itinerary-item, .afterparty-container, .faq details {
+        backdrop-filter: blur(var(--blur));
+        -webkit-backdrop-filter: blur(var(--blur));
+      }
+    }
+
+    /* ---------- Base ---------- */
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: var(--font-body);
+      color: var(--ink);
+      background: linear-gradient(180deg, #cce6ff 0%, #e9d3d6 55%, lightcoral 100%);
+      text-align: center;
+      padding: clamp(20px, 4vw, 48px) clamp(16px, 4vw, 40px) var(--space-6);
+      position: relative;
+      z-index: 0;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: url("tile.jpg") repeat;
+      background-size: 220px 220px;
+      opacity: 0.18;
+      z-index: -2;
+      pointer-events: none;
+    }
+
+    a { color: var(--brand); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    b, strong {
+      font-weight: 700;
+      -webkit-text-stroke: 0.4px currentColor;
+    }
+
+    .cleanfont, .ui { font-family: var(--font-ui); }
+
+    /* ---------- Layout ---------- */
+    main {
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+
+    .container-narrow {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .section {
+      margin: var(--space-6) auto;
+    }
+
+    .section > h2 {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 4.5vw, 2.4rem);
+      margin: 0 0 var(--space-4);
+      text-shadow: var(--glow);
+      letter-spacing: 0.5px;
+    }
+
+    .section-sub {
+      font-family: var(--font-display);
+      font-size: clamp(1.1rem, 2.4vw, 1.35rem);
+      margin: var(--space-4) 0 var(--space-3);
+      text-shadow: var(--glow);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      opacity: 0.85;
+    }
+
+    /* ---------- Glass card primitive ---------- */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    /* ---------- Header / Hero ---------- */
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: clamp(8px, 2vw, 18px);
+      flex-wrap: wrap;
+      margin-top: clamp(72px, 14vh, 140px);
+      padding-top: 44px;
+    }
+    .header img {
+      height: clamp(120px, 22vw, 160px);
+      width: auto;
+      filter: drop-shadow(0 0 18px rgba(255,255,255,0.95));
+    }
+
+    h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2.4rem, 9vw, 4.2rem);
+      margin: 0;
+      letter-spacing: 1px;
+      text-shadow: var(--glow);
+      white-space: nowrap;
+    }
+
+    .tagline {
+      font-size: clamp(1.05rem, 2.6vw, 1.45rem);
+      margin: var(--space-3) auto var(--space-4);
+      max-width: 640px;
+      text-shadow: var(--glow);
+      line-height: 1.45;
+    }
+
+    /* CTA buttons */
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      margin: 0 auto var(--space-5);
+      flex-wrap: wrap;
+    }
+    .buttons a {
+      font-family: var(--font-ui);
+      padding: 13px 24px;
+      font-size: 0.98rem;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+      border-radius: 999px;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      transition: transform .15s ease, box-shadow .2s ease, background-color .2s ease;
+    }
+    .buttons a.waitlist {
+      color: white;
+      background-color: var(--brand);
+      box-shadow: 0 8px 22px rgba(0,123,255,0.35);
+    }
+    .buttons a.waitlist:hover { transform: translateY(-1px); text-decoration: none; }
+    .buttons a.discord {
+      background-color: var(--brand-soft);
+      color: var(--brand);
+      border: 2px solid var(--brand);
+    }
+    .buttons a.discord:hover { background: white; text-decoration: none; }
+
+    /* Hero info card with SF backdrop */
+    .hero {
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--radius-lg);
+      padding: clamp(20px, 4vw, 32px) clamp(16px, 4vw, 28px);
+      box-shadow: var(--shadow-lg), 0 0 0 1px rgba(255,255,255,0.6) inset;
+    }
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: url('sf.webp');
+      background-size: cover;
+      background-position: center;
+      opacity: 0.42;
+      z-index: 0;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(255,255,255,0.25), rgba(255,255,255,0));
+      z-index: 0;
+      pointer-events: none;
+    }
+    .hero .info-boxes { position: relative; z-index: 1; }
+
+    .info-boxes {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+    }
+    .info-box {
+      background: var(--surface-strong);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 9px 18px;
+      font-size: clamp(0.78rem, 2.2vw, 0.98rem);
+      box-shadow: var(--shadow-sm);
+      text-shadow: 0 0 10px white;
+      white-space: nowrap;
+      font-family: var(--font-body);
+    }
+
+    /* Co-host strip */
+    .cohost-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-2);
+      margin: var(--space-5) auto 0;
+    }
+    .cohost-wrap h4 {
+      font-family: var(--font-ui);
+      font-weight: 500;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-size: 0.78rem;
+      color: var(--ink-soft);
+      margin: 0;
+      opacity: 0.85;
+    }
+    .co-host-partner-logos {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: clamp(0.9rem, 3vw, 2rem);
+      max-width: min(100%, 40rem);
+      margin: 0 auto;
+      padding: 6px 4px;
+    }
+    .co-host-partner-logos a { display: inline-flex; align-items: center; line-height: 0; }
+    .co-host-partner-logos img {
+      height: clamp(26px, 5.5vw, 44px);
+      width: auto;
+      max-width: min(180px, 42vw);
+      object-fit: contain;
+      filter: drop-shadow(0 2px 6px rgba(255,255,255,0.7));
+      transition: transform .2s ease, filter .2s ease;
+    }
+    .co-host-partner-logos img:hover { transform: translateY(-2px); }
+
+
+.about-container {
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+}
+
+#afterparty-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.afterparty-content {
+  position: relative;
+  z-index: 2;
+}
+    
+/* On small screens, make exactly 3 tiles fit across */
+@media (max-width: 600px) {
+  body::before {
+    background-size: calc(100vw / 3) auto;
+  }
+  
+  .info-box{
+    font-size: .5em;
+  }
+}
+
+/* Chrome only (not Safari, not Firefox) */
+@supports (-webkit-appearance:none) and (not (-webkit-touch-callout:none)) and (not (selector(:-moz-placeholder))) {
+  h1, h2 {
+    -webkit-text-stroke: 3px currentColor;
+  }
+}
+
+    /* ---------- Logo wall ---------- */
+    .logo-wall {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: clamp(14px, 3vw, 22px);
+      margin: var(--space-5) auto 0;
+      max-width: 720px;
+    }
+    .logo-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: clamp(14px, 3.5vw, 28px);
+      width: 100%;
+    }
+    .logo-row a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 0;
+      text-decoration: none;
+    }
+    .logo-row img {
+      width: auto;
+      object-fit: contain;
+      filter: drop-shadow(0 2px 8px rgba(255,255,255,0.75));
+      transition: transform .2s ease;
+    }
+    .logo-row a:hover img { transform: translateY(-2px); }
+    .logo-row--tier1 img {
+      height: clamp(42px, 8vw, 64px);
+      max-width: min(200px, 44vw);
+    }
+    .logo-row--tier2 img {
+      height: clamp(30px, 6vw, 46px);
+      max-width: min(120px, 28vw);
+    }
+    .logo-row--tier3 img {
+      height: clamp(26px, 5vw, 38px);
+      max-width: min(100px, 24vw);
+      border-radius: 8px;
+    }
+
+    /* ---------- About ---------- */
+    .about {
+      padding: clamp(22px, 4vw, 32px);
+      text-align: left;
+      font-size: clamp(1.05rem, 2.4vw, 1.2rem);
+      line-height: 1.6;
+    }
+    .about p { margin: 0; }
+
+    /* ---------- Team ---------- */
+    .team-grid {
+      display: grid;
+      gap: 18px;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+    .team-grid.copres {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      max-width: 920px;
+      justify-content: center;
+      gap: 22px;
+    }
+    .team-grid.orgs {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      max-width: 920px;
+      justify-content: center;
+      gap: 12px;
+    }
+    .team-grid.orgs .team-member {
+      padding: 18px 8px 12px;
+    }
+    .team-grid.orgs .team-member img {
+      width: 68px;
+      height: 68px;
+      margin-bottom: 6px;
+    }
+    .team-grid.orgs .team-member h3 {
+      font-size: 0.95rem;
+      margin: 4px 0 2px;
+    }
+    .team-grid.orgs .team-member p {
+      font-size: 0.72rem;
+    }
+    .team-grid.orgs .role-badge {
+      font-size: 0.55rem;
+      letter-spacing: 1px;
+      padding: 3px 8px;
+    }
+
+    .team-member {
+      position: relative;
+      border-radius: var(--radius);
+      padding: 22px 18px 18px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      transition: transform .2s ease, box-shadow .2s ease;
+      text-align: center;
+    }
+    .team-member:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-lg);
+    }
+    .team-member img {
+      width: 92px;
+      height: 92px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 2px solid rgba(255,255,255,0.7);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+      margin: 0 auto 10px;
+      display: block;
+    }
+    .team-member.copres img {
+      width: 112px;
+      height: 112px;
+    }
+    .team-member h3 {
+      font-family: var(--font-display);
+      margin: 6px 0 4px;
+      font-size: 1.15rem;
+      letter-spacing: 0.4px;
+    }
+    .team-member p {
+      margin: 2px 0;
+      font-size: 0.85rem;
+      color: var(--ink-soft);
+      font-family: var(--font-ui);
+      line-height: 1.35;
+    }
+    .team-member p a { color: var(--brand); font-weight: 500; }
+
+    .role-badge {
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: var(--font-ui);
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 999px;
+      color: white;
+      background: var(--brand);
+      box-shadow: 0 4px 10px rgba(0,123,255,0.3);
+    }
+    .role-badge.judge { background: var(--accent); box-shadow: 0 4px 10px rgba(240,128,128,0.35); }
+    .role-badge.org   { background: var(--brand); }
+    .role-badge.copres{
+      background: linear-gradient(135deg, var(--brand), #4ea3ff);
+      letter-spacing: 1.6px;
+    }
+    .team-member > h3 { margin-top: 14px; }
+
+    /* ---------- Sponsors ---------- */
+    .sponsor-intro {
+      font-family: var(--font-ui);
+      font-size: 1rem;
+      color: var(--ink-soft);
+      max-width: 560px;
+      margin: 0 auto var(--space-4);
+    }
+    .funded-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 22px;
+      width: 100%;
+      margin: 0 auto;
+    }
+    .sponsor-card--full {
+      grid-column: 1 / -1;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      padding: 4px 34px;
+    }
+    .sponsor-card--full img {
+      max-width: 140px;
+      max-height: 74px;
+      width: auto;
+      flex-shrink: 0;
+    }
+    .sponsor-card--full .desc {
+      font-size: 1.08rem;
+      text-align: left;
+      max-width: 520px;
+    }
+    .sponsor-card {
+      padding: 26px 22px;
+      border-radius: var(--radius);
+      background: var(--surface-strong);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+    .sponsor-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
+    .sponsor-card img { max-width: 80%; height: auto; }
+    .sponsor-card .desc {
+      font-family: var(--font-ui);
+      font-size: 0.92rem;
+      color: var(--ink-soft);
+      text-align: center;
+    }
+    .personal-sponsor {
+      margin-top: var(--space-4);
+      font-family: var(--font-ui);
+      color: var(--ink-soft);
+    }
+
+    /* ---------- Itinerary ---------- */
+    .itinerary {
+      text-align: left;
+      padding: clamp(8px, 2vw, 12px) 0;
+      list-style: none;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .itinerary-item {
+      display: grid;
+      grid-template-columns: minmax(7.5rem, 9.5rem) 1fr;
+      gap: 16px;
+      align-items: baseline;
+      padding: 14px 20px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-sm);
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+    .itinerary-item:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow);
+    }
+    .itinerary-time {
+      font-family: var(--font-ui);
+      font-weight: 700;
+      font-size: 0.92rem;
+      color: var(--brand);
+      letter-spacing: 0.2px;
+      white-space: nowrap;
+    }
+    .itinerary-event {
+      font-family: var(--font-ui);
+      font-size: 1.02rem;
+      color: var(--ink);
+      line-height: 1.4;
+    }
+
+    /* ---------- Afterparty ---------- */
+    .afterparty-container {
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--radius-lg);
+      padding: clamp(22px, 4vw, 32px);
+      background: var(--surface-strong);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+    }
+    #afterparty-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .afterparty-content {
+      position: relative;
+      z-index: 2;
+      text-align: left;
+      font-size: clamp(1rem, 2.3vw, 1.15rem);
+      line-height: 1.55;
+    }
+
+    /* ---------- FAQ ---------- */
+    .faq { text-align: left; }
+    .faq details {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px 20px;
+      box-shadow: var(--shadow-sm);
+      margin: 12px auto;
+      max-width: 820px;
+      transition: box-shadow .2s ease;
+    }
+    .faq details[open] { box-shadow: var(--shadow); }
+    .faq summary {
+      cursor: pointer;
+      font-family: var(--font-ui);
+      font-weight: 700;
+      font-size: 1.02rem;
+      text-shadow: 0 0 10px white;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .faq summary::-webkit-details-marker { display: none; }
+    .faq summary::after {
+      content: "+";
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      color: var(--brand);
+      transition: transform .2s ease;
+      line-height: 1;
+    }
+    .faq details[open] summary::after { content: "−"; }
+    .faq details p {
+      margin: 12px 0 0;
+      font-family: var(--font-ui);
+      line-height: 1.55;
+      color: var(--ink);
+    }
+
+    /* ---------- Footer ---------- */
+    .site-footer {
+      margin-top: var(--space-6);
+      padding: var(--space-4) 0;
+      font-family: var(--font-ui);
+      font-size: 0.92rem;
+      color: var(--ink-soft);
+      text-align: center;
+      line-height: 1.7;
+    }
+    .site-footer .sep { opacity: 0.45; margin: 0 8px; }
+
+    /* ---------- Chrome-only stroke trick (preserved) ---------- */
+    @supports (-webkit-appearance:none) and (not (-webkit-touch-callout:none)) and (not (selector(:-moz-placeholder))) {
+      h1, h2, .section-sub { -webkit-text-stroke: 2px currentColor; }
+    }
+
+    /* ---------- Responsive ---------- */
+    @media (max-width: 600px) {
+      body::before { background-size: calc(100vw / 3) auto; }
+      .header img { height: clamp(96px, 22vw, 120px); }
+      h1 { font-size: clamp(2rem, 11vw, 3rem); }
+      .team-member img { width: 80px; height: 80px; }
+      .team-member.copres img { width: 96px; height: 96px; }
+      .team-grid.copres {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+      }
+      .team-grid.orgs {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+      }
+      .team-grid.orgs .team-member img {
+        width: 72px;
+        height: 72px;
+      }
+      .funded-grid { grid-template-columns: 1fr; }
+      .itinerary-item {
+        grid-template-columns: 1fr;
+        gap: 4px;
+        padding: 12px 16px;
+      }
+      .itinerary-time { font-size: 0.82rem; }
+      .itinerary-event { font-size: 0.95rem; }
+    }
+  </style>
+</head>
+
+<body>
+
+ 
+
+  <div class="header">
+    <img src="logo.webp" alt="Showerhacks logo" width="320" height="320" decoding="async">
+    <h1>Showerhacks 2026</h1>
+  </div>
+
+  <p class="tagline">
+   A 12-hour hackathon where the <b>winner got to take a shower</b>.
+  </p>
+
+  <div class="buttons">
+    <a href="index.html" class="waitlist">← Home</a>
+    <a href="https://showerhacks.devpost.com/project-gallery" class="discord" target="_blank" rel="noopener noreferrer">View projects</a>
+  </div>
+
+  <main>
+
+    <!-- ============ HERO ============ -->
+    <section class="hero container-narrow">
+      <div class="info-boxes">
+        <div class="info-box">September 26th 2026</div>
+        <div class="info-box">10AM – 10PM</div>
+        <div class="info-box">San Francisco</div>
+        <div class="info-box">400 People</div>
+      </div>
+    </section>
+<!-- 
+    <div class="cohost-wrap">
+      <h4>Co-hosted with</h4>
+      <div class="co-host-partner-logos">
+        <a href="https://www.linkedin.com/company/aicollective/"><img src="https://www.aicollective.com/images/brand/Wordmark.svg" alt="AI Collective"></a>
+        <a href="https://www.aivalley.io/"><img src="spon/aivalley.webp" alt="AI Valley"></a>
+        <a href="https://oscollective.org/"><img src="spon/osc.png" alt="Open Source Collective"></a>
+        <a href="https://www.linkedin.com/company/shipaccelerator"><img src="spon/ship.jpeg" alt="SH1P"></a>
+      </div>
+      <div class="co-host-partner-logos">
+        <a href="https://www.firecrawl.dev/"><img src="spon/firecrawl_s.png" alt="Firecrawl"></a>
+        <a href="https://usemoss.dev/"><img src="spon/moss_s.png" alt="Moss"></a>
+      </div>
+    </div> -->
+
+    <!-- ============ ABOUT ============ -->
+    <section class="section container-narrow">
+      <!-- <h2>About</h2> -->
+      <div class="card about">
+        <p>After hours of coding, caffeine, and zero sleep, hackers want one thing above all else: <b>a shower</b>.
+        <br/><br/>
+        We want to foster outrageously creative ideas that push builders to think wildly outside of the box. Funny and absurd ideas are encouraged! Every brilliant solution sounded absurd until it worked.
+      </p>
+      </div>
+    </section>
+
+    <!-- ============ PARTNERS ============ -->
+    <section class="section container-narrow" aria-label="Partners">
+      <div class="logo-wall">
+        <div class="logo-row logo-row--tier1">
+          <a href="https://zo.computer/" target="_blank" rel="noopener noreferrer"><img src="spon/zo.svg" alt="Zo" width="499" height="213" loading="lazy" decoding="async"></a>
+          <a href="https://www.joinef.com/" target="_blank" rel="noopener noreferrer"><img src="spon/ef.png" alt="Entrepreneurs First" width="664" height="324" loading="lazy" decoding="async"></a>
+        </div>
+        <div class="logo-row logo-row--tier2">
+          <a href="https://www.firecrawl.dev/" target="_blank" rel="noopener noreferrer"><img src="spon/firecrawl_s.png" alt="Firecrawl" width="394" height="477" loading="lazy" decoding="async"></a>
+          <a href="https://usemoss.dev/" target="_blank" rel="noopener noreferrer"><img src="spon/moss_s.png" alt="Moss" width="280" height="280" loading="lazy" decoding="async"></a>
+          <a href="https://chatforce.com/" target="_blank" rel="noopener noreferrer"><img src="spon/chatforces1.png" alt="Chatforce" width="480" height="560" loading="lazy" decoding="async"></a>
+          <a href="https://oscollective.org/" target="_blank" rel="noopener noreferrer"><img src="spon/osc.png" alt="Open Source Collective" width="256" height="256" loading="lazy" decoding="async"></a>
+          <a href="https://openswarm.com" target="_blank" rel="noopener noreferrer"><img src="spon/openswarm.png" alt="AWE" style="border-radius:0px;" width="200" height="280" loading="lazy" decoding="async"></a>
+          <a href="https://featherless.ai/" target="_blank" rel="noopener noreferrer"><img src="spon/feather_mark.svg" alt="Featherless AI" width="190" height="190" loading="lazy" decoding="async"></a>
+        </div>
+        <div class="logo-row logo-row--tier3">
+          <a href="https://www.aicollective.com/" target="_blank" rel="noopener noreferrer"><img src="spon/aicollective_logo.jpeg" alt="AI Collective" width="200" height="200" loading="lazy" decoding="async"></a>
+          <a href="https://www.aivalley.io/" target="_blank" rel="noopener noreferrer"><img src="spon/aivalley.webp" alt="AI Valley" width="200" height="200" loading="lazy" decoding="async"></a>
+          <a href="https://crewbasecollective.com/"><img src="spon/crew.webp" alt="Crew" width="300" height="265" loading="lazy" decoding="async"></a>
+          <img src="spon/build.avif" alt="Build" width="488" height="469" loading="lazy" decoding="async">
+          <a href="https://www.designbuddies.community/"><img src="spon/db.png" alt="Design Buddies" width="200" height="200" loading="lazy" decoding="async"/></a>
+          <a href="https://cerebralvalley.ai" target="_blank" rel="noopener noreferrer"><img src="spon/cv.png" alt="Cerebral Valley" width="512" height="512" loading="lazy" decoding="async"></a>
+          <a href="https://bondcommunity.ai" target="_blank" rel="noopener noreferrer"><img src="spon/bond-ai-logo-vertical.png" alt="Bond AI" style="border-radius:0px;" width="200" height="280" loading="lazy" decoding="async"></a>
+         <!-- <a href="https://awe.studentorg.berkeley.edu/" target="_blank" rel="noopener noreferrer"><img src="spon/awe.webp" alt="AWE" style="border-radius:0px;" width="200" height="280" loading="lazy" decoding="async"></a>-->
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ TEAM ============ -->
+    <section class="section">
+      <h2>The Team</h2>
+
+      <h3 class="section-sub"></h3>
+      <div class="team-grid copres">
+
+        <div class="team-member copres">
+          <span class="role-badge copres">Co-President</span>
+          <img src="/team/john.webp" alt="John Lins" width="256" height="256" loading="lazy" decoding="async">
+          <h3>John Lins</h3>
+          <p>Prev-LLNL AI Research</p>
+          <p>UCSB</p>
+          <p><a href="https://johnlins.com">Profile</a></p>
+        </div>
+
+        <div class="team-member copres">
+          <span class="role-badge copres">Co-President</span>
+          <img src="/team/sarah.webp" alt="Sarah Zhao" width="256" height="256" loading="lazy" decoding="async">
+          <h3>Sarah Zhao</h3>
+          <p>Research at UCLA Connection Lab</p>
+          <p><a href="https://www.sarahzhao.dev">Profile</a></p>
+        </div>
+
+        <div class="team-member copres">
+          <span class="role-badge copres">Co-President</span>
+          <img src="/team/amy.webp" alt="Amy Chen" width="256" height="256" loading="lazy" decoding="async">
+          <h3>Amy Chen</h3>
+          <p>Western University</p>
+          <p><a href="https://www.linkedin.com/in/amychencodes/">Profile</a></p>
+        </div>
+
+        <div class="team-member copres">
+          <span class="role-badge copres">Afterparty Host</span>
+          <img src="/team/kristen.webp" alt="Amy Chen" width="256" height="256" loading="lazy" decoding="async">
+          <h3>Kristen Lew</h3>
+          <p>Stanford University</p>
+          <p>Entrepreneurs First</p>
+          <p><a href="https://www.instagram.com/kristenblds/?hl=en">@kristenblds</a></p>
+        </div>
+
+      </div>
+
+      <h3 class="section-sub"></h3>
+      <div class="team-grid orgs">
+
+        <div class="team-member">
+          <span class="role-badge org">Organizer</span>
+          <img src="/team/celina.webp" alt="Celina Kim" width="200" height="200" loading="lazy" decoding="async">
+          <h3>Celina Kim</h3>
+          <p>Marketing</p>
+          <p>CSUS</p>
+          <p><a href="https://www.linkedin.com/in/celina-kim-942a11260/">Profile</a></p>
+        </div>
+
+        <!--<div class="team-member">
+          <span class="role-badge org">Organizer</span>
+          <img src="/team/ken.webp" alt="Ken Mueller" width="256" height="256" loading="lazy" decoding="async">
+          <h3>Ken Mueller</h3>
+          <p>CS @ Stanford University</p>
+          <p>Founder @Sup.ai</p>
+          <p><a href="https://github.com/kenmueller">Profile</a></p>
+        </div>-->
+
+        <div class="team-member">
+          <span class="role-badge org">Organizer</span>
+          <img src="/team/chris.webp" alt="Chris Vaisnor" width="256" height="256" loading="lazy" decoding="async">
+          <h3>Chris Vaisnor</h3>
+          <p>AI M.S. @ John Hopkins University</p>
+          <p>Co-Founder @ Adalace</p>
+          <p><a href="https://www.linkedin.com/in/chris-vaisnor">Profile</a></p>
+        </div>
+
+        <div class="team-member">
+          <span class="role-badge org">Organizer</span>
+          <img src="/team/kevin.webp" alt="Kevin Lin" width="256" height="256" loading="lazy" decoding="async">
+          <h3>Kevin Lin</h3>
+          <p>SWE @ Tesla</p>
+          <p>UBC</p>
+          <p><a href="https://linktr.ee/linguinelabs">Profile</a></p>
+        </div>
+
+        <div class="team-member">
+          <span class="role-badge org">Organizer</span>
+          <img src="/team/leon.png" alt="Leon Khoshnevis" width="256" height="256" loading="lazy" decoding="async">
+          <h3>Leon Khoshnevis</h3>
+          <p>Entrepreneurs First</p>
+          <p>UCSB</p>
+          <p><a href="https://www.linkedin.com/in/leonkhoshnevis/">Profile</a></p>
+        </div>
+
+        <!-- <div class="team-member">
+          <span class="role-badge org">Org</span>
+          <h3>Kai</h3>
+          <p>XAI / CMU</p>
+          <p><a href="https://profsucrose.dev">Profile</a></p>
+        </div> -->
+
+      </div>
+
+      <h3 class="section-sub">Viral Judging Panel</h3>
+      <div class="team-grid">
+
+        <div class="team-member">
+          <span class="role-badge judge">Judge</span>
+          <img src="/team/viraj.webp" alt="Viraj Ala" width="256" height="256" loading="lazy" decoding="async">
+          <h3>Viraj Ala</h3>
+          <p>Viral Founder Interviews, Prev-White House &amp; Deloitte</p>
+          <p><a href="https://www.instagram.com/viraj.ala/?hl=en">@viraj.ala</a></p>
+          <p>Berkeley</p>
+          <p><a href="https://beacons.ai/viraj.ala/mediakit?utm_source=ig&utm_medium=social&utm_content=link_in_bio&fbclid=PAZXh0bgNhZW0CMTEAc3J0YwZhcHBfaWQMMjU2MjgxMDQwNTU4AAGnx7mR3OLltffRmjXBLLiPqo24ZOmMH7KVRCiHgALDvLRlysbEuQdJZdvVAdE_aem_olMg1DID_AtKtCzLnM8zTA">Profile</a></p>
+        </div>
+
+       <!-- <div class="team-member">
+          <span class="role-badge judge">Judge</span>
+          <img src="/team/christy.webp" alt="Christy Lam" width="256" height="256" loading="lazy" decoding="async">
+          <h3>Christy Lam</h3>
+          <p>FAANG SWE</p>
+          <p><a href="https://www.instagram.com/christyoverflow/">@christyoverflow</a></p>
+        </div>-->
+
+        <!--<div class="team-member">
+          <span class="role-badge judge">Judge</span>
+          <img src="/team/yuni.webp" alt="Yuni Kim" width="256" height="256" loading="lazy" decoding="async">
+          <h3>Yuni Kim</h3>
+          <p>CMO @ DittoAI</p>
+          <p><a href="https://www.tiktok.com/@yunskistudy">@yunskistudy</a></p>
+          <p>UCSD</p>
+          <p><a href="https://linkedin.com/in/seoyunkim06">Profile</a></p>
+        </div>
+
+        <div class="team-member">
+          <span class="role-badge judge">Judge</span>
+          <img src="/team/mike.webp" alt="Mike Klikushin" width="150" height="150" loading="lazy" decoding="async">
+          <h3>Mike Klikushin</h3>
+          <p>Co-Founder @ Inspector (YC)</p>
+          <p><a href="https://www.instagram.com/mikebuildsmore/">@MikeBuildsMore</a></p>
+          <p><a href="https://tryinspector.com">Profile</a></p>
+        </div>
+
+        <div class="team-member">
+          <span class="role-badge judge">Judge</span>
+          <img src="/team/tina.webp" alt="Tina Chi" width="256" height="256" loading="lazy" decoding="async">
+          <h3>Tina Chi</h3>
+          <p>FAANG SWE</p>
+          <p>UF</p>
+          <p><a href="https://www.instagram.com/tinahelloworld/">@tinahelloworld</a></p>
+        </div>
+
+        <div class="team-member">
+          <span class="role-badge judge">Judge</span>
+          <img src="/team/char.webp" alt="Charissa Kim" width="256" height="256" loading="lazy" decoding="async">
+          <h3>Charissa Kim</h3>
+          <p>Technical Program Manager @ Semgrep</p>
+          <p><a href="https://www.instagram.com/charlikestoeat/">@charlikestoeat</a></p>
+          <p><a href="https://www.linkedin.com/in/charissakim?utm_source=share_via&utm_content=profile&utm_medium=member_ios">Profile</a></p>
+        </div>-->
+
+        <!-- <div class="team-member">
+          <span class="role-badge judge">Judge</span>
+          <img src="/team/aolin.webp" alt="Aolin Xu">
+          <h3>Aolin Xu</h3>
+          <p>ML SWE @ TikTok</p>
+          <p><a href="https://www.instagram.com/aolin_xu/">@aolin_xu</a></p>
+          <p><a href="https://www.linkedin.com/in/aolin-xu-b01798194/">Profile</a></p>
+        </div> -->
+
+       <!-- <div class="team-member">
+          <span class="role-badge judge">Judge</span>
+          <img src="/team/aidan.webp" alt="Aidan Ouckama" width="225" height="225" loading="lazy" decoding="async">
+          <h3>Aidan Ouckama</h3>
+          <p>Prev-Microsoft</p>
+          <p><a href="https://www.instagram.com/ouckahcs?igsh=MzRlODBiNWFlZA==">@ouckahcs</a></p>
+          <p><a href="https://linkedin.com/in/ouck">Profile</a></p>
+        </div>-->
+
+        <div class="team-member">
+          <span class="role-badge judge">Judge</span>
+          <img src="/team/harneet.webp" alt="Harneet Dhillon" width="256" height="256" loading="lazy" decoding="async">
+          <h3>Harneet Dhillon</h3>
+          <p>Co-Founder of Elsewher3</p>
+          <p><a href="https://www.tiktok.com/@dhillon.diary">@dhillon.diary</a></p>
+          <p>UCSB B.S/Georgia Tech M.S.</p>
+          <p><a href="https://www.linkedin.com/in/harneet-dhillon">Profile</a></p>
+        </div>
+
+        <div class="team-member">
+          <span class="role-badge judge">Judge</span>
+          <img src="/team/akshyae.png" alt="Akshyae Singh" width="256" height="256" loading="lazy" decoding="async">
+          <h3>Akshyae Singh</h3>
+          <p>Co-founder, Frame Fellowship</p>
+          <p><a href="https://www.linkedin.com/in/akshyaesingh/">Profile</a></p>
+        </div>
+
+       <!-- <div class="team-member">
+          <span class="role-badge judge">Judge</span>
+          <img src="/team/ace.webp" alt="Ace Yip" width="256" height="256" loading="lazy" decoding="async">
+          <h3>Ace Yip</h3>
+          <p>WOMEN IN TECH ® Global</p>
+          <p><a href="https://www.instagram.com/hehuabuilds/">@hehuabuilds</a></p>
+          <p><a href="https://www.linkedin.com/in/ace-yip-71b71b20a/">Profile</a></p>
+        </div>-->
+
+      <!--  <div class="team-member">
+          <span class="role-badge judge">Judge</span>
+          <img src="/team/sara.webp" alt="Sara Leung" width="256" height="256" loading="lazy" decoding="async">
+          <h3>Sara Leung</h3>
+          <p>Executive @ UQIES</p>
+          <p><a href="https://www.instagram.com/saraxxlg/">@saraxxlg</a></p>
+          <p><a href="https://www.linkedin.com/in/sara-l-50b61b255?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app">Profile</a></p>
+        </div>-->
+
+        <!-- <div class="team-member">
+          <span class="role-badge judge">Judge</span>
+          <img src="/team/raami.webp" alt="Raami Abichou">
+          <h3>Raami Abichou</h3>
+          <p><a href="https://www.instagram.com/raamics/">@raamics</a></p>
+        </div> -->
+
+        <div class="team-member">
+          <span class="role-badge judge">Judge</span>
+          <img src="/team/miron.webp" alt="Miron Tkachuk" width="200" height="200" loading="lazy" decoding="async">
+          <h3>Miron Tkachuk</h3>
+          <p>Founding Engineer @ Minoa</p>
+          <p><a href="https://www.linkedin.com/in/mirontkachuk/">Profile</a></p>
+        </div>
+        <div class="team-member">
+          <span class="role-badge judge">Judge</span>
+          <img src="/team/arine.webp" alt="Arine Kim" width="256" height="256" loading="lazy" decoding="async">
+          <h3>Arine Kim</h3>
+          <p>Prev Product &amp; Growth @ Beacons</p>
+          <p><a href="https://www.instagram.com/arinekim/">@arinekim</a></p>
+          <p><a href="https://www.instagram.com/arinebuilds/">@arinebuilds</a></p>
+          <p>UCLA</p>
+          <p><a href="https://www.linkedin.com/in/arinekim/">Profile</a></p>
+        </div>
+
+        <div class="team-member">
+          <span class="role-badge judge">Judge</span>
+          <img src="/team/artem.jpeg" alt="Artem Zamarajev" width="256" height="256" loading="lazy" decoding="async">
+          <h3>Artem Zamarajev</h3>
+          <p>Sr. FAANG SWE</p>
+         
+          <p><a href="https://www.linkedin.com/in/zamarajev/">Profile</a></p>
+        </div>
+
+            <div class="team-member">
+          <span class="role-badge judge">Judge</span>
+          <img src="/team/patrick.avif" alt="Patrick Turricelli" width="256" height="256" loading="lazy" decoding="async">
+          <h3>Patrick Turricelli</h3>
+          <p> CEO & Founder @ Centillion Labs</p>
+          <p><a href="https://patrickturricelli.com">Profile</a></p>
+        </div>
+
+        <div class="team-member">
+          <span class="role-badge judge">Judge</span>
+          <img src="/team/faidra.jpeg" alt="Faidra Patsatzi" width="256" height="256" loading="lazy" decoding="async">
+          <h3>Faidra Patsatzi</h3>
+          <p>Stanford</p>
+          <p><a href="https://www.linkedin.com/in/faidrapatsatzi/">Profile</a></p>
+        </div>
+        <div class="team-member">
+          <span class="role-badge judge">Judge</span>
+          <img src="/team/ali.png" alt="Ali" width="200" height="200" loading="lazy" decoding="async">
+          <h3>Ali Amjad</h3>
+          <p><a href="https://www.linkedin.com/in/ali-amjad-a80732137/">Profile</a></p>
+        </div>
+
+         <div class="team-member">
+          <span class="role-badge judge">Judge</span>
+          <img src="/team/alessio.jpeg" alt="Alessio Lodge" width="256" height="256" loading="lazy" decoding="async">
+          <h3>Alessio Lodge</h3>
+          <p>CTO, Ambra</p>
+          <p><a href="https://alessiolodge.com">Profile</a></p>
+        </div>
+
+        <div class="team-member">
+          <span class="role-badge judge">Judge</span>
+          <img src="/team/adrian.jpg" alt="Adrian Aliu" width="256" height="256" loading="lazy" decoding="async">
+          <h3>Adrian Aliu</h3>
+          <p>A16Z-Backed Founder</p>
+          <p><a href="https://www.linkedin.com/in/adrian-aliu/">Profile</a></p>
+        </div>
+
+        <div class="team-member">
+          <span class="role-badge judge">Judge</span>
+          <img src="/team/bihan.jpg" alt="Bihan Mahadewa" width="256" height="256" loading="lazy" decoding="async">
+          <h3>Bihan Mahadewa</h3>
+          <p>Founder - Stealth (YC)</p>
+          <p><a href="https://www.linkedin.com/in/bihanmahadewa/">Profile</a></p>
+        </div>
+
+        <!-- <div class="team-member">
+          <span class="role-badge judge">Judge</span>
+          <h3>William Yoo</h3>
+          <p>Invester - EF</p>
+        </div> -->
+
+        <div class="team-member">
+          <span class="role-badge judge">Judge</span>
+          <img src="/team/alkinoos.jpg" alt="Alkinoos Sarioglou" width="256" height="256" loading="lazy" decoding="async">
+          <h3>Alkinoos Sarioglou</h3>
+          <p>Co-founder @ Purpose:lab</p>
+          <p><a href="https://www.linkedin.com/in/alkinoos-sarioglou/">Profile</a></p>
+        </div>
+
+        <div class="team-member">
+          <span class="role-badge judge">Judge</span>
+          <img src="/team/umang.jpeg" alt="Umang Rungta" width="256" height="256" loading="lazy" decoding="async">
+          <h3>Umang Rungta</h3>
+          <p>CTO &amp; Founder @ TieOut</p>
+          <p>Ex-Google, IIT Kharagpur</p>
+          <p><a href="https://www.linkedin.com/in/umang-rungta-286674160/">Profile</a></p>
+        </div>
+
+        <div class="team-member">
+          <span class="role-badge judge">Judge</span>
+          <img src="/team/hanna.jpg" alt="Hanna Runets" width="256" height="256" loading="lazy" decoding="async">
+          <h3>Hanna Runets</h3>
+          <p>Co-founder of Permitree</p>
+          <p><a href="https://www.linkedin.com/in/hanna-runets">Profile</a></p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============ SPONSORS ============ -->
+    <section class="section">
+      <h2>Sponsors</h2>
+      <!-- <p class="sponsor-intro">
+        We are looking for generous sponsors to closely collaborate with — apply <a href="sponsor.html">here</a>.
+      </p> -->
+
+      <!-- <h3 class="section-sub">Generously funded by</h3> -->
+      <div class="funded-grid">
+        <a class="sponsor-card sponsor-card--full" href="https://zo.computer/">
+          <img src="spon/zo.svg" alt="Zo" width="499" height="213" loading="lazy" decoding="async">
+          <div class="desc">Zo is an AI computer in the cloud that gives you superpowers to build anything, host anything, and own it all.</div>
+        </a>
+
+        <a class="sponsor-card" href="https://www.firecrawl.dev/">
+          <img src="spon/firecrawl.webp" alt="Firecrawl" width="560" height="131" loading="lazy" decoding="async">
+          <div class="desc">Turn websites into LLM-ready data</div>
+        </a>
+        <a class="sponsor-card" href="https://usemoss.dev/">
+          <img src="spon/moss.png" alt="Moss" width="1024" height="300" loading="lazy" decoding="async">
+          <div class="desc">Moss: Real-Time Semantic Search</div>
+        </a>
+         <a class="sponsor-card" href="https://chatforce.com/">
+          <img src="spon/chatforces.webp" alt="Chatforce" width="560" height="108" loading="lazy" decoding="async">
+          <div class="desc">Build & Share Viral Games with AI</div>
+        </a>
+        <a class="sponsor-card" href="https://openswarm.com/">
+          <img src="spon/openswarm.png" alt="OpenSwarm" width="100" height="108" loading="lazy" decoding="async">
+          <div class="desc">Meet your new AI Desktop</div>
+        </a>
+        <!--<a class="sponsor-card" href="https://oscollective.org/">
+          <img src="spon/osc.png" alt="OSC">
+          <div class="desc">The Open Source Collective</div>
+        </a>-->
+      </div>
+
+      <!-- <div class="personal-sponsor">
+        Personal Sponsor: <a href="https://shub.club/">Shubham</a>
+      </div> -->
+    </section>
+
+    <!-- ============ AFTERPARTY ============ -->
+    <section class="section container-narrow">
+      <h2>Afterparty 🎉</h2>
+      <div class="afterparty-container">
+        <canvas id="afterparty-canvas"></canvas>
+        <div class="afterparty-content">
+          <b>8:45pm – 11:00pm:</b> The top 30% of participants and all winning teams will be invited to the afterparty 🥂. Sponsored by Open Swarm!
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FAQ ============ -->
+    <section class="section faq container-narrow">
+      <h2>FAQ</h2>
+
+      <details>
+        <summary>Who can participate?</summary>
+        <p>Anyone can apply! We accept applications in August. We're looking for builders, founders, creators, engineers, and community builders. You must be over 18. Bring a valid ID to the event.</p>
+      </details>
+
+      <details>
+        <summary>Does it cost anything to attend?</summary>
+        <p>No, attendance is free thanks to our amazing sponsors.</p>
+      </details>
+
+      <details>
+        <summary>What can I win?</summary>
+        <p>The grand prize is a shower, yes, you heard that right. Imagine having that on your LinkedIn.</p>
+        <p>First place cash prize is $1000, $500 for 2nd place, and $250 for 3rd place</p>
+        <p>There will also be sponsor-specific prizes. If you used a sponsor's technology, you qualify for their track. More info on this coming soon.</p>
+      </details>
+
+      <details>
+        <summary>Are there travel reimbursements?</summary>
+        <p>No.</p>
+      </details>
+
+      <details>
+        <summary>Is there a Showerhacks group chat?</summary>
+        <p>Yes — join our Discord: <a href="https://discord.gg/4xEtJc9xqZ">discord.gg/4xEtJc9xqZ</a></p>
+      </details>
+    </section>
+
+    <!-- ============ ITINERARY ============ -->
+    <section class="section container-narrow">
+      <h2>Itinerary</h2>
+      <ol class="itinerary">
+        <li class="itinerary-item">
+          <span class="itinerary-time">9:45am</span>
+          <span class="itinerary-event">Check-in &amp; team-forming</span>
+        </li>
+        <li class="itinerary-item">
+          <span class="itinerary-time">10:30am - 11:00am</span>
+          <span class="itinerary-event">Opening ceremony</span>
+        </li>
+        <li class="itinerary-item">
+          <span class="itinerary-time">11:00am – 7:00pm</span>
+          <span class="itinerary-event">Hacking</span>
+        </li>
+        <li class="itinerary-item">
+          <span class="itinerary-time">7:00pm – 8:00pm</span>
+          <span class="itinerary-event">Judging</span>
+        </li>
+        <li class="itinerary-item">
+          <span class="itinerary-time">8:00pm - 8:20pm</span>
+          <span class="itinerary-event">Top 3 projects present</span>
+        </li>
+        <li class="itinerary-item">
+          <span class="itinerary-time">8:20pm</span>
+          <span class="itinerary-event">Vote</span>
+        </li>
+        <li class="itinerary-item">
+          <span class="itinerary-time">8:30pm</span>
+          <span class="itinerary-event">Shower 🚿 + $1750 prize</span>
+        </li>
+        <li class="itinerary-item">
+          <span class="itinerary-time">8:45pm – 11:00pm</span>
+          <span class="itinerary-event">Afterparty 🎉</span>
+        </li>
+      </ol>
+    </section>
+
+    <!-- ============ FOOTER ============ -->
+    <footer class="site-footer">
+      Follow us on Instagram <a href="https://instagram.com/showerhacks">@showerhacks</a>
+      and on <a href="https://www.linkedin.com/company/showerhacks">LinkedIn</a>.
+      <br/>
+      <a href="https://showerhacks.org/tos.txt">ToS</a><span class="sep">·</span>
+      <a href="https://showerhacks.org/privacy.txt">Privacy</a><span class="sep">·</span>
+      <a href="https://showerhacks.org/coc.html">Code of Conduct</a>
+      <br/>
+      <a href="https://linsnexus.com">Sponsorship agency</a>
+    </footer>
+
+  </main>
+
+  <!-- ============ Binary rain (1s and 0s bouncing off the page) ============ -->
+  <script type="module">
+    import { prepareWithSegments, measureNaturalWidth } from 'https://cdn.jsdelivr.net/npm/@chenglou/pretext@0.0.8/dist/layout.js';
+
+    const canvas = document.createElement('canvas');
+    Object.assign(canvas.style, {
+      position: 'fixed', top: '0', left: '0', width: '100%', height: '100%',
+      pointerEvents: 'none', zIndex: '-1',
+    });
+    document.body.appendChild(canvas);
+    const ctx = canvas.getContext('2d');
+
+    const FONT_STACK = 'ui-monospace, SFMono-Regular, Menlo, Consolas, monospace';
+    const BASE_SIZE = 16;
+
+    // Pretext measures each glyph once (canvas-backed, no DOM reflow).
+    const zeroWidth = measureNaturalWidth(prepareWithSegments('0', `${BASE_SIZE}px ${FONT_STACK}`));
+    const oneWidth = measureNaturalWidth(prepareWithSegments('1', `${BASE_SIZE}px ${FONT_STACK}`));
+
+    const GRAVITY = 900;
+    const MAX_FALL = 360;
+    const RESTITUTION = 0.55;
+    const SPAWN_MS = 70;
+
+    const SOLID_SELECTOR = '.card, .team-member, .sponsor-card, .itinerary-item, .faq details, .afterparty-container, .hero, .header h1, .header img';
+
+    let width, height;
+    let scrollY = 0;
+    const solids = [];   // page-space {left, right, top}
+
+    function measureSolids() {
+      const sy = window.scrollY;
+      solids.length = 0;
+      document.querySelectorAll(SOLID_SELECTOR).forEach((el) => {
+        const r = el.getBoundingClientRect();
+        solids.push({ left: r.left, right: r.right, top: r.top + sy });
+      });
+    }
+
+    function resizeCanvas() {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+      measureSolids();
+    }
+    window.addEventListener('resize', resizeCanvas);
+    window.addEventListener('load', measureSolids);
+    document.addEventListener('toggle', measureSolids);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(measureSolids);
+
+    class Bit {
+      constructor() { this.state = 'idle'; }
+      spawn() {
+        this.state = 'fall';
+        this.x = Math.random() * width;
+        this.y = -24;
+        this.vx = (Math.random() - 0.5) * 30;
+        this.vy = 80 + Math.random() * 120;
+        this.size = 13 + Math.random() * 8;
+        this.opacity = 0.10 + Math.random() * 0.22;
+        this.digit = Math.random() < 0.5 ? '0' : '1';
+        this.w = (this.digit === '0' ? zeroWidth : oneWidth) * (this.size / BASE_SIZE);
+      }
+      step(dt) {
+        this.vy = Math.min(this.vy + GRAVITY * dt, MAX_FALL);
+        const prevY = this.y;
+        this.x += this.vx * dt;
+        this.y += this.vy * dt;
+
+        for (const s of solids) {
+          const top = s.top - scrollY;
+          if (this.vy > 0 && this.x >= s.left && this.x <= s.right && prevY < top && this.y >= top) {
+            this.y = top;
+            this.vy = -this.vy * RESTITUTION;
+            this.vx += (Math.random() - 0.5) * 24;
+            break;
+          }
+        }
+
+        if (this.y > height + 40) this.state = 'idle';
+      }
+      draw() {
+        ctx.font = `${this.size}px ${FONT_STACK}`;
+        ctx.fillStyle = `rgba(42, 42, 51, ${this.opacity})`;
+        ctx.fillText(this.digit, this.x - this.w / 2, this.y);
+      }
+    }
+
+    const idle = [];
+    const active = [];
+    for (let i = 0; i < 80; i++) idle.push(new Bit());
+
+    function spawnOne() {
+      if (idle.length === 0) return;
+      const b = idle.pop();
+      b.spawn();
+      active.push(b);
+    }
+
+    let emitter = 0;
+
+    resizeCanvas();
+
+    let last = 0;
+    function animate(ts) {
+      requestAnimationFrame(animate);
+      if (ts - last < 1000 / 30) return;
+      const dt = (ts - last) / 1000;
+      last = ts;
+
+      scrollY = window.scrollY;
+
+      emitter -= dt * 1000;
+      if (emitter <= 0) { emitter = SPAWN_MS; spawnOne(); }
+
+      ctx.clearRect(0, 0, width, height);
+      for (let i = active.length - 1; i >= 0; i--) {
+        const b = active[i];
+        b.step(dt);
+        if (b.state === 'idle') { active.splice(i, 1); idle.push(b); }
+        else b.draw();
+      }
+    }
+    requestAnimationFrame(animate);
+  </script>
+
+  <!-- ============ Countdown ============ -->
+
+  <!-- ============ Afterparty confetti ============ -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const canvas = document.getElementById('afterparty-canvas');
+      const ctx = canvas.getContext('2d');
+      let width, height;
+
+      function resizeCanvas() {
+        const container = canvas.parentElement;
+        width = canvas.width = container.offsetWidth;
+        height = canvas.height = container.offsetHeight;
+      }
+      window.addEventListener('resize', resizeCanvas);
+      resizeCanvas();
+
+      class Confetti {
+        constructor() { this.reset(); }
+        reset() {
+          this.x = Math.random() * width;
+          this.y = -10;
+          this.size = Math.random() * 6 + 4;
+          this.speedX = Math.random() * 2 - 1;
+          this.speedY = Math.random() * 2 + 1;
+          this.color = `hsl(${Math.random() * 360}, 100%, 50%)`;
+          this.shape = Math.floor(Math.random() * 3);
+          this.rotation = Math.random() * Math.PI * 2;
+          this.rotationSpeed = Math.random() * 0.1 - 0.05;
+        }
+        update() {
+          this.x += this.speedX;
+          this.y += this.speedY;
+          this.rotation += this.rotationSpeed;
+          if (this.y > height) this.reset();
+        }
+        draw() {
+          ctx.save();
+          ctx.translate(this.x, this.y);
+          ctx.rotate(this.rotation);
+          ctx.fillStyle = this.color;
+          if (this.shape === 0) {
+            ctx.fillRect(-this.size/2, -this.size/2, this.size, this.size);
+          } else if (this.shape === 1) {
+            ctx.beginPath();
+            ctx.arc(0, 0, this.size/2, 0, Math.PI * 2);
+            ctx.fill();
+          } else {
+            ctx.beginPath();
+            ctx.moveTo(0, -this.size/2);
+            ctx.lineTo(this.size/2, this.size/2);
+            ctx.lineTo(-this.size/2, this.size/2);
+            ctx.closePath();
+            ctx.fill();
+          }
+          ctx.restore();
+        }
+      }
+
+      const confetti = [];
+      for (let i = 0; i < 10; i++) confetti.push(new Confetti());
+
+      function animate() {
+        ctx.clearRect(0, 0, width, height);
+        for (const piece of confetti) { piece.update(); piece.draw(); }
+        requestAnimationFrame(animate);
+      }
+      animate();
+    });
+  </script>
+
+</body>
+</html>
