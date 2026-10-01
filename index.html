@@ -106,7 +106,7 @@
       margin: 0;
       font-family: var(--font-body);
       color: var(--ink);
-      background: linear-gradient(180deg, #cce6ff 0%, #e9d3d6 55%, lightcoral 100%);
+      background: #fff;
       text-align: center;
       padding: clamp(20px, 4vw, 48px) clamp(16px, 4vw, 40px) var(--space-6);
       position: relative;
@@ -115,15 +115,63 @@
       overflow-x: hidden;
     }
 
-    body::before {
-      content: "";
+    /* Left and right tile walls, receding toward a white center */
+    .walls {
       position: fixed;
       inset: 0;
-      background: url("tile.jpg") repeat;
-      background-size: 220px 220px;
-      opacity: 0.18;
       z-index: -2;
       pointer-events: none;
+      perspective: 48vw;
+      perspective-origin: 50% 50%;
+      overflow: hidden;
+      background: #fff;
+    }
+    .wall {
+      position: absolute;
+      top: -20%;
+      height: 140%;
+      width: 92vw;
+      background-image: url("tile.jpg");
+      background-repeat: repeat;
+      background-size: 168px 168px;
+    }
+    .wall-left {
+      left: 0;
+      transform-origin: left center;
+      transform: rotateY(68deg);
+    }
+    .wall-right {
+      right: 0;
+      transform-origin: right center;
+      transform: rotateY(-68deg);
+    }
+    .walls::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg,
+        transparent 0%,
+        transparent 4%,
+        rgba(255,255,255,0.4) 14%,
+        #fff 30%,
+        #fff 70%,
+        rgba(255,255,255,0.4) 86%,
+        transparent 96%,
+        transparent 100%);
+    }
+    @media (max-width: 720px) {
+      .wall { background-size: 110px 110px; }
+      .wall-left { transform: rotateY(62deg); }
+      .wall-right { transform: rotateY(-62deg); }
+      .walls::after {
+        background: linear-gradient(90deg,
+          transparent 0%,
+          transparent 2%,
+          #fff 22%,
+          #fff 78%,
+          transparent 98%,
+          transparent 100%);
+      }
     }
 
     a { color: var(--brand); text-decoration: none; }
@@ -247,59 +295,32 @@
 
     /* Event photos drifting behind the page */
     .float-photos {
-      position: fixed;
+      position: absolute;
       inset: 0;
       z-index: -1;
       pointer-events: none;
-      overflow: hidden;
     }
     .float-photos img {
       position: absolute;
+      top: calc(100vh + var(--y) * 0.55);
+      width: min(var(--w), 38vw);
+      height: min(var(--h), 28vw);
       object-fit: cover;
       border-radius: 18px;
-      opacity: 0.34;
-      filter: saturate(0.22) contrast(0.86) brightness(1.16);
-      box-shadow: 0 14px 36px rgba(40, 55, 90, 0.1);
+      opacity: 0.72;
+      filter: saturate(0.72) contrast(0.94) brightness(1.04);
+      box-shadow: 0 14px 36px rgba(40, 55, 90, 0.14);
       animation: drift var(--dur, 22s) ease-in-out infinite alternate;
       animation-delay: var(--delay, 0s);
     }
+    .float-photos img.side-left { left: var(--x); }
+    .float-photos img.side-right { right: var(--x); }
     @keyframes drift {
       from { transform: translate3d(0, 0, 0) rotate(var(--rot)); }
       to { transform: translate3d(var(--dx), var(--dy), 0) rotate(calc(var(--rot) + var(--drot))); }
     }
-    .float-photos img:nth-child(1) {
-      width: min(280px, 34vw); height: min(200px, 24vw);
-      left: -4%; top: 22%;
-      --rot: -8deg; --drot: 5deg; --dx: 22px; --dy: -28px; --dur: 24s;
-    }
-    .float-photos img:nth-child(2) {
-      width: min(240px, 30vw); height: min(170px, 22vw);
-      right: -3%; top: 10%;
-      --rot: 6deg; --drot: -4deg; --dx: -18px; --dy: 24px; --dur: 27s; --delay: -6s;
-    }
-    .float-photos img:nth-child(3) {
-      width: min(220px, 28vw); height: min(150px, 19vw);
-      left: 2%; bottom: 8%;
-      --rot: 5deg; --drot: -3deg; --dx: 16px; --dy: -20px; --dur: 21s; --delay: -3s;
-    }
-    .float-photos img:nth-child(4) {
-      width: min(210px, 26vw); height: min(150px, 18vw);
-      right: 3%; bottom: 14%;
-      --rot: -6deg; --drot: 4deg; --dx: -14px; --dy: -18px; --dur: 26s; --delay: -9s;
-    }
-    .float-photos img:nth-child(5) {
-      width: min(190px, 24vw); height: min(140px, 18vw);
-      left: 18%; top: -4%;
-      --rot: 3deg; --drot: 3deg; --dx: 12px; --dy: 18px; --dur: 19s; --delay: -4s;
-    }
-    .float-photos img:nth-child(6) {
-      width: min(140px, 18vw); height: min(200px, 26vw);
-      right: 22%; bottom: -6%;
-      --rot: -4deg; --drot: 3deg; --dx: -10px; --dy: -22px; --dur: 23s; --delay: -11s;
-    }
     @media (max-width: 720px) {
-      .float-photos img { opacity: 0.2; }
-      .float-photos img:nth-child(n + 4) { display: none; }
+      .float-photos img { opacity: 0.5; }
     }
     @media (prefers-reduced-motion: reduce) {
       .float-photos img { animation: none; transform: rotate(var(--rot)); }
@@ -370,13 +391,6 @@
   z-index: 2;
 }
     
-/* On small screens, make exactly 3 tiles fit across */
-@media (max-width: 600px) {
-  body::before {
-    background-size: calc(100vw / 3) auto;
-  }
-}
-
 /* Chrome only (not Safari, not Firefox) */
 @supports (-webkit-appearance:none) and (not (-webkit-touch-callout:none)) and (not (selector(:-moz-placeholder))) {
   h1, h2 {
@@ -734,7 +748,6 @@
 
     /* ---------- Responsive ---------- */
     @media (max-width: 600px) {
-      body::before { background-size: calc(100vw / 3) auto; }
       .header img { height: clamp(96px, 22vw, 120px); }
       h1 { font-size: clamp(2rem, 11vw, 3rem); }
       .team-member img { width: 80px; height: 80px; }
@@ -765,13 +778,37 @@
 
 <body>
 
+  <div class="walls" aria-hidden="true">
+    <div class="wall wall-left"></div>
+    <div class="wall wall-right"></div>
+  </div>
+
   <div class="float-photos" aria-hidden="true">
-    <img src="pictures/pictureshowingthemostppl.jpg" alt="" width="800" height="602" decoding="async">
-    <img src="pictures/johntalking.jpeg" alt="" width="1280" height="960" decoding="async">
-    <img src="pictures/pictureofateam.jpeg" alt="" width="1280" height="853" decoding="async">
-    <img src="pictures/organizers.jpeg" alt="" width="1280" height="853" decoding="async">
-    <img src="pictures/1790803691833.jpeg" alt="" width="1280" height="960" decoding="async">
-    <img src="pictures/winnershowerpic.jpeg" alt="" width="800" height="1312" decoding="async">
+    <img class="side-left" src="pictures/bg/pictureshowingthemostppl.jpg" alt="" width="800" height="602" style="--y:1.0%; --x:-4%; --w:250px; --h:188px; --rot:-8deg; --drot:4deg; --dx:16px; --dy:-20px; --dur:19s; --delay:-0.0s" decoding="async">
+    <img class="side-right" src="pictures/bg/johntalking.jpg" alt="John Lins UCSB Speaking At Showerhacks Hackathon" width="960" height="720" style="--y:4.9%; --x:1%; --w:210px; --h:158px; --rot:6deg; --drot:-3deg; --dx:-14px; --dy:16px; --dur:20s; --delay:-1.4s" decoding="async">
+    <img class="side-left" src="pictures/bg/organizers.jpg" alt="" width="960" height="640" style="--y:8.8%; --x:6%; --w:230px; --h:153px; --rot:-5deg; --drot:4deg; --dx:16px; --dy:-20px; --dur:21s; --delay:-2.8s" decoding="async">
+    <img class="side-right" src="pictures/bg/pictureofateam.jpg" alt="" width="960" height="640" style="--y:12.8%; --x:-1%; --w:190px; --h:127px; --rot:7deg; --drot:-3deg; --dx:-14px; --dy:16px; --dur:22s; --delay:-4.2s" decoding="async">
+    <img class="side-left" src="pictures/bg/winnershowerpic.jpg" alt="" width="585" height="960" style="--y:16.7%; --x:3%; --w:168px; --h:250px; --rot:-4deg; --drot:4deg; --dx:16px; --dy:-20px; --dur:23s; --delay:-5.6s" loading="lazy" decoding="async">
+    <img class="side-right" src="pictures/bg/1790803691833.jpg" alt="" width="960" height="720" style="--y:20.6%; --x:0%; --w:210px; --h:158px; --rot:5deg; --drot:-3deg; --dx:-14px; --dy:16px; --dur:24s; --delay:-7.0s" loading="lazy" decoding="async">
+    <img class="side-left" src="pictures/bg/IMG_1674.jpg" alt="" width="960" height="720" style="--y:24.5%; --x:-4%; --w:230px; --h:172px; --rot:-7deg; --drot:4deg; --dx:16px; --dy:-20px; --dur:25s; --delay:-8.4s" loading="lazy" decoding="async">
+    <img class="side-right" src="pictures/bg/726A9434.jpg" alt="" width="960" height="640" style="--y:28.4%; --x:1%; --w:190px; --h:127px; --rot:3deg; --drot:-3deg; --dx:-14px; --dy:16px; --dur:26s; --delay:-9.8s" loading="lazy" decoding="async">
+    <img class="side-left" src="pictures/bg/726A9443.jpg" alt="" width="960" height="640" style="--y:32.3%; --x:6%; --w:250px; --h:167px; --rot:-8deg; --drot:4deg; --dx:16px; --dy:-20px; --dur:27s; --delay:-11.2s" loading="lazy" decoding="async">
+    <img class="side-right" src="pictures/bg/726A9460.jpg" alt="" width="640" height="960" style="--y:36.2%; --x:-1%; --w:168px; --h:250px; --rot:6deg; --drot:-3deg; --dx:-14px; --dy:16px; --dur:19s; --delay:-12.6s" loading="lazy" decoding="async">
+    <img class="side-left" src="pictures/bg/726A9464.jpg" alt="" width="960" height="640" style="--y:40.2%; --x:3%; --w:230px; --h:153px; --rot:-5deg; --drot:4deg; --dx:16px; --dy:-20px; --dur:20s; --delay:-14.0s" loading="lazy" decoding="async">
+    <img class="side-right" src="pictures/bg/726A9468.jpg" alt="" width="960" height="640" style="--y:44.1%; --x:0%; --w:190px; --h:127px; --rot:7deg; --drot:-3deg; --dx:-14px; --dy:16px; --dur:21s; --delay:-15.4s" loading="lazy" decoding="async">
+    <img class="side-left" src="pictures/bg/726A9490.jpg" alt="" width="960" height="640" style="--y:48.0%; --x:-4%; --w:250px; --h:167px; --rot:-4deg; --drot:4deg; --dx:16px; --dy:-20px; --dur:22s; --delay:-16.8s" loading="lazy" decoding="async">
+    <img class="side-right" src="pictures/bg/726A95631.jpg" alt="" width="960" height="640" style="--y:51.9%; --x:1%; --w:210px; --h:140px; --rot:5deg; --drot:-3deg; --dx:-14px; --dy:16px; --dur:23s; --delay:-18.2s" loading="lazy" decoding="async">
+    <img class="side-left" src="pictures/bg/726A9624.jpg" alt="" width="640" height="960" style="--y:55.8%; --x:6%; --w:168px; --h:250px; --rot:-7deg; --drot:4deg; --dx:16px; --dy:-20px; --dur:24s; --delay:-19.6s" loading="lazy" decoding="async">
+    <img class="side-right" src="pictures/bg/726A9643.jpg" alt="" width="960" height="640" style="--y:59.8%; --x:-1%; --w:190px; --h:127px; --rot:3deg; --drot:-3deg; --dx:-14px; --dy:16px; --dur:25s; --delay:-21.0s" loading="lazy" decoding="async">
+    <img class="side-left" src="pictures/bg/HC__0484.jpg" alt="" width="960" height="640" style="--y:63.7%; --x:3%; --w:250px; --h:167px; --rot:-8deg; --drot:4deg; --dx:16px; --dy:-20px; --dur:26s; --delay:-22.4s" loading="lazy" decoding="async">
+    <img class="side-right" src="pictures/bg/HC__0492.jpg" alt="" width="960" height="640" style="--y:67.6%; --x:0%; --w:210px; --h:140px; --rot:6deg; --drot:-3deg; --dx:-14px; --dy:16px; --dur:27s; --delay:-23.8s" loading="lazy" decoding="async">
+    <img class="side-left" src="pictures/bg/HC__0537.jpg" alt="" width="960" height="640" style="--y:71.5%; --x:-4%; --w:230px; --h:153px; --rot:-5deg; --drot:4deg; --dx:16px; --dy:-20px; --dur:19s; --delay:-25.2s" loading="lazy" decoding="async">
+    <img class="side-right" src="pictures/bg/HC__0611.jpg" alt="" width="960" height="640" style="--y:75.4%; --x:1%; --w:190px; --h:127px; --rot:7deg; --drot:-3deg; --dx:-14px; --dy:16px; --dur:20s; --delay:-26.6s" loading="lazy" decoding="async">
+    <img class="side-left" src="pictures/bg/HC__0640.jpg" alt="" width="960" height="640" style="--y:79.3%; --x:6%; --w:250px; --h:167px; --rot:-4deg; --drot:4deg; --dx:16px; --dy:-20px; --dur:21s; --delay:-28.0s" loading="lazy" decoding="async">
+    <img class="side-right" src="pictures/bg/HC__0642.jpg" alt="" width="960" height="640" style="--y:83.2%; --x:-1%; --w:210px; --h:140px; --rot:5deg; --drot:-3deg; --dx:-14px; --dy:16px; --dur:22s; --delay:-29.4s" loading="lazy" decoding="async">
+    <img class="side-left" src="pictures/bg/HC__0648.jpg" alt="" width="960" height="640" style="--y:87.2%; --x:3%; --w:230px; --h:153px; --rot:-7deg; --drot:4deg; --dx:16px; --dy:-20px; --dur:23s; --delay:-30.8s" loading="lazy" decoding="async">
+    <img class="side-right" src="pictures/bg/HC__0721.jpg" alt="" width="960" height="640" style="--y:91.1%; --x:0%; --w:190px; --h:127px; --rot:3deg; --drot:-3deg; --dx:-14px; --dy:16px; --dur:24s; --delay:-32.2s" loading="lazy" decoding="async">
+    <img class="side-left" src="pictures/bg/HC__0785.jpg" alt="" width="960" height="640" style="--y:95.0%; --x:-4%; --w:250px; --h:167px; --rot:-8deg; --drot:4deg; --dx:16px; --dy:-20px; --dur:25s; --delay:-33.6s" loading="lazy" decoding="async">
   </div>
 
   <div class="header">
@@ -784,10 +821,10 @@
   </p>
 
   <div class="buttons">
-    <a href="https://luma.com/99857qk9" class="waitlist">Luma</a>
-    <a href="https://forms.gle/rPKcjdARZ2QAKaZ17" class="waitlist" target="_blank" rel="noopener noreferrer">Future Interest Form</a>
-    <a href="https://showerhacks.devpost.com/project-gallery" class="discord" target="_blank" rel="noopener noreferrer">View projects</a>
-    <a href="https://discord.gg/4xEtJc9xqZ" class="discord">
+    <a href="https://luma.com/99857qk9" class="waitlist" rel="nofollow">2026 Luma</a>
+    <a href="https://forms.gle/rPKcjdARZ2QAKaZ17" class="waitlist" target="_blank" rel="nofollow noopener noreferrer">Future Interest Form</a>
+    <a href="https://showerhacks.devpost.com/project-gallery" class="discord" target="_blank" rel="nofollow noopener noreferrer">View projects</a>
+    <a href="https://discord.gg/4xEtJc9xqZ" class="discord" rel="nofollow">
       <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/discord.svg" width="20" height="20" alt="" decoding="async">
       Join Discord
     </a>
@@ -798,10 +835,10 @@
     <div class="cohost-wrap">
       <h4>Co-hosted with</h4>
       <div class="co-host-partner-logos">
-        <a href="https://www.linkedin.com/company/aicollective/"><img src="https://www.aicollective.com/images/brand/Wordmark.svg" alt="AI Collective"></a>
-        <a href="https://www.aivalley.io/"><img src="spon/aivalley.webp" alt="AI Valley"></a>
-        <a href="https://oscollective.org/"><img src="spon/osc.png" alt="Open Source Collective"></a>
-        <a href="https://www.linkedin.com/company/shipaccelerator"><img src="spon/ship.jpeg" alt="SH1P"></a>
+        <a href="https://www.linkedin.com/company/aicollective/" rel="nofollow"><img src="https://www.aicollective.com/images/brand/Wordmark.svg" alt="AI Collective"></a>
+        <a href="https://www.aivalley.io/" rel="nofollow"><img src="spon/aivalley.webp" alt="AI Valley"></a>
+        <a href="https://oscollective.org/" rel="nofollow"><img src="spon/osc.png" alt="Open Source Collective"></a>
+        <a href="https://www.linkedin.com/company/shipaccelerator" rel="nofollow"><img src="spon/ship.jpeg" alt="SH1P"></a>
       </div>
       <div class="co-host-partner-logos">
         <a href="https://www.firecrawl.dev/"><img src="spon/firecrawl_s.png" alt="Firecrawl"></a>
@@ -825,25 +862,25 @@
       <div class="logo-wall">
         <div class="logo-row logo-row--tier1">
           <a href="https://zo.computer/" target="_blank" rel="noopener noreferrer"><img src="spon/zo.svg" alt="Zo" width="499" height="213" loading="lazy" decoding="async"></a>
-          <a href="https://www.joinef.com/" target="_blank" rel="noopener noreferrer"><img src="spon/ef.png" alt="Entrepreneurs First" width="664" height="324" loading="lazy" decoding="async"></a>
+          <a href="https://www.joinef.com/" target="_blank" rel="nofollow noopener noreferrer"><img src="spon/ef.png" alt="Entrepreneurs First" width="664" height="324" loading="lazy" decoding="async"></a>
         </div>
         <div class="logo-row logo-row--tier2">
           <a href="https://www.firecrawl.dev/" target="_blank" rel="noopener noreferrer"><img src="spon/firecrawl_s.png" alt="Firecrawl" width="394" height="477" loading="lazy" decoding="async"></a>
           <a href="https://usemoss.dev/" target="_blank" rel="noopener noreferrer"><img src="spon/moss_s.png" alt="Moss" width="280" height="280" loading="lazy" decoding="async"></a>
           <a href="https://chatforce.com/" target="_blank" rel="noopener noreferrer"><img src="spon/chatforces1.png" alt="Chatforce" width="480" height="560" loading="lazy" decoding="async"></a>
-          <a href="https://oscollective.org/" target="_blank" rel="noopener noreferrer"><img src="spon/osc.png" alt="Open Source Collective" width="256" height="256" loading="lazy" decoding="async"></a>
-          <a href="https://openswarm.com" target="_blank" rel="noopener noreferrer"><img src="spon/openswarm.png" alt="AWE" style="border-radius:0px;" width="200" height="280" loading="lazy" decoding="async"></a>
-          <a href="https://featherless.ai/" target="_blank" rel="noopener noreferrer"><img src="spon/feather_mark.svg" alt="Featherless AI" width="190" height="190" loading="lazy" decoding="async"></a>
+          <a href="https://oscollective.org/" target="_blank" rel="nofollow noopener noreferrer"><img src="spon/osc.png" alt="Open Source Collective" width="256" height="256" loading="lazy" decoding="async"></a>
+          <a href="https://openswarm.com" target="_blank" rel="nofollow noopener noreferrer"><img src="spon/openswarm.png" alt="AWE" style="border-radius:0px;" width="200" height="280" loading="lazy" decoding="async"></a>
+          <a href="https://featherless.ai/" target="_blank" rel="nofollow noopener noreferrer"><img src="spon/feather_mark.svg" alt="Featherless AI" width="190" height="190" loading="lazy" decoding="async"></a>
         </div>
         <div class="logo-row logo-row--tier3">
-          <a href="https://www.aicollective.com/" target="_blank" rel="noopener noreferrer"><img src="spon/aicollective_logo.jpeg" alt="AI Collective" width="200" height="200" loading="lazy" decoding="async"></a>
-          <a href="https://www.aivalley.io/" target="_blank" rel="noopener noreferrer"><img src="spon/aivalley.webp" alt="AI Valley" width="200" height="200" loading="lazy" decoding="async"></a>
-          <a href="https://crewbasecollective.com/"><img src="spon/crew.webp" alt="Crew" width="300" height="265" loading="lazy" decoding="async"></a>
+          <a href="https://www.aicollective.com/" target="_blank" rel="nofollow noopener noreferrer"><img src="spon/aicollective_logo.jpeg" alt="AI Collective" width="200" height="200" loading="lazy" decoding="async"></a>
+          <a href="https://www.aivalley.io/" target="_blank" rel="nofollow noopener noreferrer"><img src="spon/aivalley.webp" alt="AI Valley" width="200" height="200" loading="lazy" decoding="async"></a>
+          <a href="https://crewbasecollective.com/" rel="nofollow"><img src="spon/crew.webp" alt="Crew" width="300" height="265" loading="lazy" decoding="async"></a>
           <img src="spon/build.avif" alt="Build" width="488" height="469" loading="lazy" decoding="async">
-          <a href="https://www.designbuddies.community/"><img src="spon/db.png" alt="Design Buddies" width="200" height="200" loading="lazy" decoding="async"/></a>
-          <a href="https://cerebralvalley.ai" target="_blank" rel="noopener noreferrer"><img src="spon/cv.png" alt="Cerebral Valley" width="512" height="512" loading="lazy" decoding="async"></a>
-          <a href="https://bondcommunity.ai" target="_blank" rel="noopener noreferrer"><img src="spon/bond-ai-logo-vertical.png" alt="Bond AI" style="border-radius:0px;" width="200" height="280" loading="lazy" decoding="async"></a>
-         <!-- <a href="https://awe.studentorg.berkeley.edu/" target="_blank" rel="noopener noreferrer"><img src="spon/awe.webp" alt="AWE" style="border-radius:0px;" width="200" height="280" loading="lazy" decoding="async"></a>-->
+          <a href="https://www.designbuddies.community/" rel="nofollow"><img src="spon/db.png" alt="Design Buddies" width="200" height="200" loading="lazy" decoding="async"/></a>
+          <a href="https://cerebralvalley.ai" target="_blank" rel="nofollow noopener noreferrer"><img src="spon/cv.png" alt="Cerebral Valley" width="512" height="512" loading="lazy" decoding="async"></a>
+          <a href="https://bondcommunity.ai" target="_blank" rel="nofollow noopener noreferrer"><img src="spon/bond-ai-logo-vertical.png" alt="Bond AI" style="border-radius:0px;" width="200" height="280" loading="lazy" decoding="async"></a>
+         <!-- <a href="https://awe.studentorg.berkeley.edu/" target="_blank" rel="nofollow noopener noreferrer"><img src="spon/awe.webp" alt="AWE" style="border-radius:0px;" width="200" height="280" loading="lazy" decoding="async"></a>-->
 
         </div>
       </div>
@@ -878,7 +915,7 @@
           <img src="/team/amy.webp" alt="Amy Chen" width="256" height="256" loading="lazy" decoding="async">
           <h3>Amy Chen</h3>
           <p>Western University</p>
-          <p><a href="https://www.linkedin.com/in/amychencodes/">Profile</a></p>
+          <p><a href="https://www.linkedin.com/in/amychencodes/" rel="nofollow">Profile</a></p>
         </div>
 
         <div class="team-member copres">
@@ -887,7 +924,7 @@
           <h3>Kristen Lew</h3>
           <p>Stanford University</p>
           <p>Entrepreneurs First</p>
-          <p><a href="https://www.instagram.com/kristenblds/?hl=en">@kristenblds</a></p>
+          <p><a href="https://www.instagram.com/kristenblds/?hl=en" rel="nofollow">@kristenblds</a></p>
         </div>
 
       </div>
@@ -901,7 +938,7 @@
           <h3>Celina Kim</h3>
           <p>Marketing</p>
           <p>CSUS</p>
-          <p><a href="https://www.linkedin.com/in/celina-kim-942a11260/">Profile</a></p>
+          <p><a href="https://www.linkedin.com/in/celina-kim-942a11260/" rel="nofollow">Profile</a></p>
         </div>
 
         <!--<div class="team-member">
@@ -910,7 +947,7 @@
           <h3>Ken Mueller</h3>
           <p>CS @ Stanford University</p>
           <p>Founder @Sup.ai</p>
-          <p><a href="https://github.com/kenmueller">Profile</a></p>
+          <p><a href="https://github.com/kenmueller" rel="nofollow">Profile</a></p>
         </div>-->
 
         <div class="team-member">
@@ -919,7 +956,7 @@
           <h3>Chris Vaisnor</h3>
           <p>AI M.S. @ John Hopkins University</p>
           <p>Co-Founder @ Adalace</p>
-          <p><a href="https://www.linkedin.com/in/chris-vaisnor">Profile</a></p>
+          <p><a href="https://www.linkedin.com/in/chris-vaisnor" rel="nofollow">Profile</a></p>
         </div>
 
         <div class="team-member">
@@ -928,7 +965,7 @@
           <h3>Kevin Lin</h3>
           <p>SWE @ Tesla</p>
           <p>UBC</p>
-          <p><a href="https://linktr.ee/linguinelabs">Profile</a></p>
+          <p><a href="https://linktr.ee/linguinelabs" rel="nofollow">Profile</a></p>
         </div>
 
         <div class="team-member">
@@ -937,14 +974,14 @@
           <h3>Leon Khoshnevis</h3>
           <p>Entrepreneurs First</p>
           <p>UCSB</p>
-          <p><a href="https://www.linkedin.com/in/leonkhoshnevis/">Profile</a></p>
+          <p><a href="https://www.linkedin.com/in/leonkhoshnevis/" rel="nofollow">Profile</a></p>
         </div>
 
         <!-- <div class="team-member">
           <span class="role-badge org">Org</span>
           <h3>Kai</h3>
           <p>XAI / CMU</p>
-          <p><a href="https://profsucrose.dev">Profile</a></p>
+          <p><a href="https://profsucrose.dev" rel="nofollow">Profile</a></p>
         </div> -->
 
       </div>
@@ -957,9 +994,9 @@
           <img src="/team/viraj.webp" alt="Viraj Ala" width="256" height="256" loading="lazy" decoding="async">
           <h3>Viraj Ala</h3>
           <p>Viral Founder Interviews, Prev-White House &amp; Deloitte</p>
-          <p><a href="https://www.instagram.com/viraj.ala/?hl=en">@viraj.ala</a></p>
+          <p><a href="https://www.instagram.com/viraj.ala/?hl=en" rel="nofollow">@viraj.ala</a></p>
           <p>Berkeley</p>
-          <p><a href="https://beacons.ai/viraj.ala/mediakit?utm_source=ig&utm_medium=social&utm_content=link_in_bio&fbclid=PAZXh0bgNhZW0CMTEAc3J0YwZhcHBfaWQMMjU2MjgxMDQwNTU4AAGnx7mR3OLltffRmjXBLLiPqo24ZOmMH7KVRCiHgALDvLRlysbEuQdJZdvVAdE_aem_olMg1DID_AtKtCzLnM8zTA">Profile</a></p>
+          <p><a href="https://beacons.ai/viraj.ala/mediakit?utm_source=ig&utm_medium=social&utm_content=link_in_bio&fbclid=PAZXh0bgNhZW0CMTEAc3J0YwZhcHBfaWQMMjU2MjgxMDQwNTU4AAGnx7mR3OLltffRmjXBLLiPqo24ZOmMH7KVRCiHgALDvLRlysbEuQdJZdvVAdE_aem_olMg1DID_AtKtCzLnM8zTA" rel="nofollow">Profile</a></p>
         </div>
 
        <!-- <div class="team-member">
@@ -967,7 +1004,7 @@
           <img src="/team/christy.webp" alt="Christy Lam" width="256" height="256" loading="lazy" decoding="async">
           <h3>Christy Lam</h3>
           <p>FAANG SWE</p>
-          <p><a href="https://www.instagram.com/christyoverflow/">@christyoverflow</a></p>
+          <p><a href="https://www.instagram.com/christyoverflow/" rel="nofollow">@christyoverflow</a></p>
         </div>-->
 
         <!--<div class="team-member">
@@ -975,9 +1012,9 @@
           <img src="/team/yuni.webp" alt="Yuni Kim" width="256" height="256" loading="lazy" decoding="async">
           <h3>Yuni Kim</h3>
           <p>CMO @ DittoAI</p>
-          <p><a href="https://www.tiktok.com/@yunskistudy">@yunskistudy</a></p>
+          <p><a href="https://www.tiktok.com/@yunskistudy" rel="nofollow">@yunskistudy</a></p>
           <p>UCSD</p>
-          <p><a href="https://linkedin.com/in/seoyunkim06">Profile</a></p>
+          <p><a href="https://linkedin.com/in/seoyunkim06" rel="nofollow">Profile</a></p>
         </div>
 
         <div class="team-member">
@@ -985,8 +1022,8 @@
           <img src="/team/mike.webp" alt="Mike Klikushin" width="150" height="150" loading="lazy" decoding="async">
           <h3>Mike Klikushin</h3>
           <p>Co-Founder @ Inspector (YC)</p>
-          <p><a href="https://www.instagram.com/mikebuildsmore/">@MikeBuildsMore</a></p>
-          <p><a href="https://tryinspector.com">Profile</a></p>
+          <p><a href="https://www.instagram.com/mikebuildsmore/" rel="nofollow">@MikeBuildsMore</a></p>
+          <p><a href="https://tryinspector.com" rel="nofollow">Profile</a></p>
         </div>
 
         <div class="team-member">
@@ -995,7 +1032,7 @@
           <h3>Tina Chi</h3>
           <p>FAANG SWE</p>
           <p>UF</p>
-          <p><a href="https://www.instagram.com/tinahelloworld/">@tinahelloworld</a></p>
+          <p><a href="https://www.instagram.com/tinahelloworld/" rel="nofollow">@tinahelloworld</a></p>
         </div>
 
         <div class="team-member">
@@ -1003,8 +1040,8 @@
           <img src="/team/char.webp" alt="Charissa Kim" width="256" height="256" loading="lazy" decoding="async">
           <h3>Charissa Kim</h3>
           <p>Technical Program Manager @ Semgrep</p>
-          <p><a href="https://www.instagram.com/charlikestoeat/">@charlikestoeat</a></p>
-          <p><a href="https://www.linkedin.com/in/charissakim?utm_source=share_via&utm_content=profile&utm_medium=member_ios">Profile</a></p>
+          <p><a href="https://www.instagram.com/charlikestoeat/" rel="nofollow">@charlikestoeat</a></p>
+          <p><a href="https://www.linkedin.com/in/charissakim?utm_source=share_via&utm_content=profile&utm_medium=member_ios" rel="nofollow">Profile</a></p>
         </div>-->
 
         <!-- <div class="team-member">
@@ -1012,8 +1049,8 @@
           <img src="/team/aolin.webp" alt="Aolin Xu">
           <h3>Aolin Xu</h3>
           <p>ML SWE @ TikTok</p>
-          <p><a href="https://www.instagram.com/aolin_xu/">@aolin_xu</a></p>
-          <p><a href="https://www.linkedin.com/in/aolin-xu-b01798194/">Profile</a></p>
+          <p><a href="https://www.instagram.com/aolin_xu/" rel="nofollow">@aolin_xu</a></p>
+          <p><a href="https://www.linkedin.com/in/aolin-xu-b01798194/" rel="nofollow">Profile</a></p>
         </div> -->
 
        <!-- <div class="team-member">
@@ -1021,8 +1058,8 @@
           <img src="/team/aidan.webp" alt="Aidan Ouckama" width="225" height="225" loading="lazy" decoding="async">
           <h3>Aidan Ouckama</h3>
           <p>Prev-Microsoft</p>
-          <p><a href="https://www.instagram.com/ouckahcs?igsh=MzRlODBiNWFlZA==">@ouckahcs</a></p>
-          <p><a href="https://linkedin.com/in/ouck">Profile</a></p>
+          <p><a href="https://www.instagram.com/ouckahcs?igsh=MzRlODBiNWFlZA==" rel="nofollow">@ouckahcs</a></p>
+          <p><a href="https://linkedin.com/in/ouck" rel="nofollow">Profile</a></p>
         </div>-->
 
         <div class="team-member">
@@ -1030,9 +1067,9 @@
           <img src="/team/harneet.webp" alt="Harneet Dhillon" width="256" height="256" loading="lazy" decoding="async">
           <h3>Harneet Dhillon</h3>
           <p>Co-Founder of Elsewher3</p>
-          <p><a href="https://www.tiktok.com/@dhillon.diary">@dhillon.diary</a></p>
+          <p><a href="https://www.tiktok.com/@dhillon.diary" rel="nofollow">@dhillon.diary</a></p>
           <p>UCSB B.S/Georgia Tech M.S.</p>
-          <p><a href="https://www.linkedin.com/in/harneet-dhillon">Profile</a></p>
+          <p><a href="https://www.linkedin.com/in/harneet-dhillon" rel="nofollow">Profile</a></p>
         </div>
 
         <div class="team-member">
@@ -1040,7 +1077,7 @@
           <img src="/team/akshyae.png" alt="Akshyae Singh" width="256" height="256" loading="lazy" decoding="async">
           <h3>Akshyae Singh</h3>
           <p>Co-founder, Frame Fellowship</p>
-          <p><a href="https://www.linkedin.com/in/akshyaesingh/">Profile</a></p>
+          <p><a href="https://www.linkedin.com/in/akshyaesingh/" rel="nofollow">Profile</a></p>
         </div>
 
        <!-- <div class="team-member">
@@ -1048,8 +1085,8 @@
           <img src="/team/ace.webp" alt="Ace Yip" width="256" height="256" loading="lazy" decoding="async">
           <h3>Ace Yip</h3>
           <p>WOMEN IN TECH ® Global</p>
-          <p><a href="https://www.instagram.com/hehuabuilds/">@hehuabuilds</a></p>
-          <p><a href="https://www.linkedin.com/in/ace-yip-71b71b20a/">Profile</a></p>
+          <p><a href="https://www.instagram.com/hehuabuilds/" rel="nofollow">@hehuabuilds</a></p>
+          <p><a href="https://www.linkedin.com/in/ace-yip-71b71b20a/" rel="nofollow">Profile</a></p>
         </div>-->
 
       <!--  <div class="team-member">
@@ -1057,15 +1094,15 @@
           <img src="/team/sara.webp" alt="Sara Leung" width="256" height="256" loading="lazy" decoding="async">
           <h3>Sara Leung</h3>
           <p>Executive @ UQIES</p>
-          <p><a href="https://www.instagram.com/saraxxlg/">@saraxxlg</a></p>
-          <p><a href="https://www.linkedin.com/in/sara-l-50b61b255?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app">Profile</a></p>
+          <p><a href="https://www.instagram.com/saraxxlg/" rel="nofollow">@saraxxlg</a></p>
+          <p><a href="https://www.linkedin.com/in/sara-l-50b61b255?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" rel="nofollow">Profile</a></p>
         </div>-->
 
         <!-- <div class="team-member">
           <span class="role-badge judge">Judge</span>
           <img src="/team/raami.webp" alt="Raami Abichou">
           <h3>Raami Abichou</h3>
-          <p><a href="https://www.instagram.com/raamics/">@raamics</a></p>
+          <p><a href="https://www.instagram.com/raamics/" rel="nofollow">@raamics</a></p>
         </div> -->
 
         <div class="team-member">
@@ -1073,17 +1110,17 @@
           <img src="/team/miron.webp" alt="Miron Tkachuk" width="200" height="200" loading="lazy" decoding="async">
           <h3>Miron Tkachuk</h3>
           <p>Founding Engineer @ Minoa</p>
-          <p><a href="https://www.linkedin.com/in/mirontkachuk/">Profile</a></p>
+          <p><a href="https://www.linkedin.com/in/mirontkachuk/" rel="nofollow">Profile</a></p>
         </div>
         <div class="team-member">
           <span class="role-badge judge">Judge</span>
           <img src="/team/arine.webp" alt="Arine Kim" width="256" height="256" loading="lazy" decoding="async">
           <h3>Arine Kim</h3>
           <p>Prev Product &amp; Growth @ Beacons</p>
-          <p><a href="https://www.instagram.com/arinekim/">@arinekim</a></p>
-          <p><a href="https://www.instagram.com/arinebuilds/">@arinebuilds</a></p>
+          <p><a href="https://www.instagram.com/arinekim/" rel="nofollow">@arinekim</a></p>
+          <p><a href="https://www.instagram.com/arinebuilds/" rel="nofollow">@arinebuilds</a></p>
           <p>UCLA</p>
-          <p><a href="https://www.linkedin.com/in/arinekim/">Profile</a></p>
+          <p><a href="https://www.linkedin.com/in/arinekim/" rel="nofollow">Profile</a></p>
         </div>
 
         <div class="team-member">
@@ -1092,7 +1129,7 @@
           <h3>Artem Zamarajev</h3>
           <p>Sr. FAANG SWE</p>
          
-          <p><a href="https://www.linkedin.com/in/zamarajev/">Profile</a></p>
+          <p><a href="https://www.linkedin.com/in/zamarajev/" rel="nofollow">Profile</a></p>
         </div>
 
             <div class="team-member">
@@ -1100,7 +1137,7 @@
           <img src="/team/patrick.avif" alt="Patrick Turricelli" width="256" height="256" loading="lazy" decoding="async">
           <h3>Patrick Turricelli</h3>
           <p> CEO & Founder @ Centillion Labs</p>
-          <p><a href="https://patrickturricelli.com">Profile</a></p>
+          <p><a href="https://patrickturricelli.com" rel="nofollow">Profile</a></p>
         </div>
 
         <div class="team-member">
@@ -1108,13 +1145,13 @@
           <img src="/team/faidra.jpeg" alt="Faidra Patsatzi" width="256" height="256" loading="lazy" decoding="async">
           <h3>Faidra Patsatzi</h3>
           <p>Stanford</p>
-          <p><a href="https://www.linkedin.com/in/faidrapatsatzi/">Profile</a></p>
+          <p><a href="https://www.linkedin.com/in/faidrapatsatzi/" rel="nofollow">Profile</a></p>
         </div>
         <div class="team-member">
           <span class="role-badge judge">Judge</span>
           <img src="/team/ali.png" alt="Ali" width="200" height="200" loading="lazy" decoding="async">
           <h3>Ali Amjad</h3>
-          <p><a href="https://www.linkedin.com/in/ali-amjad-a80732137/">Profile</a></p>
+          <p><a href="https://www.linkedin.com/in/ali-amjad-a80732137/" rel="nofollow">Profile</a></p>
         </div>
 
          <div class="team-member">
@@ -1122,7 +1159,7 @@
           <img src="/team/alessio.jpeg" alt="Alessio Lodge" width="256" height="256" loading="lazy" decoding="async">
           <h3>Alessio Lodge</h3>
           <p>CTO, Ambra</p>
-          <p><a href="https://alessiolodge.com">Profile</a></p>
+          <p><a href="https://alessiolodge.com" rel="nofollow">Profile</a></p>
         </div>
 
         <div class="team-member">
@@ -1130,7 +1167,7 @@
           <img src="/team/adrian.jpg" alt="Adrian Aliu" width="256" height="256" loading="lazy" decoding="async">
           <h3>Adrian Aliu</h3>
           <p>A16Z-Backed Founder</p>
-          <p><a href="https://www.linkedin.com/in/adrian-aliu/">Profile</a></p>
+          <p><a href="https://www.linkedin.com/in/adrian-aliu/" rel="nofollow">Profile</a></p>
         </div>
 
         <div class="team-member">
@@ -1138,7 +1175,7 @@
           <img src="/team/bihan.jpg" alt="Bihan Mahadewa" width="256" height="256" loading="lazy" decoding="async">
           <h3>Bihan Mahadewa</h3>
           <p>Founder - Stealth (YC)</p>
-          <p><a href="https://www.linkedin.com/in/bihanmahadewa/">Profile</a></p>
+          <p><a href="https://www.linkedin.com/in/bihanmahadewa/" rel="nofollow">Profile</a></p>
         </div>
 
         <!-- <div class="team-member">
@@ -1152,7 +1189,7 @@
           <img src="/team/alkinoos.jpg" alt="Alkinoos Sarioglou" width="256" height="256" loading="lazy" decoding="async">
           <h3>Alkinoos Sarioglou</h3>
           <p>Co-founder @ Purpose:lab</p>
-          <p><a href="https://www.linkedin.com/in/alkinoos-sarioglou/">Profile</a></p>
+          <p><a href="https://www.linkedin.com/in/alkinoos-sarioglou/" rel="nofollow">Profile</a></p>
         </div>
 
         <div class="team-member">
@@ -1161,7 +1198,7 @@
           <h3>Umang Rungta</h3>
           <p>CTO &amp; Founder @ TieOut</p>
           <p>Ex-Google, IIT Kharagpur</p>
-          <p><a href="https://www.linkedin.com/in/umang-rungta-286674160/">Profile</a></p>
+          <p><a href="https://www.linkedin.com/in/umang-rungta-286674160/" rel="nofollow">Profile</a></p>
         </div>
 
         <div class="team-member">
@@ -1169,7 +1206,7 @@
           <img src="/team/hanna.jpg" alt="Hanna Runets" width="256" height="256" loading="lazy" decoding="async">
           <h3>Hanna Runets</h3>
           <p>Co-founder of Permitree</p>
-          <p><a href="https://www.linkedin.com/in/hanna-runets">Profile</a></p>
+          <p><a href="https://www.linkedin.com/in/hanna-runets" rel="nofollow">Profile</a></p>
         </div>
 
       </div>
@@ -1179,7 +1216,7 @@
     <section class="section">
       <h2>Sponsors</h2>
       <!-- <p class="sponsor-intro">
-        We are looking for generous sponsors to closely collaborate with — apply <a href="sponsor.html">here</a>.
+        We are looking for generous sponsors to closely collaborate with — apply <a href="sponsor.html" rel="nofollow">here</a>.
       </p> -->
 
       <!-- <h3 class="section-sub">Generously funded by</h3> -->
@@ -1201,18 +1238,18 @@
           <img src="spon/chatforces.webp" alt="Chatforce" width="560" height="108" loading="lazy" decoding="async">
           <div class="desc">Build & Share Viral Games with AI</div>
         </a>
-        <a class="sponsor-card" href="https://openswarm.com/">
+        <a class="sponsor-card" href="https://openswarm.com/" rel="nofollow">
           <img src="spon/openswarm.png" alt="OpenSwarm" width="100" height="108" loading="lazy" decoding="async">
           <div class="desc">Meet your new AI Desktop</div>
         </a>
-        <!--<a class="sponsor-card" href="https://oscollective.org/">
+        <!--<a class="sponsor-card" href="https://oscollective.org/" rel="nofollow">
           <img src="spon/osc.png" alt="OSC">
           <div class="desc">The Open Source Collective</div>
         </a>-->
       </div>
 
       <!-- <div class="personal-sponsor">
-        Personal Sponsor: <a href="https://shub.club/">Shubham</a>
+        Personal Sponsor: <a href="https://shub.club/" rel="nofollow">Shubham</a>
       </div> -->
     </section>
 
@@ -1255,7 +1292,7 @@
 
       <details>
         <summary>Is there a Showerhacks group chat?</summary>
-        <p>Yes — join our Discord: <a href="https://discord.gg/4xEtJc9xqZ">discord.gg/4xEtJc9xqZ</a></p>
+        <p>Yes — join our Discord: <a href="https://discord.gg/4xEtJc9xqZ" rel="nofollow">discord.gg/4xEtJc9xqZ</a></p>
       </details>
     </section>
 
@@ -1300,12 +1337,12 @@
 
     <!-- ============ FOOTER ============ -->
     <footer class="site-footer">
-      Follow us on Instagram <a href="https://instagram.com/showerhacks">@showerhacks</a>
-      and on <a href="https://www.linkedin.com/company/showerhacks">LinkedIn</a>.
+      Follow us on Instagram <a href="https://instagram.com/showerhacks" rel="nofollow">@showerhacks</a>
+      and on <a href="https://www.linkedin.com/company/showerhacks" rel="nofollow">LinkedIn</a>.
       <br/>
-      <a href="https://showerhacks.org/tos.txt">ToS</a><span class="sep">·</span>
-      <a href="https://showerhacks.org/privacy.txt">Privacy</a><span class="sep">·</span>
-      <a href="https://showerhacks.org/coc.html">Code of Conduct</a>
+      <a href="https://showerhacks.org/tos.txt" rel="nofollow">ToS</a><span class="sep">·</span>
+      <a href="https://showerhacks.org/privacy.txt" rel="nofollow">Privacy</a><span class="sep">·</span>
+      <a href="https://showerhacks.org/coc.html" rel="nofollow">Code of Conduct</a>
       <br/>
       <a href="https://linsnexus.com">Sponsorship agency</a>
     </footer>
