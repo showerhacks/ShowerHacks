@@ -91,7 +91,7 @@
         --surface:        rgba(255, 255, 255, 0.32);
         --surface-strong: rgba(255, 255, 255, 0.55);
       }
-      .card, .info-box, .team-member, .sponsor-card, .itinerary-item, .afterparty-container, .faq details {
+      .card, .team-member, .sponsor-card, .itinerary-item, .afterparty-container, .faq details {
         backdrop-filter: blur(var(--blur));
         -webkit-backdrop-filter: blur(var(--blur));
       }
@@ -245,50 +245,64 @@
     }
     .buttons a.discord:hover { background: white; text-decoration: none; }
 
-    /* Hero info card with SF backdrop */
-    .hero {
-      position: relative;
-      overflow: hidden;
-      border-radius: var(--radius-lg);
-      padding: clamp(20px, 4vw, 32px) clamp(16px, 4vw, 28px);
-      box-shadow: var(--shadow-lg), 0 0 0 1px rgba(255,255,255,0.6) inset;
-    }
-    .hero::before {
-      content: "";
-      position: absolute;
+    /* Event photos drifting behind the page */
+    .float-photos {
+      position: fixed;
       inset: 0;
-      background-image: url('sf.webp');
-      background-size: cover;
-      background-position: center;
-      opacity: 0.42;
-      z-index: 0;
-    }
-    .hero::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(180deg, rgba(255,255,255,0.25), rgba(255,255,255,0));
-      z-index: 0;
+      z-index: -1;
       pointer-events: none;
+      overflow: hidden;
     }
-    .hero .info-boxes { position: relative; z-index: 1; }
-
-    .info-boxes {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 10px;
+    .float-photos img {
+      position: absolute;
+      object-fit: cover;
+      border-radius: 18px;
+      opacity: 0.34;
+      filter: saturate(0.22) contrast(0.86) brightness(1.16);
+      box-shadow: 0 14px 36px rgba(40, 55, 90, 0.1);
+      animation: drift var(--dur, 22s) ease-in-out infinite alternate;
+      animation-delay: var(--delay, 0s);
     }
-    .info-box {
-      background: var(--surface-strong);
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      padding: 9px 18px;
-      font-size: clamp(0.78rem, 2.2vw, 0.98rem);
-      box-shadow: var(--shadow-sm);
-      text-shadow: 0 0 10px white;
-      white-space: nowrap;
-      font-family: var(--font-body);
+    @keyframes drift {
+      from { transform: translate3d(0, 0, 0) rotate(var(--rot)); }
+      to { transform: translate3d(var(--dx), var(--dy), 0) rotate(calc(var(--rot) + var(--drot))); }
+    }
+    .float-photos img:nth-child(1) {
+      width: min(280px, 34vw); height: min(200px, 24vw);
+      left: -4%; top: 22%;
+      --rot: -8deg; --drot: 5deg; --dx: 22px; --dy: -28px; --dur: 24s;
+    }
+    .float-photos img:nth-child(2) {
+      width: min(240px, 30vw); height: min(170px, 22vw);
+      right: -3%; top: 10%;
+      --rot: 6deg; --drot: -4deg; --dx: -18px; --dy: 24px; --dur: 27s; --delay: -6s;
+    }
+    .float-photos img:nth-child(3) {
+      width: min(220px, 28vw); height: min(150px, 19vw);
+      left: 2%; bottom: 8%;
+      --rot: 5deg; --drot: -3deg; --dx: 16px; --dy: -20px; --dur: 21s; --delay: -3s;
+    }
+    .float-photos img:nth-child(4) {
+      width: min(210px, 26vw); height: min(150px, 18vw);
+      right: 3%; bottom: 14%;
+      --rot: -6deg; --drot: 4deg; --dx: -14px; --dy: -18px; --dur: 26s; --delay: -9s;
+    }
+    .float-photos img:nth-child(5) {
+      width: min(190px, 24vw); height: min(140px, 18vw);
+      left: 18%; top: -4%;
+      --rot: 3deg; --drot: 3deg; --dx: 12px; --dy: 18px; --dur: 19s; --delay: -4s;
+    }
+    .float-photos img:nth-child(6) {
+      width: min(140px, 18vw); height: min(200px, 26vw);
+      right: 22%; bottom: -6%;
+      --rot: -4deg; --drot: 3deg; --dx: -10px; --dy: -22px; --dur: 23s; --delay: -11s;
+    }
+    @media (max-width: 720px) {
+      .float-photos img { opacity: 0.2; }
+      .float-photos img:nth-child(n + 4) { display: none; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .float-photos img { animation: none; transform: rotate(var(--rot)); }
     }
 
     /* Co-host strip */
@@ -360,10 +374,6 @@
 @media (max-width: 600px) {
   body::before {
     background-size: calc(100vw / 3) auto;
-  }
-  
-  .info-box{
-    font-size: .5em;
   }
 }
 
@@ -755,7 +765,14 @@
 
 <body>
 
- 
+  <div class="float-photos" aria-hidden="true">
+    <img src="pictures/pictureshowingthemostppl.jpg" alt="" width="800" height="602" decoding="async">
+    <img src="pictures/johntalking.jpeg" alt="" width="1280" height="960" decoding="async">
+    <img src="pictures/pictureofateam.jpeg" alt="" width="1280" height="853" decoding="async">
+    <img src="pictures/organizers.jpeg" alt="" width="1280" height="853" decoding="async">
+    <img src="pictures/1790803691833.jpeg" alt="" width="1280" height="960" decoding="async">
+    <img src="pictures/winnershowerpic.jpeg" alt="" width="800" height="1312" decoding="async">
+  </div>
 
   <div class="header">
     <img src="logo.webp" alt="Showerhacks logo" width="320" height="320" decoding="async">
@@ -768,6 +785,7 @@
 
   <div class="buttons">
     <a href="https://luma.com/99857qk9" class="waitlist">Luma</a>
+    <a href="https://forms.gle/rPKcjdARZ2QAKaZ17" class="waitlist" target="_blank" rel="noopener noreferrer">Future Interest Form</a>
     <a href="https://showerhacks.devpost.com/project-gallery" class="discord" target="_blank" rel="noopener noreferrer">View projects</a>
     <a href="https://discord.gg/4xEtJc9xqZ" class="discord">
       <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/discord.svg" width="20" height="20" alt="" decoding="async">
@@ -776,17 +794,6 @@
   </div>
 
   <main>
-
-    <!-- ============ HERO ============ -->
-    <section class="hero container-narrow">
-      <div class="info-boxes">
-        <div class="info-box">September 26th 2026</div>
-        <div class="info-box">10AM – 10PM</div>
-        <div class="info-box">San Francisco</div>
-        <div class="info-box">400 People</div>
-        <div class="info-box" id="countdown"></div>
-      </div>
-    </section>
 <!-- 
     <div class="cohost-wrap">
       <h4>Co-hosted with</h4>
@@ -1329,7 +1336,7 @@
     const RESTITUTION = 0.55;
     const SPAWN_MS = 70;
 
-    const SOLID_SELECTOR = '.card, .team-member, .sponsor-card, .itinerary-item, .faq details, .afterparty-container, .hero, .header h1, .header img';
+    const SOLID_SELECTOR = '.card, .team-member, .sponsor-card, .itinerary-item, .faq details, .afterparty-container, .header h1, .header img';
 
     let width, height;
     let scrollY = 0;
@@ -1428,35 +1435,6 @@
       }
     }
     requestAnimationFrame(animate);
-  </script>
-
-  <!-- ============ Countdown ============ -->
-  <script>
-  (function() {
-    const el = document.getElementById("countdown");
-    const target = new Date("2026-09-26T10:00:00-07:00").getTime();
-    const msPerDay = 1000 * 60 * 60 * 24;
-    const prec = 5;
-
-    function formatDays(diffMs) {
-      const days = diffMs / msPerDay;
-      return Math.max(0, days).toFixed(prec);
-    }
-
-    function update() {
-      const now = Date.now();
-      const diff = target - now;
-      if (diff <= 0) {
-        el.innerHTML = "The day has arrived!";
-        clearInterval(timer);
-        return;
-      }
-      el.innerHTML = `${formatDays(diff)} days left`;
-    }
-
-    const timer = setInterval(update, 1000);
-    update();
-  })();
   </script>
 
   <!-- ============ Afterparty confetti ============ -->
