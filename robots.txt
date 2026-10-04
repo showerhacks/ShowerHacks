@@ -3,3 +3,5 @@
 # Allow all crawlers full access
 User-agent: *
 Allow: /
+
+Sitemap: https://showerhacks.org/sitemap.xml
